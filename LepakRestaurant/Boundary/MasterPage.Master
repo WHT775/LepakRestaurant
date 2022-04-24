@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="LepakRestaurant.Boundary.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <ul class="topnav">
+            <li>
+                <asp:ImageButton ID="ibtnHome" runat="server" Width="250px" Height="50px" ImageUrl="~/Images/logo.png" /></li>
+            <%--<li><asp:HyperLink ID="hlHome" class="active" runat="server">Home</asp:HyperLink></li>--%>
+            <li class="right">
+                <asp:LinkButton ID="lbLoginSignUp" runat="server" >Login/Sign Up</asp:LinkButton></li>
+            <%--<li class="right"><asp:HyperLink ID="hlCart" runat="server">Cart</asp:HyperLink></li>--%>
+            <li class="right">
+                <asp:LinkButton ID="lblLogOut" runat="server" >Log Out</asp:LinkButton></li>
+        </ul>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
