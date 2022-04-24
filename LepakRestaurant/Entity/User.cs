@@ -29,7 +29,7 @@ namespace LepakRestaurant.Entity
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "Select * from user where USER_ID = @userid and USER_PW = @userpw";
+                string query = "Select * from [user] where USER_ID = @userid and USER_PW = @userpw";
                 User objUser = new User();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {

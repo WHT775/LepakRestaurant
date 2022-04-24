@@ -13,7 +13,7 @@ namespace LepakRestaurant.Controller
         public string LoginUser(string username,string password)
         {
             User uc = new User() { user_id=username, user_pw=password };
-            
+            uc.CheckUserInDB();
             return "";
         }
     }
