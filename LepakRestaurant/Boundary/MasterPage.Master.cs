@@ -13,5 +13,13 @@ namespace LepakRestaurant.Boundary
         {
 
         }
+
+        protected void lblLogOut_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.RemoveAll();
+            HttpContext.Current.Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

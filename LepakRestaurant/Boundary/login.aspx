@@ -7,10 +7,9 @@
             <td>Login ID:
             </td>
             <td>
-                <asp:TextBox ID="txtUser" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtUser" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
             </td>
         </tr>
-
         <tr>
             <td>Password:
             </td>

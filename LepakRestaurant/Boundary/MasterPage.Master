@@ -18,7 +18,7 @@
                 <asp:LinkButton ID="lbLoginSignUp" runat="server" >Login/Sign Up</asp:LinkButton></li>
             <%--<li class="right"><asp:HyperLink ID="hlCart" runat="server">Cart</asp:HyperLink></li>--%>
             <li class="right">
-                <asp:LinkButton ID="lblLogOut" runat="server" >Log Out</asp:LinkButton></li>
+                <asp:LinkButton ID="lblLogOut" runat="server" OnClick="lblLogOut_Click">Log Out</asp:LinkButton></li>
         </ul>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

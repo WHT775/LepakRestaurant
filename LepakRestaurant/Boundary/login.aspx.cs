@@ -18,7 +18,16 @@ namespace LepakRestaurant.Boundary
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            uc.LoginUser(txtUser.Text.Trim(), txtPass.Text.Trim());
+            string msg = uc.LoginUser(txtUser.Text.Trim(), txtPass.Text.Trim());
+            if (msg == "1")//Owner
+                Response.Redirect("Owner.aspx");
+            else if (msg == "2")//Manager
+                Response.Redirect("");
+            else if (msg == "3")//Staff
+                Response.Redirect("");
+            else
+                lblWrong.Text = msg;
+            lblWrong.Visible = true;
         }
     }
 }
