@@ -22,9 +22,9 @@ namespace LepakRestaurant.Boundary
             if (msg == "1")//Owner
                 Response.Redirect("Owner.aspx");
             else if (msg == "2")//Manager
-                Response.Redirect("");
+                Response.Redirect("Manager.aspx");
             else if (msg == "3")//Staff
-                Response.Redirect("");
+                Response.Redirect("Staff.aspx");
             else
                 lblWrong.Text = msg;
             lblWrong.Visible = true;

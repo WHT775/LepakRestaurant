@@ -114,6 +114,7 @@
     <Content Include="Boundary\AddUser.aspx" />
     <Content Include="Boundary\EditUser.aspx" />
     <Content Include="Boundary\login.aspx" />
+    <Content Include="Boundary\Manager.aspx" />
     <Content Include="Boundary\Owner.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -193,6 +194,13 @@
     <Compile Include="Boundary\EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Boundary\Manager.aspx.cs">
+      <DependentUpon>Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\Manager.aspx.designer.cs">
+      <DependentUpon>Manager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Boundary\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -229,6 +237,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\Roles.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Global.asax.cs">
