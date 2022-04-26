@@ -7,9 +7,8 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Menu
+    public class Menu : DataContext
     {
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         public int menu_id { get; set; }
 

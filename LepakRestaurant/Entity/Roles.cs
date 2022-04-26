@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Roles
+    public class Roles : DataContext
     {
         public int roles_id { get; set; }
         public string role_name { get; set; }
@@ -15,8 +15,6 @@ namespace LepakRestaurant.Entity
         {
 
         }
-
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         public List<Roles> RetrieveRoles()
         {

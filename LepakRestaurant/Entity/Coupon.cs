@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Coupon
+    public class Coupon : DataContext
     {
         public int coupon_id { get; set; }
 

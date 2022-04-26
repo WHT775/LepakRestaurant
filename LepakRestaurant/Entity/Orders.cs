@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Orders
+    public class Orders : DataContext
     {
         public int orders_id { get; set; }
 

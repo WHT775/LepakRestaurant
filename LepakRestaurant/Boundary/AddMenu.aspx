@@ -33,7 +33,7 @@
         <tr>
             <td>Category:</td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlCategory" Width="100%" DataTextField="category.category_name" DataValueField="category.category_id"></asp:DropDownList></td>
+                <asp:DropDownList runat="server" ID="ddlCategory" Width="100%" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList></td>
         </tr>
         <tr>
             <td>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Category
+    public class Category :DataContext
     {
         public int category_id { get; set; }
 
@@ -16,8 +16,6 @@ namespace LepakRestaurant.Entity
         {
 
         }
-
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
 
         public List<Category> RetrieveCategories()
         {

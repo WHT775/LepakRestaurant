@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Payment
+    public class Payment : DataContext
     {
         public int payment_id { get; set; }
 
