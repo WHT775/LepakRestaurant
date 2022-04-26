@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,38 @@ namespace LepakRestaurant.Entity
         public Menu()
         {
 
+        }
+
+        public DataSet retrieveItemsByCategory(string item_category)
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    if(item_category !="")
+                        cmd.Parameters.AddWithValue("@itemcategory", item_category);
+                    else
+                        cmd.Parameters.AddWithValue("@itemcategory", "Rice");
+                    conn.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(ds);
+                    //using (SqlDataReader dr = cmd.ExecuteReader())
+                    //{
+                    //    if (dr.HasRows)
+                    //    {
+                    //        List<string> tempList = new List<string>();
+                    //        while (dr.Read())
+                    //        {
+                    //            tempList.Add(dr["ITEM_CATEGORY"].ToString());
+                    //        }
+                    //        categoryList = tempList.ToArray();
+                    //    }
+                    //}
+                }
+            }
+            return ds;
         }
 
         public List<Menu> retrieveItemByCategory(string item_category)
@@ -59,30 +92,32 @@ namespace LepakRestaurant.Entity
             return menuList;
         }
 
-        public string[] retrieveListOfCategory()
+        public DataSet retrieveListOfCategory()
         {
-            string[] categoryList = new string[] { };
+            DataSet ds = new DataSet();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select distinct(ITEM_CATEGORY) from Menu";
+                string query = "select CATEGORY_NAME from CATEGORY";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.HasRows)
-                        {
-                            List<string> tempList = new List<string>();
-                            while (dr.Read())
-                            {
-                                tempList.Add(dr["ITEM_CATEGORY"].ToString());
-                            }
-                            categoryList = tempList.ToArray();
-                        }
-                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(ds);
+                    //using (SqlDataReader dr = cmd.ExecuteReader())
+                    //{
+                    //    if (dr.HasRows)
+                    //    {
+                    //        List<string> tempList = new List<string>();
+                    //        while (dr.Read())
+                    //        {
+                    //            tempList.Add(dr["ITEM_CATEGORY"].ToString());
+                    //        }
+                    //        categoryList = tempList.ToArray();
+                    //    }
+                    //}
                 }
             }
-            return categoryList;
+            return ds;
         }
 
 

@@ -14,4 +14,7 @@
           <asp:TextBox ID ="nameTxt" placeholder="Enter your name here" runat="server"></asp:TextBox>
           <asp:Button ID="btnAdd" Text="Submit" runat="server" OnClick="btnAdd_Click" />
       </div>
+    <div id="errorDiv" runat="server">
+        <asp:Label ID="errorMsg" runat="server"></asp:Label>
+    </div>
 </asp:Content>

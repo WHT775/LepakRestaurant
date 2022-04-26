@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows;
 using LepakRestaurant.Controller;
 
 namespace LepakRestaurant.Boundary
@@ -14,23 +15,30 @@ namespace LepakRestaurant.Boundary
         protected void Page_Load(object sender, EventArgs e)
         {
             custDiv.Visible = false;
+            errorDiv.Visible = false;
+            errorMsg.ForeColor = System.Drawing.Color.Red;
         }
 
         protected void btnCode_Click(object sender, EventArgs e)
         {
-            if (phoneTxt.Text != null || phoneTxt.Text != "")
+            if (phoneTxt.Text != "")
             {
                 bool isExist = cc.checkExistingCustomer(phoneTxt.Text);
                 if (isExist)
                 {
                     cc.updateCustomer();
-                    Response.Redirect("");
+                    Response.Redirect("CustomerMenu.aspx");
                 }
                 else
                 {
                     custDiv.Visible = true;
                     btnCode.Visible = false;
                 }
+            }
+            else
+            {
+                errorDiv.Visible = true;
+                errorMsg.Text = "Please enter your phone number";
             }
         }
 
@@ -39,7 +47,12 @@ namespace LepakRestaurant.Boundary
             if (nameTxt.Text != "")
             {
                 cc.createCustomer(nameTxt.Text, phoneTxt.Text);
-                Response.Redirect("");
+                MessageBox.Show("Customer registered successfully!", "Registered!");
+                Response.Redirect("CustomerMenu.aspx");
+            }
+            else
+            {
+                errorMsg.Text = "Please enter your name";
             }
         }
     }

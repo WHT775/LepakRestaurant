@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -263,6 +264,8 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Category.cs" />
+    <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\Roles.cs" />
     <Compile Include="Entity\User.cs" />
