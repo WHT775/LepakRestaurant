@@ -35,7 +35,7 @@ namespace LepakRestaurant.Entity
                 string query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    if(item_category !="")
+                    if (item_category != "")
                         cmd.Parameters.AddWithValue("@itemcategory", item_category);
                     else
                         cmd.Parameters.AddWithValue("@itemcategory", "Rice");
@@ -119,6 +119,55 @@ namespace LepakRestaurant.Entity
             return ds;
         }
 
+        public bool CreateMenu()
+        {
 
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "INSERT INTO MENU VALUES(@itemname,@itemdesc,@itemprice,@itemimg,@categoryid)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@itemname", item_name);
+                    cmd.Parameters.AddWithValue("@itemdesc", item_desc);
+                    cmd.Parameters.AddWithValue("@itemprice", item_price);
+                    cmd.Parameters.AddWithValue("@itemimg", item_img);
+                    cmd.Parameters.AddWithValue("@categoryid", category_id);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch(Exception)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool CheckIfImageNameIsUnique()
+        {
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select ITEM_IMG from [MENU] where ITEM_IMG = @itemimg";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@itemimg", this.item_img);
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }
+                    
+                }
+            }
+            
+        }
     }
 }

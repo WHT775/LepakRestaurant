@@ -28,12 +28,17 @@
         <tr>
             <td>Image:</td>
             <td style="float: left;">
-                <asp:FileUpload runat="server" ID="FileUpload" /></td>
+                <asp:FileUpload runat="server" ID="fUpload" /></td>
         </tr>
         <tr>
             <td>Category:</td>
             <td>
                 <asp:DropDownList runat="server" ID="ddlCategory" Width="100%" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <asp:Label runat="server" ID="lblWrong" ForeColor="Red" Visible="false"></asp:Label>
+            </td>
         </tr>
         <tr>
             <td>
