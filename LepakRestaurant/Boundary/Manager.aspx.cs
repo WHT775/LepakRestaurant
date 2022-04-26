@@ -16,7 +16,7 @@ namespace LepakRestaurant.Boundary
 
         protected void btnAddMenu_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("AddMenu.aspx");
         }
     }
 }
