@@ -23,6 +23,7 @@ namespace LepakRestaurant.Boundary
                 bool isExist = cc.checkExistingCustomer(phoneTxt.Text);
                 if (isExist)
                 {
+                    cc.updateCustomer();
                     Response.Redirect("");
                 }
                 else

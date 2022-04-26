@@ -20,6 +20,14 @@ namespace LepakRestaurant.Controller
             return true;
         }
 
+        public void updateCustomer()
+        {
+            Customer cust = (Customer)HttpContext.Current.Session["custObj"];
+            cust.updateLastVisit();
+            cust.CheckExistingCustomer();
+            HttpContext.Current.Session["custObj"] = cust;
+        }
+
         public void createCustomer(string custName, string phoneNum)
         {
             Customer cust = new Customer(phoneNum);

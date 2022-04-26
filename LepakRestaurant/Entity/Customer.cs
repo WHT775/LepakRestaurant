@@ -22,6 +22,7 @@ namespace LepakRestaurant.Entity
         {
             this.phone_num = phone_num;
         }
+
         public Customer()
         {
 
@@ -34,7 +35,7 @@ namespace LepakRestaurant.Entity
                 string query = "Select * from CUSTOMER where PHONE_NUM = @phonenum";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@phonenum", phone_num);
+                    cmd.Parameters.AddWithValue("@phonenum", this.phone_num);
                     conn.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())  // or load a DataTable, ExecuteScalar, etc.    
                     {
@@ -62,6 +63,21 @@ namespace LepakRestaurant.Entity
                 {
                     cmd.Parameters.AddWithValue("@custName", custName);
                     cmd.Parameters.AddWithValue("@phoneNum", phoneNum);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+        public void updateLastVisit()
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "update CUSTOMER set LAST_VISIT = getdate() where CUSTOMER_ID = @custID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@custID", this.id);
                     conn.Open();
                     cmd.ExecuteNonQuery();
 
