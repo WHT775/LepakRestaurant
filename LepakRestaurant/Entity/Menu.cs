@@ -21,7 +21,7 @@ namespace LepakRestaurant.Entity
 
         public string item_img { get; set; }
 
-        public string item_category { get; set; }
+        public int category_id { get; set; }
 
         public Menu()
         {
@@ -60,12 +60,12 @@ namespace LepakRestaurant.Entity
             return ds;
         }
 
-        public List<Menu> retrieveItemByCategory(string item_category)
+        public List<Menu> retrieveItemByCategory(int item_category)
         {
             List<Menu> menuList = new List<Menu>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select * from Menu where ITEM_CATEGORY = @itemcategory";
+                string query = "select * from Menu where CATEGORY_ID = @itemcategory";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@itemcategory", item_category);
@@ -82,7 +82,7 @@ namespace LepakRestaurant.Entity
                                 tempObj.item_desc = dr["ITEM_DESC"].ToString();
                                 tempObj.item_price = Convert.ToDouble(dr["ITEM_PRICE"].ToString());
                                 tempObj.item_img = dr["ITEM_IMG"].ToString();
-                                tempObj.item_category = dr["ITEM_CATEGORY"].ToString();
+                                tempObj.category_id = Convert.ToInt32(dr["CATEGORY_ID"].ToString());
                                 menuList.Add(tempObj);
                             }
                         }

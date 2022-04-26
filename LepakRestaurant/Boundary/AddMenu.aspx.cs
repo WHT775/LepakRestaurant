@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LepakRestaurant.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,12 @@ namespace LepakRestaurant.Boundary
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                CustomerMenuController uc = new CustomerMenuController();
+                ddlCategory.DataSource = uc.getListOfCategory();
+                ddlCategory.DataBind();
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
