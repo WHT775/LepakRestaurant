@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Category :DataContext
+    public class Category : DataContext
     {
         public int category_id { get; set; }
 
@@ -15,6 +15,12 @@ namespace LepakRestaurant.Entity
         public Category()
         {
 
+        }
+
+        public Category(int category_id, string category_name)
+        {
+            this.category_id = category_id;
+            this.category_name = category_name;
         }
 
         public List<Category> RetrieveCategories()

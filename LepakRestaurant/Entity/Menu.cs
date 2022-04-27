@@ -32,28 +32,19 @@ namespace LepakRestaurant.Entity
             DataSet ds = new DataSet();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory";
+                string query = "";
+                if (item_category != "")
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory";
+                else
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where m.CATEGORY_ID = 1";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     if (item_category != "")
                         cmd.Parameters.AddWithValue("@itemcategory", item_category);
-                    else
-                        cmd.Parameters.AddWithValue("@itemcategory", "Rice");
+
                     conn.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(ds);
-                    //using (SqlDataReader dr = cmd.ExecuteReader())
-                    //{
-                    //    if (dr.HasRows)
-                    //    {
-                    //        List<string> tempList = new List<string>();
-                    //        while (dr.Read())
-                    //        {
-                    //            tempList.Add(dr["ITEM_CATEGORY"].ToString());
-                    //        }
-                    //        categoryList = tempList.ToArray();
-                    //    }
-                    //}
                 }
             }
             return ds;
@@ -102,18 +93,6 @@ namespace LepakRestaurant.Entity
                     conn.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(ds);
-                    //using (SqlDataReader dr = cmd.ExecuteReader())
-                    //{
-                    //    if (dr.HasRows)
-                    //    {
-                    //        List<string> tempList = new List<string>();
-                    //        while (dr.Read())
-                    //        {
-                    //            tempList.Add(dr["ITEM_CATEGORY"].ToString());
-                    //        }
-                    //        categoryList = tempList.ToArray();
-                    //    }
-                    //}
                 }
             }
             return ds;
