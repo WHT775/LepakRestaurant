@@ -112,6 +112,7 @@
     <Content Include="App_Data\LepakRestaurantDB_log.ldf">
       <DependentUpon>LepakRestaurantDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
     <Content Include="Boundary\CustomerMenu.aspx" />
@@ -184,6 +185,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Boundary\AddMenu.aspx.cs">
+      <DependentUpon>AddMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\AddMenu.aspx.designer.cs">
+      <DependentUpon>AddMenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Boundary\AddUser.aspx.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -256,6 +264,7 @@
     </Compile>
     <Compile Include="Controller\CustomerController.cs" />
     <Compile Include="Controller\CustomerMenuController.cs" />
+    <Compile Include="Controller\MenuController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -265,9 +274,15 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Category.cs" />
+    <Compile Include="Entity\Coupon.cs" />
     <Compile Include="Entity\Customer.cs" />
+    <Compile Include="Entity\DataContext.cs" />
     <Compile Include="Entity\Menu.cs" />
+    <Compile Include="Entity\Orders.cs" />
+    <Compile Include="Entity\Order_Summary.cs" />
+    <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Roles.cs" />
+    <Compile Include="Entity\Table_Num.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

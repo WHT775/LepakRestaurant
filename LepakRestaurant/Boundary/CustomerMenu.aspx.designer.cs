@@ -15,6 +15,24 @@ namespace LepakRestaurant.Boundary
     {
 
         /// <summary>
+        /// cartId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cartId;
+
+        /// <summary>
+        /// cartQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label cartQty;
+
+        /// <summary>
         /// rptItemCategory control.
         /// </summary>
         /// <remarks>

@@ -17,6 +17,12 @@ namespace LepakRestaurant.Entity
 
         }
 
+        public Category(int category_id, string category_name)
+        {
+            this.category_id = category_id;
+            this.category_name = category_name;
+        }
+
         public List<Category> RetrieveCategories()
         {
             using (SqlConnection conn = new SqlConnection(connString))
