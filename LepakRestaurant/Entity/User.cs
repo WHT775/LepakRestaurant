@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class User : DataContext
+    public class User :DataContext
     {
 
         public int id { get; set; }

@@ -14,8 +14,6 @@ namespace LepakRestaurant.Controller
             List<Category> categoryList = new List<Category>();
             Category cat = new Category();
             categoryList = cat.RetrieveCategories();
-            cat = new Category(1, "View Cart");
-            categoryList.Add(cat);
             return categoryList;
         }
 
