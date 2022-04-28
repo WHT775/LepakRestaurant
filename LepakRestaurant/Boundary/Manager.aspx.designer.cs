@@ -24,12 +24,21 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.WebControls.Button btnAddMenu;
 
         /// <summary>
-        /// rptBranch control.
+        /// rptMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptBranch;
+        protected global::System.Web.UI.WebControls.Repeater rptMenu;
+
+        /// <summary>
+        /// btnAddCoupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddCoupon;
     }
 }

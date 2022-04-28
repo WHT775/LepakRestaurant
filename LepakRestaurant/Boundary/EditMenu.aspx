@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="AddMenu.aspx.cs" Inherits="LepakRestaurant.Boundary.AddMenu" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditMenu.aspx.cs" Inherits="LepakRestaurant.Boundary.EditMenu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <table id="tableStyle">
+        <table id="tableStyle">
         <tr>
             <td colspan="2">
                 <h1>

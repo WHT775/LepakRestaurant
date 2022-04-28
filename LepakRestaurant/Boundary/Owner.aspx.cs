@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -37,19 +38,17 @@ namespace LepakRestaurant.Boundary
                 string msg = uc.DeleteUser(Convert.ToInt32(e.CommandArgument.ToString()));
                 if (msg == "User deleted successfully")
                 {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("<script type = 'text/javascript'>");
+                    sb.Append("window.onload=function(){");
+                    sb.Append("alert('");
+                    sb.Append(msg);
+                    sb.Append("')};");
+                    sb.Append("</script>");
+                    ScriptManager.RegisterStartupScript(this,this.GetType(), "alert", sb.ToString(),false);
                     gvUsers.DataSource = uc.PopulateGridViewUsers();
                     gvUsers.DataBind();
-                    upUsers.Update();
-                    //System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    //sb.Append("<script type = 'text/javascript'>");
-                    //sb.Append("window.onload=function(){");
-                    //sb.Append("alert('");
-                    //sb.Append(msg);
-                    //sb.Append("')};");
-                    //sb.Append("</script>");
-                    //ClientScript.RegisterClientScriptBlock(Page.GetType(), "alert", msg.ToString());
                 }
-
             }
         }
 

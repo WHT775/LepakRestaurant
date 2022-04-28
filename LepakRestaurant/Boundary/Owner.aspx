@@ -3,17 +3,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="width: 100%; text-align: center">
-        <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label>
-    </div>
-    <asp:GridView runat="server" ID="gvCustomerData"></asp:GridView>
-    <div style="width: 100%; text-align: center;">
-        <asp:Label runat="server" Text="Manager Users" Width="100%"></asp:Label>
-        <asp:Button runat="server" ID="btnAddUsers" Text="Add User" OnClick="btnAddUsers_Click" />
-    </div>
     <asp:ScriptManager runat="server" ID="scriptMangager"></asp:ScriptManager>
-    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upUsers">
+    <asp:UpdatePanel runat="server" ID="upOwner" UpdateMode="Conditional">
         <ContentTemplate>
+            <div style="width: 100%; text-align: center">
+                <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label>
+            </div>
+            <asp:GridView runat="server" ID="gvCustomerData"></asp:GridView>
+            <div style="width: 100%; text-align: center;">
+                <asp:Label runat="server" Text="Manager Users" Width="100%"></asp:Label>
+                <asp:Button runat="server" ID="btnAddUsers" Text="Add User" OnClick="btnAddUsers_Click" />
+            </div>
+            
             <asp:GridView runat="server" ID="gvUsers" AutoGenerateColumns="false" OnRowCommand="gvUsers_RowCommand" OnRowDeleting="gvUsers_RowDeleting" OnRowDataBound="gvUsers_RowDataBound">
                 <Columns>
                     <asp:BoundField HeaderText="Username" DataField="user_id" />

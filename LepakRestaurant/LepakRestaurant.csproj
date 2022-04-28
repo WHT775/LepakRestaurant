@@ -112,11 +112,14 @@
     <Content Include="App_Data\LepakRestaurantDB_log.ldf">
       <DependentUpon>LepakRestaurantDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Boundary\AddCoupon.aspx" />
     <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
     <Content Include="Boundary\CustomerMenu.aspx" />
+    <Content Include="Boundary\EditMenu.aspx" />
     <Content Include="Boundary\EditUser.aspx" />
+    <Content Include="Boundary\images\test.jpg" />
     <Content Include="Boundary\login.aspx" />
     <Content Include="Boundary\Manager.aspx" />
     <Content Include="Boundary\Owner.aspx" />
@@ -185,6 +188,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Boundary\AddCoupon.aspx.cs">
+      <DependentUpon>AddCoupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\AddCoupon.aspx.designer.cs">
+      <DependentUpon>AddCoupon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Boundary\AddMenu.aspx.cs">
       <DependentUpon>AddMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -212,6 +222,13 @@
     </Compile>
     <Compile Include="Boundary\CustomerMenu.aspx.designer.cs">
       <DependentUpon>CustomerMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boundary\EditMenu.aspx.cs">
+      <DependentUpon>EditMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\EditMenu.aspx.designer.cs">
+      <DependentUpon>EditMenu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boundary\EditUser.aspx.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>

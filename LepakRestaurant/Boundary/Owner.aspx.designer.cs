@@ -15,6 +15,24 @@ namespace LepakRestaurant.Boundary
     {
 
         /// <summary>
+        /// scriptMangager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptMangager;
+
+        /// <summary>
+        /// upOwner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upOwner;
+
+        /// <summary>
         /// gvCustomerData control.
         /// </summary>
         /// <remarks>
@@ -31,24 +49,6 @@ namespace LepakRestaurant.Boundary
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddUsers;
-
-        /// <summary>
-        /// scriptMangager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager scriptMangager;
-
-        /// <summary>
-        /// upUsers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upUsers;
 
         /// <summary>
         /// gvUsers control.

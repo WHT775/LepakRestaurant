@@ -22,9 +22,11 @@ namespace LepakRestaurant.Entity
 
         public int category_id { get; set; }
 
+        public Category category { get; set; }
+
         public Menu()
         {
-
+            category = new Category();
         }
 
         public DataSet retrieveItemsByCategory(string item_category)
@@ -117,7 +119,58 @@ namespace LepakRestaurant.Entity
                         cmd.ExecuteNonQuery();
                         return true;
                     }
-                    catch(Exception)
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public string DeleteMenu()
+        {
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "DELETE FROM [MENU] where MENU_ID=@menuid";
+                string result = "Menu deleted successfully";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@menuid", menu_id);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        result = e.Message;
+                    }
+                }
+                return result;
+            }
+        }
+        public bool UpdateMenu()
+        {
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "UPDATE [Menu] SET ITEM_NAME = @itemname, ITEM_DESCRIPTION = @itemdesc, ITEM_PRICE = @itemprice, ITEM_IMG = @itemimg, CATEGORY_ID = @categoryid WHERE MENU_ID = @menuid";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@menuid", menu_id);
+                    cmd.Parameters.AddWithValue("@itemname", item_name);
+                    cmd.Parameters.AddWithValue("@itemdesc", item_desc);
+                    cmd.Parameters.AddWithValue("@itemprice", item_price);
+                    cmd.Parameters.AddWithValue("@itemimg", item_img);
+                    cmd.Parameters.AddWithValue("@categoryid", category_id);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception)
                     {
                         return false;
                     }
@@ -143,10 +196,69 @@ namespace LepakRestaurant.Entity
                         }
                         return true;
                     }
-                    
                 }
             }
-            
+        }
+        public List<Menu> RetrieveAllMenu()
+        {
+            List<Menu> menuList = new List<Menu>();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select menu_id, item_name, item_description, item_price, item_img, m.category_id,category_name from Menu as m join category as c on m.category_id = c.category_id";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                Menu tempObj = new Menu();
+                                tempObj.menu_id = Convert.ToInt32(dr["MENU_ID"].ToString());
+                                tempObj.item_name = dr["ITEM_NAME"].ToString();
+                                tempObj.item_desc = dr["ITEM_DESCRIPTION"].ToString();
+                                tempObj.item_price = Convert.ToDouble(dr["ITEM_PRICE"].ToString());
+                                tempObj.item_img = dr["ITEM_IMG"].ToString();
+                                //tempObj.category_id = Convert.ToInt32(dr["category_id"].ToString());
+                                tempObj.category.category_name = dr["category_name"].ToString();
+                                menuList.Add(tempObj);
+                            }
+                        }
+                    }
+                }
+            }
+            return menuList;
+        }
+        public Menu RetrieveMenuByMenuId()
+        {
+            Menu tempObj = new Menu();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "SELECT * FROM MENU WHERE MENU_ID = @menuid";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@menuid", menu_id);
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                tempObj.menu_id = Convert.ToInt32(dr["MENU_ID"].ToString());
+                                tempObj.item_name = dr["ITEM_NAME"].ToString();
+                                tempObj.item_desc = dr["ITEM_DESCRIPTION"].ToString();
+                                tempObj.item_price = Convert.ToDouble(dr["ITEM_PRICE"].ToString());
+                                tempObj.item_img = dr["ITEM_IMG"].ToString();
+                                tempObj.category_id = Convert.ToInt32(dr["category_id"].ToString());
+                                //tempObj.category.category_name = dr["category_name"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return tempObj;
         }
     }
 }
