@@ -117,6 +117,7 @@
     <Content Include="Boundary\AddUser.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
     <Content Include="Boundary\CustomerMenu.aspx" />
+    <Content Include="Boundary\EditCoupon.aspx" />
     <Content Include="Boundary\EditMenu.aspx" />
     <Content Include="Boundary\EditUser.aspx" />
     <Content Include="Boundary\images\test.jpg" />
@@ -222,6 +223,13 @@
     </Compile>
     <Compile Include="Boundary\CustomerMenu.aspx.designer.cs">
       <DependentUpon>CustomerMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boundary\EditCoupon.aspx.cs">
+      <DependentUpon>EditCoupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\EditCoupon.aspx.designer.cs">
+      <DependentUpon>EditCoupon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boundary\EditMenu.aspx.cs">
       <DependentUpon>EditMenu.aspx</DependentUpon>

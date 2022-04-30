@@ -61,7 +61,7 @@ namespace LepakRestaurant.Entity
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "INSERT INTO [USER] VALUES (@userid,@userpw,@isdeleted,@roleid)";
-                string result = "True";
+                string result = "Successfully created user";
                 List<User> objUser = new List<User>();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -193,7 +193,7 @@ namespace LepakRestaurant.Entity
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "UPDATE [USER] set USER_ID=@userid, USER_PW=@userpw, IS_DELETED=@isdeleted, ROLES_ID=@roleid where id = @id";
-                string result = "No issue";
+                string result = "Successfully updated user";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@userid", this.user_id);

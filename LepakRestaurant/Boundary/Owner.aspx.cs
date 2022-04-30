@@ -38,16 +38,10 @@ namespace LepakRestaurant.Boundary
                 string msg = uc.DeleteUser(Convert.ToInt32(e.CommandArgument.ToString()));
                 if (msg == "User deleted successfully")
                 {
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("<script type = 'text/javascript'>");
-                    sb.Append("window.onload=function(){");
-                    sb.Append("alert('");
-                    sb.Append(msg);
-                    sb.Append("')};");
-                    sb.Append("</script>");
-                    ScriptManager.RegisterStartupScript(this,this.GetType(), "alert", sb.ToString(),false);
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
                     gvUsers.DataSource = uc.PopulateGridViewUsers();
                     gvUsers.DataBind();
+                    upOwner.Update();
                 }
             }
         }

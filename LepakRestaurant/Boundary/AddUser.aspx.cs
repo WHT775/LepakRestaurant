@@ -27,14 +27,21 @@ namespace LepakRestaurant.Boundary
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
            string msg = uc.CreateUser(txtLoginId.Text,txtPassword.Text,Convert.ToInt32(ddlRole.SelectedValue),Convert.ToBoolean(ddlDisabled.SelectedValue));
-            if(msg != "True")
+            if(msg != "Successfully created user")
             {
                 lblWrong.Text = msg;
                 lblWrong.Visible = true;
             }
             else
             {
-                Response.Redirect("Owner.aspx");
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append("<script type = 'text/javascript'>");
+                sb.Append("window.onload=function(){");
+                sb.Append("alert('");
+                sb.Append(msg);
+                sb.Append("');window.location='Owner.aspx';};");
+                sb.Append("</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
             }
             //run using clientScript.Register
             

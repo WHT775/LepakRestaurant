@@ -31,5 +31,39 @@ namespace LepakRestaurant.Controller
                 return "Successfully created coupon";
             }
         }
+
+        public List<Coupon> RetrieveAllCoupon()
+        {
+            Coupon ce = new Coupon();
+            return ce.RetrieveAllCoupon();
+        }
+
+        public Coupon RetrieveCouponById(int couponid)
+        {
+            Coupon ce = new Coupon() { coupon_id = couponid};
+            return ce.RetrieveCouponById();
+        }
+
+        public string DeleteCoupon(int couponid)
+        {
+            Coupon ce = new Coupon() { coupon_id = couponid };
+            return ce.DeleteCoupon();
+
+        }
+        public string UpdateCoupon(int couponid, string couponcode, string discountamt)
+        {
+            if (couponcode == "" || discountamt == "") return "Please fill up the form";
+            try
+            {
+                Convert.ToDouble(discountamt);
+            }
+            catch (Exception)
+            {
+                return "Please key in appropriate price";
+            }
+            Coupon ue = new Coupon() { coupon_id = couponid , coupon_code=couponcode,discount_amt= Convert.ToDouble(discountamt) };
+            return ue.UpdateCoupon();
+
+        }
     }
 }

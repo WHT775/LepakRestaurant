@@ -39,6 +39,9 @@
             </td>
         </tr>
         <tr>
+            <td><asp:Label runat="server" ID="lblWrong" ForeColor="Red" Visible="false"></asp:Label></td>
+        </tr>
+        <tr>
             <td>
                 <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Back" />
             </td>

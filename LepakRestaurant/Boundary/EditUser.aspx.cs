@@ -27,9 +27,22 @@ namespace LepakRestaurant.Boundary
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(uc.UpdateUserProfile(txtLoginId.Text, txtPassword.Text, Convert.ToInt32(ddlRole.SelectedValue), Convert.ToBoolean(ddlDisabled.SelectedValue), Convert.ToInt32(HttpContext.Current.Session["edituserid"].ToString())) == "No issue")
+            string msg = uc.UpdateUserProfile(txtLoginId.Text, txtPassword.Text, Convert.ToInt32(ddlRole.SelectedValue), Convert.ToBoolean(ddlDisabled.SelectedValue), Convert.ToInt32(HttpContext.Current.Session["edituserid"].ToString()));
+            if (msg == "Successfully updated user")
             {
-                Response.Redirect("Owner.aspx");
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append("<script type = 'text/javascript'>");
+                sb.Append("window.onload=function(){");
+                sb.Append("alert('");
+                sb.Append(msg);
+                sb.Append("');window.location='Owner.aspx';};");
+                sb.Append("</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+            }
+            else
+            {
+                lblWrong.Text = msg;
+                lblWrong.Visible = true;
             }
         }
 

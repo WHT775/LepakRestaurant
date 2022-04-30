@@ -44,7 +44,7 @@
                 <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Cancel" Width="100%" />
             </td>
             <td>
-                <asp:Button runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Create" Width="100%" />
+                <asp:Button runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Update" Width="100%" />
             </td>
         </tr>
     </table>

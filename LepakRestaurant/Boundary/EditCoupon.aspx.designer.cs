@@ -11,61 +11,52 @@ namespace LepakRestaurant.Boundary
 {
 
 
-    public partial class Manager
+    public partial class EditCoupon
     {
 
         /// <summary>
-        /// scriptManager control.
+        /// txtCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager scriptManager;
+        protected global::System.Web.UI.WebControls.TextBox txtCode;
 
         /// <summary>
-        /// upManager control.
+        /// txtDiscount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upManager;
+        protected global::System.Web.UI.WebControls.TextBox txtDiscount;
 
         /// <summary>
-        /// btnAddMenu control.
+        /// lblWrong control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddMenu;
+        protected global::System.Web.UI.WebControls.Label lblWrong;
 
         /// <summary>
-        /// rptMenu control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptMenu;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
 
         /// <summary>
-        /// btnAddCoupon control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddCoupon;
-
-        /// <summary>
-        /// gvCoupon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCoupon;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

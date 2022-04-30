@@ -15,13 +15,13 @@ namespace LepakRestaurant.Boundary
     {
 
         /// <summary>
-        /// scriptMangager control.
+        /// scriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager scriptMangager;
+        protected global::System.Web.UI.ScriptManager scriptManager1;
 
         /// <summary>
         /// upOwner control.

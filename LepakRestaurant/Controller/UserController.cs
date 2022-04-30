@@ -90,15 +90,7 @@ namespace LepakRestaurant.Controller
         public string UpdateUserProfile(string username, string password, int roleid, bool isdisabled, int id)
         {
             User ue = new User() { id=id ,user_id = username, user_pw = password, fk_roles_id = roleid, is_deleted = isdisabled };
-            string msg = ue.UpdateUserProfile();
-            if (msg == "No issue")
-            {
-                return "No issue";
-            }
-            else
-            {
-                throw new Exception(msg);
-            }
+            return ue.UpdateUserProfile();
 
         }
     }
