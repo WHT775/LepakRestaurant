@@ -21,5 +21,10 @@ namespace LepakRestaurant.Entity
         {
 
         }
+
+        public Orders(int oid)
+        {
+            orders_id = oid;
+        }
     }
 }

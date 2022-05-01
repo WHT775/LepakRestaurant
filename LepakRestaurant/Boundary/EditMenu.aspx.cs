@@ -47,7 +47,6 @@ namespace LepakRestaurant.Boundary
                 sb.Append("');window.location='Manager.aspx';};");
                 sb.Append("</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
-                //Response.Redirect("Manager.aspx");
             }
             else
             {

@@ -18,10 +18,6 @@ namespace LepakRestaurant.Boundary
                 ddlRole.DataSource= uc.PopulateRoleDDL();
                 ddlRole.DataBind();
             }
-            else
-            {
-
-            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -43,8 +39,6 @@ namespace LepakRestaurant.Boundary
                 sb.Append("</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
             }
-            //run using clientScript.Register
-            
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

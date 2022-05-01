@@ -124,6 +124,7 @@
     <Content Include="Boundary\login.aspx" />
     <Content Include="Boundary\Manager.aspx" />
     <Content Include="Boundary\Owner.aspx" />
+    <Content Include="Boundary\Staff.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -280,6 +281,13 @@
     <Compile Include="Boundary\Owner.aspx.designer.cs">
       <DependentUpon>Owner.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Boundary\Staff.aspx.cs">
+      <DependentUpon>Staff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\Staff.aspx.designer.cs">
+      <DependentUpon>Staff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,6 +299,7 @@
     <Compile Include="Controller\CustomerController.cs" />
     <Compile Include="Controller\CustomerMenuController.cs" />
     <Compile Include="Controller\MenuController.cs" />
+    <Compile Include="Controller\OrderSummaryController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
