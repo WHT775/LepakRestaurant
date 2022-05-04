@@ -11,7 +11,7 @@ namespace LepakRestaurant.Boundary
 {
 
 
-    public partial class CustomerLogin1
+    public partial class CustomerLogin
     {
 
         /// <summary>

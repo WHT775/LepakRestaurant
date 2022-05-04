@@ -101,5 +101,32 @@ namespace LepakRestaurant.Entity
                 }
             }
         }
+
+        public string InsertOrderSummary(int orderId, int menuId, int qty)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "INSERT INTO [ORDER_SUMMARY] VALUES (@OrderId,@menuId,@qty)";
+                string result = "Success";
+                List<User> objUser = new List<User>();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@OrderId", orderId);
+                    cmd.Parameters.AddWithValue("@menuId", menuId);
+                    cmd.Parameters.AddWithValue("@qty", qty);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        result = e.Message;
+                    }
+
+                    return result;
+                }
+            }
+        }
     }
 }

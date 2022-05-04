@@ -37,5 +37,10 @@ namespace LepakRestaurant.Controller
             HttpContext.Current.Session["custObj"] = cust;
         }
         
+        public int getTableNum(string code)
+        {
+            Table_Num table_Num = new Table_Num();
+            return table_Num.getTableNum(code);
+        }
     }
 }

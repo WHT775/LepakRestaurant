@@ -9,7 +9,7 @@ using LepakRestaurant.Controller;
 
 namespace LepakRestaurant.Boundary
 {
-    public partial class CustomerLogin1 : System.Web.UI.Page
+    public partial class CustomerLogin : System.Web.UI.Page
     {
         CustomerController cc = new CustomerController();
         protected void Page_Load(object sender, EventArgs e)
@@ -21,24 +21,35 @@ namespace LepakRestaurant.Boundary
 
         protected void btnCode_Click(object sender, EventArgs e)
         {
-            if (phoneTxt.Text != "")
+            if (phoneTxt.Text != "" || codeTxt.Text != "")
             {
-                bool isExist = cc.checkExistingCustomer(phoneTxt.Text);
-                if (isExist)
+                int table_num = cc.getTableNum(codeTxt.Text);
+                if (table_num == 0)
                 {
-                    cc.updateCustomer();
-                    Response.Redirect("CustomerMenu.aspx");
+                    errorDiv.Visible = true;
+                    errorMsg.Text = "Please enter a correct unique code!";
                 }
                 else
                 {
-                    custDiv.Visible = true;
-                    btnCode.Visible = false;
+                    HttpContext.Current.Session["tableNum"] = table_num;
+                    bool isExist = cc.checkExistingCustomer(phoneTxt.Text);
+                    if (isExist)
+                    {
+                        cc.updateCustomer();
+
+                        Response.Redirect("CustomerMenu.aspx");
+                    }
+                    else
+                    {
+                        custDiv.Visible = true;
+                        btnCode.Visible = false;
+                    }
                 }
             }
             else
             {
                 errorDiv.Visible = true;
-                errorMsg.Text = "Please enter your phone number";
+                errorMsg.Text = "Please enter your phone number or unique code";
             }
         }
 

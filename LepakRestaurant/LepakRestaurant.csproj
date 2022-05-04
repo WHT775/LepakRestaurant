@@ -115,6 +115,7 @@
     <Content Include="Boundary\AddCoupon.aspx" />
     <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
+    <Content Include="Boundary\PaymentPage.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
     <Content Include="Boundary\CustomerMenu.aspx" />
     <Content Include="Boundary\EditCoupon.aspx" />
@@ -210,6 +211,13 @@
     </Compile>
     <Compile Include="Boundary\AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boundary\PaymentPage.aspx.cs">
+      <DependentUpon>PaymentPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\PaymentPage.aspx.designer.cs">
+      <DependentUpon>PaymentPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boundary\CustomerLogin.aspx.cs">
       <DependentUpon>CustomerLogin.aspx</DependentUpon>

@@ -11,52 +11,52 @@ namespace LepakRestaurant.Boundary
 {
 
 
-    public partial class CustomerMenu
+    public partial class PaymentPage
     {
 
         /// <summary>
-        /// menuDiv control.
+        /// lblTableNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuDiv;
+        protected global::System.Web.UI.WebControls.Label lblTableNum;
 
         /// <summary>
-        /// rptItemCategory control.
+        /// lblImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptItemCategory;
+        protected global::System.Web.UI.WebControls.Image lblImage;
 
         /// <summary>
-        /// rptItem control.
+        /// lblItemName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptItem;
+        protected global::System.Web.UI.WebControls.Label lblItemName;
 
         /// <summary>
-        /// cartDiv control.
+        /// lblQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl cartDiv;
+        protected global::System.Web.UI.WebControls.Label lblQty;
 
         /// <summary>
-        /// cfmOrder control.
+        /// lblPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cfmOrder;
+        protected global::System.Web.UI.WebControls.Label lblPrice;
     }
 }
