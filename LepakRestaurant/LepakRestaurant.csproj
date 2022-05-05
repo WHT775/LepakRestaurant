@@ -323,6 +323,7 @@
     <Compile Include="Entity\DataContext.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\Orders.cs" />
+    <Compile Include="Entity\Order_Cancel.cs" />
     <Compile Include="Entity\Order_Summary.cs" />
     <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Roles.cs" />
