@@ -59,8 +59,16 @@ namespace LepakRestaurant.Boundary
             {
                 cc.createCustomer(nameTxt.Text, phoneTxt.Text);
                 HttpContext.Current.Session["custId"] = cc.getCustId();
-                MessageBox.Show("Customer registered successfully!", "Registered!");
-                Response.Redirect("CustomerMenu.aspx");
+				//MessageBox.Show("Customer registered successfully!", "Registered!");
+                //Response.Redirect("CustomerMenu.aspx");
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append("<script type = 'text/javascript'>");
+                sb.Append("window.onload=function(){");
+                sb.Append("alert('");
+                sb.Append("Customer registered successfully!");
+                sb.Append("');window.location='CustomerMenu.aspx';};");
+                sb.Append("</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
             }
             else
             {

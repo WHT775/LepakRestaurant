@@ -21,6 +21,26 @@ namespace LepakRestaurant.Boundary
 
         protected void rptOrders_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            //OrderID
+            int orderid = (int)DataBinder.Eval(e.Item.DataItem, "orders.orders_id");
+            Label lblOrderid = (e.Item.FindControl("lblOrderId") as Label);
+            lblOrderid.Text = "Order ID: " + orderid.ToString();
+            //TableID
+            int tableid = (int)DataBinder.Eval(e.Item.DataItem, "orders.fk_table_num_id");
+            Label lblTableid = (e.Item.FindControl("lblTableId") as Label);
+            lblTableid.Text = "Table No: " + tableid.ToString();
+            //TotalCost
+            //double totalcost = (Double)DataBinder.Eval(e.Item.DataItem, "orders.total_amt");
+            //Label lblTotalCost = (e.Item.FindControl("lblTotalCost") as Label);
+            //lblTotalCost.Text = "Total Cost: $" + totalcost.ToString();
+
+            //Order repeater
+            Repeater rptOrders = (e.Item.FindControl("rptMenu") as Repeater);
+            rptOrders.DataSource = osc.RetrieveAllMenuByOrderId(orderid);
+            rptOrders.DataBind();
+
+            //
+
             ////Image
             //string imageUrl = (string)DataBinder.Eval(e.Item.DataItem, "item_img");
             //Image img = (e.Item.FindControl("menuImage") as Image);
@@ -59,6 +79,25 @@ namespace LepakRestaurant.Boundary
         {
             rptOrders.DataSource = osc.GetAllPendingOrders();
             rptOrders.DataBind();
+        }
+
+        protected void rptMenu_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            //Menu Name
+            string menuname = (string)DataBinder.Eval(e.Item.DataItem, "menu.item_name");
+            Label lblMenuName = (e.Item.FindControl("lblMenuName") as Label);
+            lblMenuName.Text = menuname.ToString();
+
+            //Quantity
+            int quantity = (int)DataBinder.Eval(e.Item.DataItem, "quantity");
+            Label lblQuantity = (e.Item.FindControl("lblQuantity") as Label);
+            lblQuantity.Text = "x" + quantity;
+
+            //itemprice
+            double itemprice = (double)DataBinder.Eval(e.Item.DataItem, "menu.item_price");
+            Label lblCost = (e.Item.FindControl("lblCost") as Label);
+            lblCost.Text = "$" + itemprice;
+
         }
     }
 }

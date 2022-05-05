@@ -25,6 +25,12 @@ namespace LepakRestaurant.Controller
             return ose.CompleteOrderById();
         }
 
+        public List<Order_Summary> RetrieveAllMenuByOrderId(int orderid)
+        {
+            Order_Summary ose = new Order_Summary() { _oid = orderid };
+            return ose.RetrieveAllMenuByOrderId();
+        }
+
         public string InsertOrderSummary(int orderId, int menuId, int qty)
         {
             Order_Summary sum = new Order_Summary();

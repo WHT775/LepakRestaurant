@@ -43,12 +43,13 @@ namespace LepakRestaurant.Boundary
         protected void selectedCategory_Click(object sender, EventArgs e)
         {
             var btn = (Button)sender;
-            if (btn.Text.ToString() != "View Cart")
-                BindItemData(btn.Text.ToString());
-            else
-            {
-                updateTempCart();
-            }
+            //if (btn.Text.ToString() != "View Cart")
+            BindItemData(btn.Text.ToString());
+            //else
+            //{
+            //    updateTempCart();
+            //}
+            updateTempCart();
         }
 
         public void updateTempCart()

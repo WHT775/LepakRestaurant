@@ -33,7 +33,8 @@ namespace LepakRestaurant.Entity
             List<Order_Summary> OrderList = new List<Order_Summary>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select os.quantity, o.table_num_id, o.ORDERS_ID, o.total_amt, m.item_name from [ORDER_SUMMARY] as os join [ORDERS] as o on os.orders_id = o.orders_id join [MENU] as m on os.MENU_ID = m.MENU_ID WHERE o.ORDERS_STATUS = 'Pending'";
+                //string query = "select os.quantity, o.table_num_id, o.ORDERS_ID, o.total_amt, m.item_name from [ORDER_SUMMARY] as os join [ORDERS] as o on os.orders_id = o.orders_id join [MENU] as m on os.MENU_ID = m.MENU_ID WHERE o.ORDERS_STATUS = 'Pending'";
+                string query = "select distinct o.ORDERS_ID, o.table_num_id from [ORDER_SUMMARY] as os join [ORDERS] as o on os.orders_id = o.orders_id join [MENU] as m on os.MENU_ID = m.MENU_ID WHERE o.ORDERS_STATUS = 'Pending'";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
@@ -44,10 +45,37 @@ namespace LepakRestaurant.Entity
                             while (dr.Read())
                             {
                                 Order_Summary tempObj = new Order_Summary();
-                                tempObj.quantity = Convert.ToInt32(dr["quantity"].ToString());
-                                tempObj.orders.fk_table_num_id = Convert.ToInt32(dr["table_num_id"].ToString());
                                 tempObj.orders.orders_id = Convert.ToInt32(dr["ORDERS_ID"].ToString());
-                                tempObj.orders.total_amt = Convert.ToDouble(dr["total_amt"].ToString());
+                                //tempObj.orders.total_amt = Convert.ToDouble(dr["total_amt"].ToString());
+                                tempObj.orders.fk_table_num_id = Convert.ToInt32(dr["table_num_id"].ToString());
+                                OrderList.Add(tempObj);
+                            }
+                        }
+                    }
+                }
+            }
+            return OrderList;
+        }
+
+        public List<Order_Summary> RetrieveAllMenuByOrderId()
+        {
+            List<Order_Summary> OrderList = new List<Order_Summary>();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select os.quantity, m.item_price, m.item_name from [ORDER_SUMMARY] as os join [ORDERS] as o on os.orders_id = o.orders_id join [MENU] as m on os.MENU_ID = m.MENU_ID WHERE o.ORDERS_STATUS = 'Pending' and o.orders_id = @orderid";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@orderid", _oid);
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                Order_Summary tempObj = new Order_Summary();
+                                tempObj.quantity = Convert.ToInt32(dr["quantity"].ToString());
+                                tempObj.menu.item_price = Convert.ToDouble(dr["item_price"].ToString());
                                 tempObj.menu.item_name = dr["item_name"].ToString();
                                 OrderList.Add(tempObj);
                             }
