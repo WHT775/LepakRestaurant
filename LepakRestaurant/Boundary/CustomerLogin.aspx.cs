@@ -58,6 +58,7 @@ namespace LepakRestaurant.Boundary
             if (nameTxt.Text != "")
             {
                 cc.createCustomer(nameTxt.Text, phoneTxt.Text);
+                HttpContext.Current.Session["custId"] = cc.getCustId();
                 MessageBox.Show("Customer registered successfully!", "Registered!");
                 Response.Redirect("CustomerMenu.aspx");
             }
