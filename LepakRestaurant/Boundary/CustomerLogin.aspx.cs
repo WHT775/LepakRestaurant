@@ -36,7 +36,7 @@ namespace LepakRestaurant.Boundary
                     if (isExist)
                     {
                         cc.updateCustomer();
-
+                        HttpContext.Current.Session["custId"] = cc.getCustId();
                         Response.Redirect("CustomerMenu.aspx");
                     }
                     else

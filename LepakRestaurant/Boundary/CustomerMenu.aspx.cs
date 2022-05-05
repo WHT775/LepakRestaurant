@@ -16,10 +16,12 @@ namespace LepakRestaurant.Boundary
         static Dictionary<int, int> tempCart = new Dictionary<int, int>();
         static Dictionary<int, string> nameDict = new Dictionary<int, string>();
         static double total_amt = 0;
+        static int table_num = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                table_num = (int)HttpContext.Current.Session["tableNum"];
                 BindCategoryData();
                 BindItemData("");
                 updateTempCart();
@@ -106,19 +108,8 @@ namespace LepakRestaurant.Boundary
         protected void cfmOrder_Click(object sender, EventArgs e)
         {
             Dictionary<int, Tuple<string, string, double, int>> paymentInfo = new Dictionary<int, Tuple<string, string, double, int>>();
-            //int table_id = Convert.ToInt32(HttpContext.Current.Session["tableNum"].ToString());
-            //string message = cmc.insertOrder(total_amt, table_id);
-            //if(message == "Success")
-            //{
-            //    int orderId = cmc.getLatestOrderId();
-            //    if(orderId != 0)
-            //    {
-            //        foreach (KeyValuePair<int, int> entry in tempCart)
-            //        {
-            //            osc.InsertOrderSummary(orderId, entry.Key, entry.Value);
-            //        }
-            //    }
-            //}
+            
+            HttpContext.Current.Session["tableNum"] = table_num;
             HttpContext.Current.Session["tempCart"] = tempCart;
             HttpContext.Current.Session["subtotalAmt"] = total_amt;
 
@@ -132,8 +123,11 @@ namespace LepakRestaurant.Boundary
             var item = (RepeaterItem)btn.NamingContainer;
             var tb = (TextBox)item.FindControl("itemQty");
             var itemId = (Label)item.FindControl("itemID");
+            var labelPrice = (Label)item.FindControl("itemPrice");
             int menuId = Convert.ToInt32(itemId.Text.ToString());
             int qty = Convert.ToInt32(tb.Text.ToString());
+            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 8));
+            total_amt -= qty * price;
             if (tempCart.ContainsKey(menuId))
                 tempCart[menuId] -= qty;
                 if(tempCart[menuId] <= 0)

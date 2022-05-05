@@ -114,6 +114,32 @@ namespace LepakRestaurant.Entity
                 }
             }
         }
+
+        public Coupon RetrieveCouponByCode()
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "Select * from [COUPON] WHERE COUPON_Code = @couponCode";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@couponCode", coupon_code);
+                    Coupon resultObj = new Coupon();
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())  // or load a DataTable, ExecuteScalar, etc.    
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                resultObj.coupon_code = dr["COUPON_CODE"].ToString();
+                                resultObj.discount_amt = Convert.ToDouble(dr["DISCOUNT_AMT"].ToString());
+                            }
+                        }
+                    }
+                    return resultObj;
+                }
+            }
+        }
         public string DeleteCoupon()
         {
             using (SqlConnection conn = new SqlConnection(connString))

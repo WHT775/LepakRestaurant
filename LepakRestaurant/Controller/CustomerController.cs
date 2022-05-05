@@ -28,6 +28,12 @@ namespace LepakRestaurant.Controller
             HttpContext.Current.Session["custObj"] = cust;
         }
 
+        public int getCustId()
+        {
+            Customer cust = (Customer)HttpContext.Current.Session["custObj"];
+            return Convert.ToInt32(cust.id);
+        }
+
         public void createCustomer(string custName, string phoneNum)
         {
             Customer cust = new Customer(phoneNum);

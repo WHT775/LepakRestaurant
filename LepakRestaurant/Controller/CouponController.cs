@@ -32,6 +32,12 @@ namespace LepakRestaurant.Controller
             }
         }
 
+        public bool checkIfCouponExist(string coupon)
+        {
+            Coupon ce = new Coupon() { coupon_code = coupon.ToUpper(), discount_amt = 1};
+            return ce.CheckIfCouponExist();
+        }
+
         public List<Coupon> RetrieveAllCoupon()
         {
             Coupon ce = new Coupon();
@@ -42,6 +48,12 @@ namespace LepakRestaurant.Controller
         {
             Coupon ce = new Coupon() { coupon_id = couponid};
             return ce.RetrieveCouponById();
+        }
+
+        public Coupon RetrieveCouponByCode(string code)
+        {
+            Coupon ce = new Coupon() { coupon_code = code };
+            return ce.RetrieveCouponByCode();
         }
 
         public string DeleteCoupon(int couponid)

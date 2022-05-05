@@ -308,6 +308,7 @@
     <Compile Include="Controller\CustomerMenuController.cs" />
     <Compile Include="Controller\MenuController.cs" />
     <Compile Include="Controller\OrderSummaryController.cs" />
+    <Compile Include="Controller\PaymentController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
