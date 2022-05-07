@@ -13,10 +13,16 @@ namespace LepakRestaurant.Controller
             Order_Summary ose = new Order_Summary();
             return ose.GetAllPendingOrders();
         }
-        public string CancelOrderById(int orderid)
+        public string CancelOrderById(int orderid,string reasoning)
         {
-            Order_Summary ose = new Order_Summary() {_oid = orderid };
-            return ose.CancelOrderById();
+            if (reasoning == "") return "Please fill up the reasoning";
+            Order_Summary ose = new Order_Summary() {_oid = orderid ,_reason=reasoning};
+            string msg = ose.CancelOrderById();
+            if (msg == "Successfully cancelled order")
+            {
+                return ose.InsertCancelOrderReason();   
+            }
+            return msg;
         }
 
         public string CompleteOrderById(int orderid)

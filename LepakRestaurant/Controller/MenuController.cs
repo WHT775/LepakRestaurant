@@ -119,5 +119,11 @@ namespace LepakRestaurant.Controller
             }
 
         }
+
+        public List<Menu> RetrieveAllMenuByCategoryId(int categoryid)
+        {
+            Menu me = new Menu() { category_id = categoryid };
+            return me.RetrieveAllMenuByCategoryId();
+        }
     }
 }

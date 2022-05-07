@@ -21,11 +21,17 @@ namespace LepakRestaurant.Entity
         public Menu menu { get; set; }
         public int _oid { get; set; }
 
+        public Order_Cancel order_cancel { get; set; }
+
+        public string _reason { get; set; }
+
         public Order_Summary()
         {
             orders = new Orders();
             orders.orders_id = _oid;
             menu = new Menu();
+            order_cancel = new Order_Cancel();
+            order_cancel.reason = _reason;
         }
 
         public List<Order_Summary> GetAllPendingOrders()
@@ -94,6 +100,29 @@ namespace LepakRestaurant.Entity
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@orderid", _oid);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return "Successfully cancelled order";
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.Message;
+                    }
+                }
+            }
+        }
+
+        public string InsertCancelOrderReason()
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "INSERT INTO ORDER_CANCEL VALUES(@orderid,@reason)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@orderid", _oid);
+                    cmd.Parameters.AddWithValue("@reason", _reason);
                     conn.Open();
                     try
                     {

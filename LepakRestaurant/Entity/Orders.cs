@@ -18,11 +18,10 @@ namespace LepakRestaurant.Entity
 
         public int fk_customer_id { get; set; }
 
-        public Order_Cancel order_cancel { get; set; }
+
         
         public Orders()
         {
-            order_cancel = new Order_Cancel();
         }
 
         public Orders(int oid)

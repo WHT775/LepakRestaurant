@@ -38,30 +38,17 @@ namespace LepakRestaurant.Boundary
             Repeater rptOrders = (e.Item.FindControl("rptMenu") as Repeater);
             rptOrders.DataSource = osc.RetrieveAllMenuByOrderId(orderid);
             rptOrders.DataBind();
-
-            //
-
-            ////Image
-            //string imageUrl = (string)DataBinder.Eval(e.Item.DataItem, "item_img");
-            //Image img = (e.Item.FindControl("menuImage") as Image);
-            //string url = "./images/" + imageUrl;
-            //img.Style.Add("vertical-align", "middle");
-            //img.ImageUrl = url;
-            ////Price
-            //double price = (Double)DataBinder.Eval(e.Item.DataItem, "item_price");
-            //Label lblPrice = (e.Item.FindControl("menuPrice") as Label);
-            //lblPrice.Text = "$" + price;
-
-            //Button btn = (e.Item.FindControl("btnDelete") as Button);
-            //btn.OnClientClick = "return confirm('Are you sure you want to delete this menu?');";
         }
 
         protected void rptOrders_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "Cancel")
             {
-                string msg = osc.CancelOrderById(Convert.ToInt32(e.CommandArgument.ToString()));
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
+                hfcancelorderid.Value = e.CommandArgument.ToString();
+                lblTitle.Text= "Order ID: " +  e.CommandArgument.ToString();
+                my_popup.Style.Add("display", "block");
+                popup.Style.Add("display", "block");
+                upStaff.Update();
             }
             else if (e.CommandName == "Complete")
             {
@@ -97,6 +84,26 @@ namespace LepakRestaurant.Boundary
             double itemprice = (double)DataBinder.Eval(e.Item.DataItem, "menu.item_price");
             Label lblCost = (e.Item.FindControl("lblCost") as Label);
             lblCost.Text = "$" + itemprice;
+
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            my_popup.Style.Add("display", "none");
+            popup.Style.Add("display", "none");
+        }
+
+        protected void btnSubmitReason_Click(object sender, EventArgs e)
+        {
+            string msg = osc.CancelOrderById(Convert.ToInt32(hfcancelorderid.Value.ToString()), txtReasoning.Text);
+            if(msg == "Successfully cancelled order")
+            {
+                upStaff.Update();
+                bindPendingOrders();
+                my_popup.Style.Add("display", "none");
+                popup.Style.Add("display", "none");
+            }
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
 
         }
     }

@@ -9,8 +9,20 @@
             <div style="width: 100%; text-align: center;">
                 <asp:Button runat="server" ID="btnAddMenu" Text="Add Menu" OnClick="btnAddMenu_Click" />
             </div>
+            <br />
             <div style="overflow-x: auto; text-align: center; width: 100%">
-                <div style="width: 60%; margin: 0 auto; height: 600px;">
+                <div style="width: 80%; margin: 0 auto;">
+                    <div style="text-align: center;">
+                        <h2>
+                            <asp:Label runat="server" ID="lblCategories"></asp:Label></h2>
+                    </div>
+                    <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
+                        <ItemTemplate>
+                            <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
+                        </ItemTemplate>
+                        <FooterTemplate></FooterTemplate>
+                    </asp:Repeater>
+                    <br />
                     <asp:Repeater ID="rptMenu" runat="server" EnableViewState="true" OnItemDataBound="rptMenu_ItemDataBound" OnItemCommand="rptMenu_ItemCommand">
                         <ItemTemplate>
                             <div style="display: inline-grid; text-align: center; border: 1px solid black; margin: 8px">
@@ -28,13 +40,17 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
+
+
             </div>
             <div style="width: 100%; text-align: center;">
                 <asp:Button runat="server" ID="btnAddCoupon" Text="Add Coupon" OnClick="btnAddCoupon_Click" />
             </div>
+            <br />
             <div style="overflow-x: auto; text-align: center; width: 100%">
-                <div style="width: 60%; margin: 0 auto; height: 600px;">
-                    <asp:GridView runat="server" ID="gvCoupon" AutoGenerateColumns="false" OnRowCommand="gvCoupon_RowCommand" OnRowDeleting="gvCoupon_RowDeleting" OnRowDataBound="gvCoupon_RowDataBound">
+                <div style="width: 80%; margin: 0 auto;">
+
+                    <asp:GridView runat="server" ID="gvCoupon" AutoGenerateColumns="false" OnRowCommand="gvCoupon_RowCommand" OnRowDeleting="gvCoupon_RowDeleting" OnRowDataBound="gvCoupon_RowDataBound" HorizontalAlign="Center">
                         <Columns>
                             <asp:BoundField HeaderText="Coupon Code" DataField="coupon_code" />
                             <asp:BoundField HeaderText="Amount" DataField="discount_amt" />
@@ -52,6 +68,7 @@
                     </asp:GridView>
                 </div>
             </div>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

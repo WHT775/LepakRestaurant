@@ -11,6 +11,7 @@ namespace LepakRestaurant.Boundary
     public partial class Manager : System.Web.UI.Page
     {
         MenuController mc = new MenuController();
+        CustomerMenuController cmc = new CustomerMenuController();
         CouponController cc = new CouponController();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,6 +21,9 @@ namespace LepakRestaurant.Boundary
                 rptMenu.DataBind();
                 gvCoupon.DataSource = cc.RetrieveAllCoupon();
                 gvCoupon.DataBind();
+                rptItemCategory.DataSource = cmc.getListOfCategory();
+                rptItemCategory.DataBind();
+                lblCategories.Text = "All Menu";
             }
         }
 
@@ -105,6 +109,13 @@ namespace LepakRestaurant.Boundary
                     btn.OnClientClick = "return confirm('Are you sure you want to delete this coupon?');";
                 }
             }
+        }
+
+        protected void rptItemCategory_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            lblCategories.Text = e.CommandName.ToString() + " Menu";
+            rptMenu.DataSource = mc.RetrieveAllMenuByCategoryId(Convert.ToInt32(e.CommandArgument.ToString()));
+            rptMenu.DataBind();
         }
     }
 }
