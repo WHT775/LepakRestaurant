@@ -30,6 +30,7 @@
         <br />
         <br />
         <asp:Label ID="lblFinalTotal" runat="server"></asp:Label>
+        <asp:Label ID="lblGst" runat="server"></asp:Label>
         <asp:Button ID ="btnPayment" runat="server" Text="Complete Payment" OnClick="btnPayment_Click"/>
     </div>
     <div id="paySuccess" runat="server">

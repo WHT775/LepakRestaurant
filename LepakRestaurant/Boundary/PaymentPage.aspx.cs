@@ -21,6 +21,7 @@ namespace LepakRestaurant.Boundary
         static double final = 0;
         static int table_num = 0;
         static int custId = 0;
+        static double gst = 0;
         static Dictionary<int, int> tempCart = new Dictionary<int, int>();
         static List<(int menuId, string itemName, string itemImg, double price, int qty)> itemList = new List<(int menuId, string itemName, string itemImg, double price, int qty)>();
         protected void Page_Load(object sender, EventArgs e)
@@ -33,9 +34,12 @@ namespace LepakRestaurant.Boundary
                 final = (double)HttpContext.Current.Session["subtotalAmt"];
                 table_num = (int)HttpContext.Current.Session["tableNum"];
                 custId = (int)HttpContext.Current.Session["custId"];
+                gst = total_amt * 0.07;
+                final = total_amt + gst;
+                lblGst.Text = "GST: $" + gst.ToString();
                 lblTableNum.Text = "Table number: " + table_num.ToString() + "<br />";
                 lblSubtotal.Text = "Subtotal: $" + total_amt.ToString();
-                lblFinalTotal.Text = "Total: $" + total_amt.ToString();
+                lblFinalTotal.Text = "Total: $" + final.ToString();
                 tempCart = (Dictionary<int, int>)HttpContext.Current.Session["tempCart"];
 
                 foreach(KeyValuePair<int, int> entry in tempCart)
@@ -89,8 +93,12 @@ namespace LepakRestaurant.Boundary
                 var obj = cc.RetrieveCouponByCode(couponTxt.Text.ToString());
                 double discount = Convert.ToDouble(obj.discount_amt);
                 final = Convert.ToDouble(lblFinalTotal.Text.ToString().Remove(0, 8));
-                final = final * ((100 - discount)/100);
-                lblDiscountTxt.Text = "Discount: " + discount + "%";
+                total_amt = total_amt - discount;
+                gst = total_amt * 0.07;
+                final = total_amt + gst;
+                lblGst.Text = "GST: $" + gst.ToString();
+                lblDiscountTxt.Text = "Discount: $" + discount;
+                lblDiscountTxt.Visible = true;
                 lblFinalTotal.Text = "Total: $" + final.ToString();
                 checkCoupon.Visible = false;
             }
