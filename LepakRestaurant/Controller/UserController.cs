@@ -18,7 +18,8 @@ namespace LepakRestaurant.Controller
             }
             else
             {
-                User ue = new User() { user_id = username, user_pw = password };
+                CommonController ccc = new CommonController();
+                User ue = new User() { user_id = username, user_pw = ccc.Encrypt(password) };
                 User ucObj = ue.CheckIfUserInDB();
                 if (ucObj.id == 0)
                 {
@@ -38,7 +39,7 @@ namespace LepakRestaurant.Controller
                     {
                         HttpContext.Current.Session["id"] = ue.id;
                         HttpContext.Current.Session["user_id"] = ue.user_id;
-                        HttpContext.Current.Session["user_pw"] = ue.user_pw;
+                        //HttpContext.Current.Session["user_pw"] = ue.user_pw;
                         return ue.fk_roles_id.ToString();
                     }
                 }
@@ -47,7 +48,8 @@ namespace LepakRestaurant.Controller
 
         public string CreateUser(string username, string password, int role, bool isdisabled)
         {
-            User ue = new User() { user_id = username, user_pw = password, fk_roles_id = role, is_deleted = isdisabled };
+            CommonController ccc = new CommonController();
+            User ue = new User() { user_id = username, user_pw = ccc.Encrypt(password), fk_roles_id = role, is_deleted = isdisabled };
             if (ue.CheckIfUserExist())
             {
                 return "User Exist";
@@ -89,7 +91,8 @@ namespace LepakRestaurant.Controller
 
         public string UpdateUserProfile(string username, string password, int roleid, bool isdisabled, int id)
         {
-            User ue = new User() { id=id ,user_id = username, user_pw = password, fk_roles_id = roleid, is_deleted = isdisabled };
+            CommonController ccc = new CommonController();
+            User ue = new User() { id=id ,user_id = username, user_pw = ccc.Encrypt(password), fk_roles_id = roleid, is_deleted = isdisabled };
             return ue.UpdateUserProfile();
 
         }

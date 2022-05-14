@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditMenu.aspx.cs" Inherits="LepakRestaurant.Boundary.EditMenu" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <table id="tableStyle">
+    <table id="tableStyle">
         <tr>
             <td colspan="2">
                 <h1>
@@ -33,6 +34,11 @@
             <td>Category:</td>
             <td>
                 <asp:DropDownList runat="server" ID="ddlCategory" Width="100%" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>
+                <asp:DropDownList runat="server" ID="ddlStatus" Width="100%" DataTextField="status_name" DataValueField="status_id"></asp:DropDownList></td>
         </tr>
         <tr>
             <td colspan="2">

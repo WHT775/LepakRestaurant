@@ -303,6 +303,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\CommonController.cs" />
     <Compile Include="Controller\CouponController.cs" />
     <Compile Include="Controller\CustomerController.cs" />
     <Compile Include="Controller\CustomerMenuController.cs" />
@@ -322,6 +323,7 @@
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\DataContext.cs" />
     <Compile Include="Entity\Menu.cs" />
+    <Compile Include="Entity\MenuStatus.cs" />
     <Compile Include="Entity\Orders.cs" />
     <Compile Include="Entity\Order_Cancel.cs" />
     <Compile Include="Entity\Order_Summary.cs" />

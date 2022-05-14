@@ -8,7 +8,7 @@ namespace LepakRestaurant.Controller
 {
     public class MenuController
     {
-        public string[] createMenu(string name, string description, string price, HttpPostedFile imgfile, int categoryid)
+        public string[] createMenu(string name, string description, string price, HttpPostedFile imgfile, int categoryid, int statusid)
         {
             Menu menu = new Menu();
             if (name == "" || description == "" || price == "")
@@ -34,7 +34,7 @@ namespace LepakRestaurant.Controller
                 }
                 ID += ID + "." + GetFileExtension(imgfile.FileName);
             }
-            menu = new Menu() { item_name = name, item_desc = description, item_price = Convert.ToDouble(price), item_img = ID, category_id = categoryid };
+            menu = new Menu() { item_name = name, item_desc = description, item_price = Convert.ToDouble(price), item_img = ID, category_id = categoryid, status_id= statusid };
             bool result = menu.CreateMenu();
             if (!result)
             {
@@ -60,7 +60,7 @@ namespace LepakRestaurant.Controller
 
         public string DeleteMenu(int menuid)
         {
-            Menu me = new Menu() { menu_id = menuid};
+            Menu me = new Menu() { menu_id = menuid };
             return me.DeleteMenu();
         }
         public List<Category> getListOfCategory()
@@ -69,12 +69,18 @@ namespace LepakRestaurant.Controller
             return cat.RetrieveCategories();
         }
 
+        public List<MenuStatus> getListOfMenuStatus()
+        {
+            MenuStatus cat = new MenuStatus();
+            return cat.RetrieveMenuStatus();
+        }
+
         public Menu getMenuByMenuId(int menuid)
         {
             Menu me = new Menu() { menu_id = menuid };
             return me.RetrieveMenuByMenuId();
         }
-        public string[] UpdateMenu(int menuid,string menuname, string menudesc, string price, HttpPostedFile imgfile, string categoryid)
+        public string[] UpdateMenu(int menuid, string menuname, string menudesc, string price, HttpPostedFile imgfile, string categoryid,string statusid)
         {
             Menu menu = new Menu();
             if (menuname == "" || menudesc == "" || price == "")
@@ -104,10 +110,10 @@ namespace LepakRestaurant.Controller
             else
             {
                 //Retrieve file name to stay status quo
-                menu = new Menu() {menu_id = menuid };
+                menu = new Menu() { menu_id = menuid };
                 ID = menu.RetrieveMenuByMenuId().item_img;
             }
-            menu = new Menu() {menu_id= menuid, item_name = menuname, item_desc = menudesc, item_price = Convert.ToDouble(price), item_img = ID, category_id = Convert.ToInt32(categoryid) };
+            menu = new Menu() { menu_id = menuid, item_name = menuname, item_desc = menudesc, item_price = Convert.ToDouble(price), item_img = ID, category_id = Convert.ToInt32(categoryid), status_id= Convert.ToInt32(statusid) };
             bool result = menu.UpdateMenu();
             if (!result)
             {
@@ -115,7 +121,7 @@ namespace LepakRestaurant.Controller
             }
             else
             {
-                return new string[] { "Successfully updated menu", ID};
+                return new string[] { "Successfully updated menu", ID };
             }
 
         }
@@ -123,7 +129,10 @@ namespace LepakRestaurant.Controller
         public List<Menu> RetrieveAllMenuByCategoryId(int categoryid)
         {
             Menu me = new Menu() { category_id = categoryid };
-            return me.RetrieveAllMenuByCategoryId();
+            if (categoryid == 0)
+                return me.RetrieveAllMenu();
+            else
+                return me.RetrieveAllMenuByCategoryId();
         }
     }
 }

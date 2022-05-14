@@ -33,6 +33,33 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.UpdatePanel upManager;
 
         /// <summary>
+        /// btnMenuTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMenuTab;
+
+        /// <summary>
+        /// btnCouponTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCouponTab;
+
+        /// <summary>
+        /// divMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMenu;
+
+        /// <summary>
         /// btnAddMenu control.
         /// </summary>
         /// <remarks>
@@ -67,6 +94,15 @@ namespace LepakRestaurant.Boundary
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptMenu;
+
+        /// <summary>
+        /// divCoupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCoupon;
 
         /// <summary>
         /// btnAddCoupon control.

@@ -24,9 +24,16 @@ namespace LepakRestaurant.Entity
 
         public Category category { get; set; }
 
+        public int status_id { get; set; }
+
+        public MenuStatus menustatus { get; set; }
+
         public Menu()
         {
             category = new Category();
+            category.category_id = category_id;
+            menustatus = new MenuStatus();
+            menustatus.status_id = status_id;
         }
 
         public DataSet retrieveItemsByCategory(string item_category)
@@ -36,9 +43,9 @@ namespace LepakRestaurant.Entity
             {
                 string query = "";
                 if (item_category != "")
-                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory";
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory and m.MENUSTATUS_ID = 1";
                 else
-                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where m.CATEGORY_ID = 1";
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where m.CATEGORY_ID = 1 and m.MENUSTATUS_ID = 1";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     if (item_category != "")
@@ -105,7 +112,7 @@ namespace LepakRestaurant.Entity
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "INSERT INTO MENU VALUES(@itemname,@itemdesc,@itemprice,@itemimg,@categoryid)";
+                string query = "INSERT INTO MENU VALUES(@itemname,@itemdesc,@itemprice,@itemimg,@categoryid,@statusid)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@itemname", item_name);
@@ -113,6 +120,7 @@ namespace LepakRestaurant.Entity
                     cmd.Parameters.AddWithValue("@itemprice", item_price);
                     cmd.Parameters.AddWithValue("@itemimg", item_img);
                     cmd.Parameters.AddWithValue("@categoryid", category_id);
+                    cmd.Parameters.AddWithValue("@statusid", status_id);
                     conn.Open();
                     try
                     {
@@ -155,7 +163,7 @@ namespace LepakRestaurant.Entity
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "UPDATE [Menu] SET ITEM_NAME = @itemname, ITEM_DESCRIPTION = @itemdesc, ITEM_PRICE = @itemprice, ITEM_IMG = @itemimg, CATEGORY_ID = @categoryid WHERE MENU_ID = @menuid";
+                string query = "UPDATE [Menu] SET ITEM_NAME = @itemname, ITEM_DESCRIPTION = @itemdesc, ITEM_PRICE = @itemprice, ITEM_IMG = @itemimg, CATEGORY_ID = @categoryid, MENUSTATUS_ID = @statusid WHERE MENU_ID = @menuid";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@menuid", menu_id);
@@ -164,6 +172,7 @@ namespace LepakRestaurant.Entity
                     cmd.Parameters.AddWithValue("@itemprice", item_price);
                     cmd.Parameters.AddWithValue("@itemimg", item_img);
                     cmd.Parameters.AddWithValue("@categoryid", category_id);
+                    cmd.Parameters.AddWithValue("@statusid", status_id);
                     conn.Open();
                     try
                     {
@@ -204,7 +213,7 @@ namespace LepakRestaurant.Entity
             List<Menu> menuList = new List<Menu>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select menu_id, item_name, item_description, item_price, item_img, m.category_id,category_name from Menu as m join category as c on m.category_id = c.category_id";
+                string query = "select menu_id, item_name, item_description, item_price, item_img, m.category_id,category_name, ms.status_name from Menu as m join category as c on m.category_id = c.category_id join menustatus as ms on m.MENUSTATUS_ID = ms.status_id";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
@@ -222,6 +231,7 @@ namespace LepakRestaurant.Entity
                                 tempObj.item_img = dr["ITEM_IMG"].ToString();
                                 //tempObj.category_id = Convert.ToInt32(dr["category_id"].ToString());
                                 tempObj.category.category_name = dr["category_name"].ToString();
+                                tempObj.menustatus.status_name = dr["status_name"].ToString();
                                 menuList.Add(tempObj);
                             }
                         }
@@ -285,6 +295,7 @@ namespace LepakRestaurant.Entity
                                 tempObj.item_price = Convert.ToDouble(dr["ITEM_PRICE"].ToString());
                                 tempObj.item_img = dr["ITEM_IMG"].ToString();
                                 tempObj.category_id = Convert.ToInt32(dr["category_id"].ToString());
+                                tempObj.status_id = Convert.ToInt32(dr["MENUSTATUS_ID"].ToString());
                                 //tempObj.category.category_name = dr["category_name"].ToString();
                             }
                         }

@@ -6,29 +6,22 @@ using System.Web;
 
 namespace LepakRestaurant.Entity
 {
-    public class Category :DataContext
+    public class MenuStatus : DataContext
     {
-        public int category_id { get; set; }
+        public int status_id { get; set; }
 
-        public string category_name { get; set; }
+        public string status_name { get; set; }
 
-        public Category()
+        public MenuStatus()
         {
 
         }
-
-        public Category(int category_id, string category_name)
-        {
-            this.category_id = category_id;
-            this.category_name = category_name;
-        }
-
-        public List<Category> RetrieveCategories()
+        public List<MenuStatus> RetrieveMenuStatus()
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "Select * from [CATEGORY]";
-                List<Category> objUser = new List<Category>();
+                string query = "Select * from [MENUSTATUS]";
+                List<MenuStatus> objUser = new List<MenuStatus>();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
@@ -38,9 +31,9 @@ namespace LepakRestaurant.Entity
                         {
                             while (dr.Read())
                             {
-                                Category tempObj = new Category();
-                                tempObj.category_id = Convert.ToInt32(dr["CATEGORY_ID"].ToString());
-                                tempObj.category_name = dr["CATEGORY_NAME"].ToString();
+                                MenuStatus tempObj = new MenuStatus();
+                                tempObj.status_id = Convert.ToInt32(dr["STATUS_ID"].ToString());
+                                tempObj.status_name = dr["STATUS_NAME"].ToString();
                                 objUser.Add(tempObj);
                             }
                         }
@@ -49,6 +42,5 @@ namespace LepakRestaurant.Entity
                 }
             }
         }
-
     }
 }

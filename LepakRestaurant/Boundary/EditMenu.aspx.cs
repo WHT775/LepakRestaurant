@@ -17,22 +17,25 @@ namespace LepakRestaurant.Boundary
             {
                 ddlCategory.DataSource = mc.getListOfCategory();
                 ddlCategory.DataBind();
+                ddlStatus.DataSource = mc.getListOfMenuStatus();
+                ddlStatus.DataBind();
                 var menuDetails = mc.getMenuByMenuId(Convert.ToInt32(HttpContext.Current.Session["editmenuid"].ToString()));
                 txtName.Text = menuDetails.item_name;
                 txtDescription.Text = menuDetails.item_desc;
                 txtCost.Text = Convert.ToDouble(menuDetails.item_price).ToString();
                 ddlCategory.SelectedValue = menuDetails.category_id.ToString();
+                ddlStatus.SelectedValue = menuDetails.status_id.ToString();
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Manager.aspx");
+            Response.Redirect("Manager.aspx?q=m");
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string[] msg = mc.UpdateMenu(Convert.ToInt32(HttpContext.Current.Session["editmenuid"].ToString()), txtName.Text.Trim(),txtDescription.Text.Trim(),txtCost.Text,fUpload.PostedFile,ddlCategory.SelectedValue);
+            string[] msg = mc.UpdateMenu(Convert.ToInt32(HttpContext.Current.Session["editmenuid"].ToString()), txtName.Text.Trim(),txtDescription.Text.Trim(),txtCost.Text,fUpload.PostedFile,ddlCategory.SelectedValue, ddlStatus.SelectedValue);
             if (msg[0] == "Successfully updated menu")
             {
                 if(fUpload.HasFile)
@@ -44,7 +47,7 @@ namespace LepakRestaurant.Boundary
                 sb.Append("window.onload=function(){");
                 sb.Append("alert('");
                 sb.Append(msg[0]);
-                sb.Append("');window.location='Manager.aspx';};");
+                sb.Append("');window.location='Manager.aspx?q=m';};");
                 sb.Append("</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
             }

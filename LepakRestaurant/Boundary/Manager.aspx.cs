@@ -21,9 +21,25 @@ namespace LepakRestaurant.Boundary
                 rptMenu.DataBind();
                 gvCoupon.DataSource = cc.RetrieveAllCoupon();
                 gvCoupon.DataBind();
-                rptItemCategory.DataSource = cmc.getListOfCategory();
+                rptItemCategory.DataSource = cmc.getListOfCategoryWithAll();
                 rptItemCategory.DataBind();
                 lblCategories.Text = "All Menu";
+                if(Request.QueryString["q"] == "m")
+                {
+                    divMenu.Style.Add("display", "block");
+                    divCoupon.Style.Add("display", "none");
+                }
+                else if(Request.QueryString["q"] == "c")
+                {
+                    divMenu.Style.Add("display", "none");
+                    divCoupon.Style.Add("display", "block");
+                }
+                else
+                {
+                    divMenu.Style.Add("display", "block");
+                    divCoupon.Style.Add("display", "none");
+                }
+
             }
         }
 
@@ -45,8 +61,8 @@ namespace LepakRestaurant.Boundary
             Label lblPrice = (e.Item.FindControl("menuPrice") as Label);
             lblPrice.Text = "$" + price;
 
-            Button btn = (e.Item.FindControl("btnDelete") as Button);
-            btn.OnClientClick = "return confirm('Are you sure you want to delete this menu?');";
+            //Button btn = (e.Item.FindControl("btnDelete") as Button);
+            //btn.OnClientClick = "return confirm('Are you sure you want to delete this menu?');";
         }
 
         protected void rptMenu_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -56,17 +72,17 @@ namespace LepakRestaurant.Boundary
                 HttpContext.Current.Session["editmenuid"] = Convert.ToInt32(e.CommandArgument.ToString());
                 Response.Redirect("EditMenu.aspx");
             }
-            else if (e.CommandName == "Delete")
-            {
-                string msg = mc.DeleteMenu(Convert.ToInt32(e.CommandArgument.ToString()));
-                if (msg == "Menu deleted successfully")
-                {
-                    rptMenu.DataSource = mc.RetrieveAllMenu();
-                    rptMenu.DataBind();
-                }
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
-                upManager.Update();
-            }
+            //else if (e.CommandName == "Delete")
+            //{
+            //    string msg = mc.DeleteMenu(Convert.ToInt32(e.CommandArgument.ToString()));
+            //    if (msg == "Menu deleted successfully")
+            //    {
+            //        rptMenu.DataSource = mc.RetrieveAllMenu();
+            //        rptMenu.DataBind();
+            //    }
+            //    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
+            //    upManager.Update();
+            //}
         }
 
         protected void btnAddCoupon_Click(object sender, EventArgs e)
@@ -81,22 +97,23 @@ namespace LepakRestaurant.Boundary
                 HttpContext.Current.Session["editcouponid"] = Convert.ToInt32(e.CommandArgument.ToString());
                 Response.Redirect("EditCoupon.aspx");
             }
-            else if (e.CommandName == "Delete")
-            {
-                string msg = cc.DeleteCoupon(Convert.ToInt32(e.CommandArgument.ToString()));
-                if(msg == "Coupon deleted successfully")
-                {
-                    gvCoupon.DataSource = cc.RetrieveAllCoupon();
-                    gvCoupon.DataBind();
-                }
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('"+msg+"');", true);
-                upManager.Update();
-            }
+            //else if (e.CommandName == "Delete")
+            //{
+            //    string msg = cc.DeleteCoupon(Convert.ToInt32(e.CommandArgument.ToString()));
+            //    if(msg == "Coupon deleted successfully")
+            //    {
+            //        gvCoupon.DataSource = cc.RetrieveAllCoupon();
+            //        gvCoupon.DataBind();
+            //    }
+            //    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('"+msg+"');", true);
+            //    upManager.Update();
+            //}
         }
 
         protected void gvCoupon_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
+            //divCoupon.Style.Add("display", "block");
+            //divMenu.Style.Add("display", "none");
         }
 
         protected void gvCoupon_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -116,6 +133,28 @@ namespace LepakRestaurant.Boundary
             lblCategories.Text = e.CommandName.ToString() + " Menu";
             rptMenu.DataSource = mc.RetrieveAllMenuByCategoryId(Convert.ToInt32(e.CommandArgument.ToString()));
             rptMenu.DataBind();
+        }
+
+        protected void btnMenuTab_Click(object sender, EventArgs e)
+        {
+            divMenu.Style.Add("display","block");
+            divCoupon.Style.Add("display", "none");
+            btnMenuTab.CssClass += " active";
+            btnCouponTab.CssClass = "tablinks";
+            //btnMenuTab.Attributes.Add("class","active");
+            //btnCouponTab.Attributes.Remove("active");
+            upManager.Update();
+        }
+
+        protected void btnCouponTab_Click(object sender, EventArgs e)
+        {
+            divMenu.Style.Add("display", "none");
+            divCoupon.Style.Add("display", "block");
+            btnCouponTab.CssClass += " active";
+            btnMenuTab.CssClass = "tablinks";
+            upManager.Update();
+            //btnCouponTab.Attributes.Add("class", "active");
+            //btnMenuTab.Attributes.Remove("active");
         }
     }
 }

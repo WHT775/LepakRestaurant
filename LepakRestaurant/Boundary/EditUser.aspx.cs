@@ -17,9 +17,10 @@ namespace LepakRestaurant.Boundary
             {
                 ddlRole.DataSource = uc.PopulateRoleDDL();
                 ddlRole.DataBind();
+                CommonController ccc = new CommonController();
                 var userDetails = uc.RetrieveUserById(Convert.ToInt32(HttpContext.Current.Session["edituserid"].ToString()));
                 txtLoginId.Text = userDetails.user_id;
-                txtPassword.Text = userDetails.user_pw;
+                txtPassword.Text = ccc.Decrypt(userDetails.user_pw);
                 ddlRole.SelectedValue = userDetails.fk_roles_id.ToString();
                 ddlDisabled.SelectedValue = userDetails.is_deleted.ToString();
             }

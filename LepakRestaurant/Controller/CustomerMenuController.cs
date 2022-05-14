@@ -40,5 +40,15 @@ namespace LepakRestaurant.Controller
             Orders order = new Orders();
             return order.getLatestOrderId();
         }
+
+        public List<Category> getListOfCategoryWithAll()
+        {
+            List<Category> categoryList = new List<Category>();
+            Category cat = new Category();
+            categoryList = cat.RetrieveCategories();
+            cat = new Category(0, "All");
+            categoryList.Add(cat);
+            return categoryList;
+        }
     }
 }
