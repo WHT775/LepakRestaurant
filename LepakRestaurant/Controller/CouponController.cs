@@ -8,9 +8,9 @@ namespace LepakRestaurant.Controller
 {
     public class CouponController
     {
-        public string CreateCoupon(string coupon,string discount)
+        public string CreateCoupon(string coupon,string discount,string expirydate)
         {
-            if(coupon == "" || discount == "") return "Please fill up the form" ;
+            if(coupon == "" || discount == "" || expirydate == "") return "Please fill up the form" ;
             try
             {
                 Convert.ToDouble(discount);
@@ -19,7 +19,7 @@ namespace LepakRestaurant.Controller
             {
                 return "Please key in appropriate price";
             }
-            Coupon ce = new Coupon() { coupon_code=coupon.ToUpper(), discount_amt = Convert.ToDouble(discount)};
+            Coupon ce = new Coupon() { coupon_code=coupon.ToUpper(), discount_amt = Convert.ToDouble(discount), expiry_date= expirydate };
             if (ce.CheckIfCouponExist()) return "Coupon exist";
             bool result = ce.InsertCoupon();
             if (!result)
@@ -62,7 +62,7 @@ namespace LepakRestaurant.Controller
             return ce.DeleteCoupon();
 
         }
-        public string UpdateCoupon(int couponid, string couponcode, string discountamt)
+        public string UpdateCoupon(int couponid, string couponcode, string discountamt, string expirydate)
         {
             if (couponcode == "" || discountamt == "") return "Please fill up the form";
             try
@@ -73,7 +73,7 @@ namespace LepakRestaurant.Controller
             {
                 return "Please key in appropriate price";
             }
-            Coupon ue = new Coupon() { coupon_id = couponid , coupon_code=couponcode,discount_amt= Convert.ToDouble(discountamt) };
+            Coupon ue = new Coupon() { coupon_id = couponid , coupon_code=couponcode,discount_amt= Convert.ToDouble(discountamt) , expiry_date=expirydate};
             return ue.UpdateCoupon();
 
         }

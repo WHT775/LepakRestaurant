@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -82,6 +83,28 @@ namespace LepakRestaurant.Entity
 
                 }
             }
+        }
+        public DataSet retrieveCustomerData(string item_category)
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "";
+                if (item_category != "")
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where CATEGORY_NAME = @itemcategory and m.MENUSTATUS_ID = 1";
+                else
+                    query = "select * from Menu m inner join CATEGORY c on c.CATEGORY_ID = M.CATEGORY_ID where m.CATEGORY_ID = 1 and m.MENUSTATUS_ID = 1";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    if (item_category != "")
+                        cmd.Parameters.AddWithValue("@itemcategory", item_category);
+
+                    conn.Open();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(ds);
+                }
+            }
+            return ds;
         }
     }
 }

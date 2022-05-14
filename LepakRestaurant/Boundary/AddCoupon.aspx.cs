@@ -23,7 +23,7 @@ namespace LepakRestaurant.Boundary
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
-            string msg = cc.CreateCoupon(txtCode.Text.Trim(),txtDiscount.Text.Trim());
+            string msg = cc.CreateCoupon(txtCode.Text.Trim(),txtDiscount.Text.Trim(),txtExpiryDate.Text.Trim());
             if (msg == "Successfully created coupon")
             {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

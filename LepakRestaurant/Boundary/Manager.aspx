@@ -104,6 +104,7 @@
                             <Columns>
                                 <asp:BoundField HeaderText="Coupon Code" DataField="coupon_code" />
                                 <asp:BoundField HeaderText="Amount" DataField="discount_amt" />
+                                <asp:BoundField HeaderText="Expiry Date" DataField="expiry_date" />
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:Button runat="server" CommandName="Edit" CommandArgument='<%#Eval("coupon_id") %>' Text="Edit" />

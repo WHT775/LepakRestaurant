@@ -1,6 +1,7 @@
 ﻿using LepakRestaurant.Controller;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -97,17 +98,17 @@ namespace LepakRestaurant.Boundary
                 HttpContext.Current.Session["editcouponid"] = Convert.ToInt32(e.CommandArgument.ToString());
                 Response.Redirect("EditCoupon.aspx");
             }
-            //else if (e.CommandName == "Delete")
-            //{
-            //    string msg = cc.DeleteCoupon(Convert.ToInt32(e.CommandArgument.ToString()));
-            //    if(msg == "Coupon deleted successfully")
-            //    {
-            //        gvCoupon.DataSource = cc.RetrieveAllCoupon();
-            //        gvCoupon.DataBind();
-            //    }
-            //    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('"+msg+"');", true);
-            //    upManager.Update();
-            //}
+            else if (e.CommandName == "Delete")
+            {
+                string msg = cc.DeleteCoupon(Convert.ToInt32(e.CommandArgument.ToString()));
+                if (msg == "Coupon deleted successfully")
+                {
+                    gvCoupon.DataSource = cc.RetrieveAllCoupon();
+                    gvCoupon.DataBind();
+                }
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
+                upManager.Update();
+            }
         }
 
         protected void gvCoupon_RowDeleting(object sender, GridViewDeleteEventArgs e)

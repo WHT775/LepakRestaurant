@@ -18,12 +18,13 @@ namespace LepakRestaurant.Boundary
                 var couponDetails = cc.RetrieveCouponById(Convert.ToInt32(HttpContext.Current.Session["editcouponid"].ToString()));
                 txtCode.Text = couponDetails.coupon_code;
                 txtDiscount.Text = couponDetails.discount_amt.ToString();
+                txtExpiryDate.Text = DateTime.Parse(couponDetails.expiry_date).ToString("yyyy-MM-dd");
             }
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            string msg = cc.UpdateCoupon(Convert.ToInt32(HttpContext.Current.Session["editcouponid"].ToString()), txtCode.Text.Trim(),txtDiscount.Text);
+            string msg = cc.UpdateCoupon(Convert.ToInt32(HttpContext.Current.Session["editcouponid"].ToString()), txtCode.Text.Trim(),txtDiscount.Text,txtExpiryDate.Text.Trim());
             if (msg == "Successfully updated coupon")
             {
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();

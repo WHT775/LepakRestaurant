@@ -14,6 +14,7 @@ namespace LepakRestaurant.Entity
 
         public double discount_amt { get; set; }
 
+        public string expiry_date { get; set; }
         public Coupon()
         {
 
@@ -24,11 +25,12 @@ namespace LepakRestaurant.Entity
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "INSERT INTO [COUPON] VALUES(@couponcode,@discountamt)";
+                string query = "INSERT INTO [COUPON] VALUES(@couponcode,@discountamt,@expirydate)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@couponcode", coupon_code);
                     cmd.Parameters.AddWithValue("@discountamt", discount_amt);
+                    cmd.Parameters.AddWithValue("@expirydate", expiry_date);
                     conn.Open();
                     try
                     {
@@ -81,6 +83,7 @@ namespace LepakRestaurant.Entity
                                 tempObj.coupon_id = Convert.ToInt32(dr["COUPON_ID"].ToString());
                                 tempObj.coupon_code = dr["COUPON_CODE"].ToString();
                                 tempObj.discount_amt = Convert.ToDouble(dr["DISCOUNT_AMT"].ToString());
+                                tempObj.expiry_date = DateTime.Parse(dr["EXPIRY_DATE"].ToString()).ToString("yyyy-MMM-dd");
                                 resultObj.Add(tempObj);
                             }
                         }
@@ -107,6 +110,7 @@ namespace LepakRestaurant.Entity
                             {
                                 resultObj.coupon_code = dr["COUPON_CODE"].ToString();
                                 resultObj.discount_amt = Convert.ToDouble(dr["DISCOUNT_AMT"].ToString());
+                                resultObj.expiry_date = dr["EXPIRY_DATE"].ToString();
                             }
                         }
                     }
@@ -166,13 +170,14 @@ namespace LepakRestaurant.Entity
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "UPDATE [COUPON] set COUPON_CODE=@couponcode, DISCOUNT_AMT=@discountamt where COUPON_ID = @couponid";
+                string query = "UPDATE [COUPON] set COUPON_CODE=@couponcode, DISCOUNT_AMT=@discountamt, EXPIRY_DATE=@expirydate where COUPON_ID = @couponid";
                 string result = "Successfully updated coupon";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@couponid", coupon_id);
                     cmd.Parameters.AddWithValue("@couponcode", coupon_code);
                     cmd.Parameters.AddWithValue("@discountamt", discount_amt);
+                    cmd.Parameters.AddWithValue("@expirydate", expiry_date);
                     try
                     {
                         conn.Open();
