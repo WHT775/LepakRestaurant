@@ -64,7 +64,7 @@
     <asp:ScriptManager runat="server" ID="ScriptManager"></asp:ScriptManager>
     <asp:UpdatePanel runat="server" ID="upStaff" UpdateMode="Conditional">
         <ContentTemplate>
-            <div style="width: 100%; text-align: center;">
+            <div style="top: -100px; margin-left: 825px; font-family: Arial, Helvetica, sans-serif; text-align: center;">
                 <h1>Pending Orders</h1>
             </div>
             <div style="overflow-x: auto; text-align: center; width: 100%">

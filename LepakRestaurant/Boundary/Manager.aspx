@@ -3,7 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /*body {font-family: Arial;}*/
-
+        div{
+            font-family: Arial, Helvetica, sans-serif;
+        }
         /* Style the tab */
         .tab {
             overflow: hidden;
@@ -11,6 +13,7 @@
             background-color: #f1f1f1;
             /*width:100%;*/
             text-align: center;
+            width: 100vw;
         }
 
             /* Style the buttons inside the tab */

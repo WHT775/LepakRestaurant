@@ -7,18 +7,33 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+<style>
+    body{
+        margin: 0;
+        display: inline-block;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    #ibtnHome{
+        margin-left: 845px;
+        width: 800px;
+            }
+    ul{
+        position: absolute;
+        top: 5px;
+        right: 200px;
+      }
+</style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <ul class="topnav">
-            <li>
-                <asp:ImageButton ID="ibtnHome" runat="server" Width="250px" Height="50px" ImageUrl="~/Images/logo.png" /></li>
+                <asp:ImageButton ID="ibtnHome" runat="server" Width="260px" Height="110px" ImageUrl="~/CSS/logo.jpg"/>
             <%--<li><asp:HyperLink ID="hlHome" class="active" runat="server">Home</asp:HyperLink></li>--%>
+        <ul class="topnav">
             <li class="right">
                 <asp:LinkButton ID="lbLoginSignUp" runat="server" >Login/Sign Up</asp:LinkButton></li>
             <%--<li class="right"><asp:HyperLink ID="hlCart" runat="server">Cart</asp:HyperLink></li>--%>
             <li class="right">
-                <asp:LinkButton ID="lblLogOut" runat="server" OnClick="lblLogOut_Click">Log Out</asp:LinkButton></li>
+                <asp:LinkButton ID="lblLogOut" runat="server" OnClick="lblLogOut_Click">Logout</asp:LinkButton></li>
         </ul>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
