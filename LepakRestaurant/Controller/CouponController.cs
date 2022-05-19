@@ -38,6 +38,12 @@ namespace LepakRestaurant.Controller
             return ce.CheckIfCouponExist();
         }
 
+        public bool CheckIfCouponExpired(string coupon)
+        {
+            Coupon ce = new Coupon() { coupon_code = coupon.ToUpper(), discount_amt = 1 };
+            return ce.CheckIfCouponExpired();
+        }
+
         public List<Coupon> RetrieveAllCoupon()
         {
             Coupon ce = new Coupon();

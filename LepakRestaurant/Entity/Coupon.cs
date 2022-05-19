@@ -46,6 +46,7 @@ namespace LepakRestaurant.Entity
         }
         public bool CheckIfCouponExist()
         {
+            bool yes = false;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "SELECT COUPON_CODE FROM [COUPON] WHERE UPPER(COUPON_CODE) = @couponcode";
@@ -57,9 +58,40 @@ namespace LepakRestaurant.Entity
                     {
                         if (dr.HasRows)
                         {
-                            return true;
+                            yes = true;
                         }
-                        return false;
+                        else
+                            yes = false;
+                        return yes;
+                    }
+                }
+            }
+        }
+
+        public bool CheckIfCouponExpired()
+        {
+            bool yes = true;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "SELECT EXPIRY_DATE FROM [COUPON] WHERE UPPER(COUPON_CODE) = @couponcode";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@couponcode", coupon_code);
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                DateTime expiry = Convert.ToDateTime(dr["EXPIRY_DATE"].ToString());
+                                if (expiry > DateTime.Now)
+                                    yes = false;
+                                else
+                                    yes = true;
+                            }
+                        }
+                        return yes;
                     }
                 }
             }

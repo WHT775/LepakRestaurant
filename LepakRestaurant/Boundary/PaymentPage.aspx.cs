@@ -90,17 +90,26 @@ namespace LepakRestaurant.Boundary
             bool isExist = cc.checkIfCouponExist(couponTxt.Text.ToString());
             if (isExist)
             {
-                var obj = cc.RetrieveCouponByCode(couponTxt.Text.ToString());
-                double discount = Convert.ToDouble(obj.discount_amt);
-                final = Convert.ToDouble(lblFinalTotal.Text.ToString().Remove(0, 8));
-                total_amt = total_amt - discount;
-                gst = total_amt * 0.07;
-                final = total_amt + gst;
-                lblGst.Text = "GST: $" + gst.ToString();
-                lblDiscountTxt.Text = "Discount: $" + discount;
-                lblDiscountTxt.Visible = true;
-                lblFinalTotal.Text = "Total: $" + final.ToString();
-                checkCoupon.Visible = false;
+                bool isExpired = cc.CheckIfCouponExpired(couponTxt.Text.ToString());
+                if (isExpired)
+                {
+                    lblDiscountTxt.Text = "This coupon is expired!";
+                    lblDiscountTxt.Visible = true;
+                }
+                else
+                {
+                    var obj = cc.RetrieveCouponByCode(couponTxt.Text.ToString());
+                    double discount = Convert.ToDouble(obj.discount_amt);
+                    final = Convert.ToDouble(lblFinalTotal.Text.ToString().Remove(0, 8));
+                    total_amt = total_amt - discount;
+                    gst = total_amt * 0.07;
+                    final = total_amt + gst;
+                    lblGst.Text = "GST: $" + gst.ToString();
+                    lblDiscountTxt.Text = "Discount: $" + discount;
+                    lblDiscountTxt.Visible = true;
+                    lblFinalTotal.Text = "Total: $" + final.ToString();
+                    checkCoupon.Visible = false;
+                }
             }
             else
             {
