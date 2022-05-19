@@ -1,6 +1,9 @@
 ﻿using LepakRestaurant.Controller;
+using MessagingToolkit.QRCode.Codec;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -12,12 +15,31 @@ namespace LepakRestaurant.Boundary
     public partial class Owner : System.Web.UI.Page
     {
         UserController uc = new UserController();
+        OrderSummaryController osc = new OrderSummaryController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 gvUsers.DataSource = uc.PopulateGridViewUsers();
                 gvUsers.DataBind();
+            }
+            if (Request.QueryString["q"] == "u")
+            {
+                divInsights.Style.Add("display", "none");
+                divQrCode.Style.Add("display", "none");
+                divUsers.Style.Add("display", "block");
+            }
+            else if (Request.QueryString["q"] == "qr")
+            {
+                divInsights.Style.Add("display", "none");
+                divQrCode.Style.Add("display", "block");
+                divUsers.Style.Add("display", "none");
+            }
+            else
+            {
+                divInsights.Style.Add("display", "block");
+                divQrCode.Style.Add("display", "none");
+                divUsers.Style.Add("display", "none");
             }
         }
 
@@ -60,6 +82,64 @@ namespace LepakRestaurant.Boundary
                     Button btn = row.FindControl("btnDelete") as Button;
                     btn.OnClientClick = "return confirm('Are you sure you want to delete this user?');";
                 }
+            }
+        }
+
+        protected void ddlInsights_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
+            //gvStatistics.DataBind();
+        }
+
+        protected void btnInsightsTab_Click(object sender, EventArgs e)
+        {
+            divQrCode.Style.Add("display", "none");
+            divUsers.Style.Add("display", "none");
+            divInsights.Style.Add("display", "block");
+            btnInsightsTab.CssClass += " active";
+            btnUserTab.CssClass = "tablinks";
+            btnQrCode.CssClass = "tablinks";
+            upOwner.Update();
+        }
+
+        protected void btnUserTab_Click(object sender, EventArgs e)
+        {
+            divQrCode.Style.Add("display", "none");
+            divInsights.Style.Add("display", "none");
+            divUsers.Style.Add("display", "block");
+            btnUserTab.CssClass += " active";
+            btnInsightsTab.CssClass = "tablinks";
+            btnQrCode.CssClass = "tablinks";
+            upOwner.Update();
+        }
+
+        protected void btnQrCode_Click(object sender, EventArgs e)
+        {
+            divUsers.Style.Add("display", "none");
+            divInsights.Style.Add("display", "none");
+            divQrCode.Style.Add("display", "block");
+            btnQrCode.CssClass += " active";
+            btnInsightsTab.CssClass = "tablinks";
+            btnUserTab.CssClass = "tablinks";
+            upOwner.Update();
+        }
+
+        protected void btnGenerateQrCode_Click(object sender, EventArgs e)
+        {
+            TableNumController tnc = new TableNumController();
+            if (!tnc.CheckIfTableNumExists(txtTableId.Text))
+            {
+                QRCodeEncoder encoder = new QRCodeEncoder();
+                encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
+                encoder.QRCodeScale = 10;
+                Bitmap img = encoder.Encode("http://localhost:44331/Boundary/CustomerLogin/?tableid=" + txtTableId.Text);
+                string savePath = Server.MapPath("images/tableid" + txtTableId.Text);
+                img.Save(savePath, ImageFormat.Jpeg);
+                tnc.InsertTableNumber(txtTableId.Text,savePath);
+            }
+            else
+            {
+                //Display the existing qr code and unique code
             }
         }
     }

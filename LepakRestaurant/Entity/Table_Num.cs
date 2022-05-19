@@ -34,13 +34,50 @@ namespace LepakRestaurant.Entity
                             while (dr.Read())
                             {
                                 table_id = Convert.ToInt32(dr["TABLE_NUM_ID"].ToString());
-
                             }
                         }
                     }
                 }
             }
             return table_id;
+        }
+        public bool CheckIfUniqueCodeIsUnique(string code)
+        {
+            int table_id = 0;
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "Select UNIQUE_CODE from TABLE_NUM where UNIQUE_CODE = @code";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@code", code);
+                    using (SqlDataReader dr = cmd.ExecuteReader())  // or load a DataTable, ExecuteScalar, etc.    
+                    {
+                        if (dr.HasRows)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        public bool InsertTableDetails(string tblnum,string uniquecode, string imagepath)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "INSERT INTO TABLE_NUM VALUES(@tblnum,@uniquecode,@imagepath)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@tblnum", tblnum);
+                    cmd.Parameters.AddWithValue("@uniquecode", uniquecode);
+                    cmd.Parameters.AddWithValue("@imagepath", imagepath);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            return true;
         }
     }
 }

@@ -45,7 +45,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -100,6 +104,7 @@
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -115,6 +120,7 @@
     <Content Include="Boundary\AddCoupon.aspx" />
     <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
+    <Content Include="Boundary\GenerateQR.aspx" />
     <Content Include="Boundary\PaymentPage.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
     <Content Include="Boundary\CustomerMenu.aspx" />
@@ -211,6 +217,13 @@
     </Compile>
     <Compile Include="Boundary\AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boundary\GenerateQR.aspx.cs">
+      <DependentUpon>GenerateQR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\GenerateQR.aspx.designer.cs">
+      <DependentUpon>GenerateQR.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boundary\PaymentPage.aspx.cs">
       <DependentUpon>PaymentPage.aspx</DependentUpon>
@@ -310,6 +323,7 @@
     <Compile Include="Controller\MenuController.cs" />
     <Compile Include="Controller\OrderSummaryController.cs" />
     <Compile Include="Controller\PaymentController.cs" />
+    <Compile Include="Controller\TableNumController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

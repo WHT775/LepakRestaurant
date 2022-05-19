@@ -52,8 +52,6 @@
     <asp:UpdatePanel runat="server" ID="upManager" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="tab">
-                <%--        <button class="tablinks" onclick="openCity(event, 'divMenu');return false;">Menu</button>
-        <button class="tablinks" onclick="openCity(event, 'divCoupon');return false;">Coupon</button>--%>
                 <asp:Button runat="server" CssClass="tablinks" Text="Menu  " ID="btnMenuTab" OnClick="btnMenuTab_Click" />
                 <asp:Button runat="server" CssClass="tablinks" Text="Coupon" ID="btnCouponTab" OnClick="btnCouponTab_Click" />
             </div>

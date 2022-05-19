@@ -42,5 +42,24 @@ namespace LepakRestaurant.Controller
             Order_Summary sum = new Order_Summary();
             return sum.InsertOrderSummary(orderId, menuId, qty);
         }
+
+
+        //public Dataset RetrieveInsights(int ddlIndex)
+        //{
+        //    Order_Summary sum = new Order_Summary();
+        //    switch (ddlIndex)
+        //    {
+        //        case 0:
+        //            return sum.RetrieveInsights(orderId, menuId, qty);
+        //            //Customer name, last visit, food preference, avg spent
+        //            break;
+        //        case 1:
+        //            break;
+        //        default:
+        //            break;
+        //    }
+            
+
+        //}
     }
 }

@@ -185,5 +185,34 @@ namespace LepakRestaurant.Entity
                 }
             }
         }
+
+        public string Retrieve(int orderId, int menuId, int qty)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select c.customer_name, c.last_visit, avg(total_amt) as 'Avg spent', item_name, count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id " +
+                    "join menu as m on os.menu_id = m.menu_id where orders_status = 'Completed' " +
+                    "group by c.customer_id,  customer_name, item_name, last_visit";
+                string result = "Success";
+                List<User> objUser = new List<User>();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@OrderId", orderId);
+                    cmd.Parameters.AddWithValue("@menuId", menuId);
+                    cmd.Parameters.AddWithValue("@qty", qty);
+                    conn.Open();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        result = e.Message;
+                    }
+
+                    return result;
+                }
+            }
+        }
     }
 }

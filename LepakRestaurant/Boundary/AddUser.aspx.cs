@@ -35,7 +35,7 @@ namespace LepakRestaurant.Boundary
                 sb.Append("window.onload=function(){");
                 sb.Append("alert('");
                 sb.Append(msg);
-                sb.Append("');window.location='Owner.aspx';};");
+                sb.Append("');window.location='Owner.aspx?q=u';};");
                 sb.Append("</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
             }
@@ -43,7 +43,7 @@ namespace LepakRestaurant.Boundary
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Owner.aspx");
+            Response.Redirect("Owner.aspx?q=u");
         }
     }
 }
