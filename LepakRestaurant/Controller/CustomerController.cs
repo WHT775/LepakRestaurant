@@ -48,5 +48,11 @@ namespace LepakRestaurant.Controller
             Table_Num table_Num = new Table_Num();
             return table_Num.getTableNum(code);
         }
+
+        public string getTableCode(int tableId)
+        {
+            Table_Num table_Num = new Table_Num();
+            return table_Num.getTableCode(tableId);
+        }
     }
 }

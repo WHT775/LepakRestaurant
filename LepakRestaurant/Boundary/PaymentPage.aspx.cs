@@ -28,6 +28,12 @@ namespace LepakRestaurant.Boundary
         {
             if (!IsPostBack)
             {
+                tempCart.Clear();
+                final = 0;
+                total_amt = 0;
+                custId = 0;
+                gst = 0;
+                table_num = 0;
                 lblDiscountTxt.Visible = false;
                 paySuccess.Visible = false;
                 total_amt = (double)HttpContext.Current.Session["subtotalAmt"];

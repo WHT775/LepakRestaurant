@@ -17,6 +17,12 @@ namespace LepakRestaurant.Boundary
             custDiv.Visible = false;
             errorDiv.Visible = false;
             errorMsg.ForeColor = System.Drawing.Color.Red;
+            HttpContext.Current.Session.Clear();
+            if (!string.IsNullOrEmpty(Request.QueryString["tableid"]))
+            {
+                codeTxt.Text = cc.getTableCode(Convert.ToInt32(Request.QueryString["tableid"].ToString()));
+                codeTxt.Enabled = false;
+            }
         }
 
         protected void btnCode_Click(object sender, EventArgs e)
