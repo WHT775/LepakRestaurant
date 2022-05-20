@@ -35,11 +35,16 @@
                         <FooterTemplate></FooterTemplate>
                     </asp:Repeater>
                 </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
                 <asp:TableCell>
+                    <br />
                     <div id="cartDiv" runat="server">
                         
                     </div>
                     <asp:Button ID ="cfmOrder" runat="server" Text="Confirm Order" OnClick="cfmOrder_Click" />
+                    <br />
+                    <br />
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
