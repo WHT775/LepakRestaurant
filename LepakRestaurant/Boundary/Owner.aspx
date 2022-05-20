@@ -84,11 +84,17 @@
                 <div style="text-align: center">
                     <h1>
                         <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label></h1>
-                    <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged">
-                        <asp:ListItem Text="" Value="" Selected="True"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:GridView runat="server" ID="gvStatistics" AutoGenerateColumns="false">
-                    </asp:GridView>
+                    <div>
+                        Custom Data:
+                        <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged">
+                            <asp:ListItem Text="Average Spending" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Most Menu Preferred"></asp:ListItem>
+                        </asp:DropDownList>
+                        <br />
+                        <br />
+                        <asp:GridView runat="server" ID="gvStatistics">
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
             <div id="divUsers" runat="server" class="tabcontent">

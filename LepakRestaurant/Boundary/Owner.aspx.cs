@@ -24,6 +24,7 @@ namespace LepakRestaurant.Boundary
                 gvUsers.DataBind();
                 gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
                 gvStatistics.DataBind();
+                
             }
             if (Request.QueryString["q"] == "u")
             {

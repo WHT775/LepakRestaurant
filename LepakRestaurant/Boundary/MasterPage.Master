@@ -8,21 +8,25 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="css/Master.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
     body{
         margin: 0;
         display: inline-block;
         font-family: Arial, Helvetica, sans-serif;
     }
-    #ibtnHome{
+/*    #ibtnHome{
         margin-left: 845px;
         width: 800px;
-            }
-    ul{
+            }*/
+/*    ul{
         position: absolute;
         top: 5px;
         right: 200px;
-      }
+      }*/
+    .topnav{
+        float:right;
+    }
 </style>
 </head>
 <body>

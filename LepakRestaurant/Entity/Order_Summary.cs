@@ -207,6 +207,38 @@ namespace LepakRestaurant.Entity
                     "group by c.customer_id,  customer_name, item_name, last_visit";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    conn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                Order_Summary tempObj = new Order_Summary();
+                                tempObj.customer.customer_name = dr["customer_name"].ToString();
+                                tempObj.customer.last_visit = Convert.ToDateTime(dr["last_visit"].ToString());
+                                tempObj.menu.item_name = dr["item_name"].ToString();
+                                tempObj.orders.total_amt = Convert.ToDouble(dr["Avgspent"].ToString());
+                                objOrder_Summary.Add(tempObj);
+                            }
+                        }
+                    }
+                }
+            }
+            return objOrder_Summary;
+        }
+        public List<Order_Summary> RetrieveInsightsMostMenuOrdered()
+        {
+            DataSet ds = new DataSet();
+            List<Order_Summary> objOrder_Summary = new List<Order_Summary>();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "select c.customer_name, c.last_visit, avg(total_amt) as 'Avgspent', item_name, count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id " +
+                    "join menu as m on os.menu_id = m.menu_id where orders_status = 'Completed' " +
+                    "group by c.customer_id,  customer_name, item_name, last_visit";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         if (dr.HasRows)

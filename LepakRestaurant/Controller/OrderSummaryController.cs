@@ -46,11 +46,10 @@ namespace LepakRestaurant.Controller
         }
 
 
-        public System.Data.DataSet RetrieveInsights(int ddlIndex)
+        public DataTable RetrieveInsights(int ddlIndex)
         {
             Order_Summary sum = new Order_Summary();
             DataTable dtTemp = new DataTable();
-            DataSet dtSet = new DataSet();
             switch (ddlIndex)
             {
                 case 0:
@@ -62,16 +61,25 @@ namespace LepakRestaurant.Controller
                     dtTemp.Columns.Add("Average Spent", typeof(string));
                     foreach (var obj in listOS)
                     {
-                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, obj.orders.total_amt);
+                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, "$"+ Math.Round(obj.orders.total_amt, 2).ToString("#.00"));
                     }
                     //dtSet = sum.RetrieveInsights();
                     break;
                 case 1:
+                    List<Order_Summary> listOSMenu = sum.RetrieveInsightsMostMenuOrdered();
+                    dtTemp.Columns.Add("Customer Name", typeof(string));
+                    dtTemp.Columns.Add("Last Visit", typeof(string));
+                    dtTemp.Columns.Add("Most Preferred Menu", typeof(string));
+                    dtTemp.Columns.Add("Average Spent", typeof(string));
+                    foreach (var obj in listOSMenu)
+                    {
+                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, "$" + Math.Round(obj.orders.total_amt, 2).ToString("#.00"));
+                    }
                     break;
                 default:
                     break;
             }
-            return dtSet;
+            return dtTemp;
         }
     }
 }
