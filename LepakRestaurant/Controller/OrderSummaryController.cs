@@ -1,8 +1,10 @@
 ﻿using LepakRestaurant.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace LepakRestaurant.Controller
 {
@@ -13,14 +15,14 @@ namespace LepakRestaurant.Controller
             Order_Summary ose = new Order_Summary();
             return ose.GetAllPendingOrders();
         }
-        public string CancelOrderById(int orderid,string reasoning)
+        public string CancelOrderById(int orderid, string reasoning)
         {
             if (reasoning == "") return "Please fill up the reasoning";
-            Order_Summary ose = new Order_Summary() {_oid = orderid ,_reason=reasoning};
+            Order_Summary ose = new Order_Summary() { _oid = orderid, _reason = reasoning };
             string msg = ose.CancelOrderById();
             if (msg == "Successfully cancelled order")
             {
-                return ose.InsertCancelOrderReason();   
+                return ose.InsertCancelOrderReason();
             }
             return msg;
         }
@@ -44,22 +46,32 @@ namespace LepakRestaurant.Controller
         }
 
 
-        //public Dataset RetrieveInsights(int ddlIndex)
-        //{
-        //    Order_Summary sum = new Order_Summary();
-        //    switch (ddlIndex)
-        //    {
-        //        case 0:
-        //            return sum.RetrieveInsights(orderId, menuId, qty);
-        //            //Customer name, last visit, food preference, avg spent
-        //            break;
-        //        case 1:
-        //            break;
-        //        default:
-        //            break;
-        //    }
-            
-
-        //}
+        public System.Data.DataSet RetrieveInsights(int ddlIndex)
+        {
+            Order_Summary sum = new Order_Summary();
+            DataTable dtTemp = new DataTable();
+            DataSet dtSet = new DataSet();
+            switch (ddlIndex)
+            {
+                case 0:
+                    //Customer name, last visit, food preference, avg spent
+                    List<Order_Summary> listOS = sum.RetrieveInsights();
+                    dtTemp.Columns.Add("Customer Name", typeof(string));
+                    dtTemp.Columns.Add("Last Visit", typeof(string));
+                    dtTemp.Columns.Add("Most Preferred Menu", typeof(string));
+                    dtTemp.Columns.Add("Average Spent", typeof(string));
+                    foreach (var obj in listOS)
+                    {
+                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, obj.orders.total_amt);
+                    }
+                    //dtSet = sum.RetrieveInsights();
+                    break;
+                case 1:
+                    break;
+                default:
+                    break;
+            }
+            return dtSet;
+        }
     }
 }

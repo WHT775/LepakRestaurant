@@ -10,7 +10,7 @@
 namespace LepakRestaurant {
     
     
-    public partial class Site_Mobile {
+    public partial class MobileMaster {
         
         /// <summary>
         /// HeadContent control.

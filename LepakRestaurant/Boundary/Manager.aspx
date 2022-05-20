@@ -25,6 +25,8 @@
                 padding: 14px 16px;
                 transition: 0.3s;
                 font-size: 17px;
+                height:auto;
+                color:black;
             }
 
                 /* Change background color of buttons on hover */
@@ -68,7 +70,7 @@
                         </div>
                         <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
                             <ItemTemplate>
-                                <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
+                                <asp:Button ID="selectedCategory" Width="100%" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
                             </ItemTemplate>
                             <FooterTemplate></FooterTemplate>
                         </asp:Repeater>
@@ -123,19 +125,4 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <%--    <script>
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById("<%=cityName.ClientID%>").style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>--%>
 </asp:Content>

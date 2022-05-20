@@ -22,23 +22,28 @@ namespace LepakRestaurant.Controller
         public bool CheckIfTableNumExists(string tblnum)
         {
             Table_Num tne = new Table_Num();
-            if (tne.getTableNum(tblnum) == 0) return false;
+            if (tne.getTableDetails(tblnum).table_num_id == 0) return false;
             else return true;
         }
 
-        public bool InsertTableNumber(string tblnum,string ImagePath)
+        public bool InsertTableNumber(string tblnum, string ImagePath)
         {
             Table_Num tne = new Table_Num();
             string ID = "";
             ID = RandomCode(5);
             while (!tne.CheckIfUniqueCodeIsUnique(ID))
             {
-                ID = RandomCode(7);
+                ID = RandomCode(5);
             }
-            tne.InsertTableDetails(tblnum, ID, ImagePath);
-            if (tne.getTableNum(tblnum) == 0) return false;
-            else return true;
+            return tne.InsertTableDetails(tblnum, ID, ImagePath);
         }
+
+        public Table_Num getTableDetails(string tableId)
+        {
+            Table_Num tne = new Table_Num();
+            return tne.getTableDetails(tableId);
+        }
+
         private static Random random = new Random();
         public static string RandomCode(int length)
         {

@@ -120,6 +120,7 @@
     <Content Include="Boundary\AddCoupon.aspx" />
     <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
+    <Content Include="Boundary\css\Master.css" />
     <Content Include="Boundary\GenerateQR.aspx" />
     <Content Include="Boundary\PaymentPage.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />

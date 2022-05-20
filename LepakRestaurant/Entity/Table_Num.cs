@@ -12,9 +12,38 @@ namespace LepakRestaurant.Entity
 
         public string unique_code { get; set; }
 
+        public string image { get; set; }
+
         public Table_Num()
         {
 
+        }
+
+        public Table_Num getTableDetails(string tableId)
+        {
+            Table_Num num = new Table_Num();
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "Select * from TABLE_NUM WHERE TABLE_NUM_ID = @tableId";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@tableId", tableId);
+                    using (SqlDataReader dr = cmd.ExecuteReader())  // or load a DataTable, ExecuteScalar, etc.    
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                num.table_num_id = Convert.ToInt32(dr["TABLE_NUM_ID"].ToString());
+                                num.unique_code = dr["UNIQUE_CODE"].ToString();
+                                num.image = dr["image"].ToString();
+                            }
+                        }
+                        return num;
+                    }
+                }
+            }
         }
 
         public int getTableNum(string code)
@@ -68,7 +97,6 @@ namespace LepakRestaurant.Entity
         }
         public bool CheckIfUniqueCodeIsUnique(string code)
         {
-            int table_id = 0;
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "Select UNIQUE_CODE from TABLE_NUM where UNIQUE_CODE = @code";
@@ -87,7 +115,7 @@ namespace LepakRestaurant.Entity
             }
             return true;
         }
-        public bool InsertTableDetails(string tblnum,string uniquecode, string imagepath)
+        public bool InsertTableDetails(string tblnum, string uniquecode, string imagepath)
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -98,7 +126,14 @@ namespace LepakRestaurant.Entity
                     cmd.Parameters.AddWithValue("@tblnum", tblnum);
                     cmd.Parameters.AddWithValue("@uniquecode", uniquecode);
                     cmd.Parameters.AddWithValue("@imagepath", imagepath);
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
                     conn.Close();
                 }
             }

@@ -11,7 +11,7 @@
             top: 10px;
         }*/
 
-/*        .manage {
+        /*        .manage {
             top: 100px;
         }
 
@@ -50,6 +50,8 @@
                 padding: 14px 16px;
                 transition: 0.3s;
                 font-size: 17px;
+                height: auto;
+                color: black;
             }
 
                 /* Change background color of buttons on hover */
@@ -80,21 +82,24 @@
             </div>
             <div id="divInsights" runat="server" class="tabcontent">
                 <div style="text-align: center">
-                    <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label>
+                    <h1>
+                        <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label></h1>
                     <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged">
                         <asp:ListItem Text="" Value="" Selected="True"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:GridView runat="server" ID="gvStatistics">
+                    <asp:GridView runat="server" ID="gvStatistics" AutoGenerateColumns="false">
                     </asp:GridView>
                 </div>
             </div>
             <div id="divUsers" runat="server" class="tabcontent">
                 <div class="manage" style="text-align: center;">
-                    <asp:Label runat="server" ID="manUsers" Text="Manage Users"></asp:Label>
+                    <h1>
+                        <asp:Label runat="server" ID="manUsers" Text="Manage Users"></asp:Label></h1>
                 </div>
                 <div class="adduser" style="text-align: center;">
                     <asp:Button runat="server" ID="btnAddUsers" Text="Add User" OnClick="btnAddUsers_Click" />
                 </div>
+                <br />
                 <div style="text-align: center; width: 100%;">
                     <asp:GridView runat="server" ID="gvUsers" AutoGenerateColumns="false" OnRowCommand="gvUsers_RowCommand" OnRowDeleting="gvUsers_RowDeleting" OnRowDataBound="gvUsers_RowDataBound">
                         <Columns>
@@ -117,18 +122,41 @@
             </div>
             <div id="divQrCode" runat="server" class="tabcontent">
                 <div class="manage" style="text-align: center;">
-                    <asp:Label runat="server" ID="lblQrCode" Text="Generate QR Code"></asp:Label>
+                    <h1>
+                        <asp:Label runat="server" ID="lblQrCode" Text="Generate QR Code"></asp:Label></h1>
                 </div>
                 <table>
                     <tr>
                         <td>
-                            <asp:Label runat="server" Text="Table Number:"></asp:Label>
+                            <h1>
+                                <asp:Label runat="server" Text="Table Number:"></asp:Label></h1>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtTableId" TextMode="Number"></asp:TextBox>
                         </td>
                         <td>
                             <asp:Button runat="server" ID="btnGenerateQrCode" Text="Generate" OnClick="btnGenerateQrCode_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:Label runat="server" ID="lblWrong3" ForeColor="Red"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%; text-align: center;">
+                    <tr>
+                        <td colspan="2">
+                            <h2>
+                                <asp:Label runat="server" ID="lblTitle"></asp:Label></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; border-right: 1px solid black;">
+                            <asp:Image runat="server" ID="imgQrCode" Height="200px" AlternateText="" /></td>
+                        <td style="width: 50%">
+                            <asp:Label runat="server" ID="lblUniqueCode"></asp:Label>
+                            <br />
                         </td>
                     </tr>
                 </table>

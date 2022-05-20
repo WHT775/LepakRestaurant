@@ -22,6 +22,8 @@ namespace LepakRestaurant.Boundary
             {
                 gvUsers.DataSource = uc.PopulateGridViewUsers();
                 gvUsers.DataBind();
+                gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
+                gvStatistics.DataBind();
             }
             if (Request.QueryString["q"] == "u")
             {
@@ -87,8 +89,8 @@ namespace LepakRestaurant.Boundary
 
         protected void ddlInsights_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
-            //gvStatistics.DataBind();
+            gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
+            gvStatistics.DataBind();
         }
 
         protected void btnInsightsTab_Click(object sender, EventArgs e)
@@ -133,14 +135,38 @@ namespace LepakRestaurant.Boundary
                 encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
                 encoder.QRCodeScale = 10;
                 Bitmap img = encoder.Encode("http://localhost:44331/Boundary/CustomerLogin/?tableid=" + txtTableId.Text);
-                string savePath = Server.MapPath("images/tableid" + txtTableId.Text);
+                string savePath = Server.MapPath("images/tableid" + txtTableId.Text + ".jpeg");
                 img.Save(savePath, ImageFormat.Jpeg);
-                tnc.InsertTableNumber(txtTableId.Text,savePath);
+                string url = "images/tableid" + txtTableId.Text + ".jpeg";
+                if (tnc.InsertTableNumber(txtTableId.Text, url))
+                {
+                    lblWrong3.Text = "";
+                    //Retrieve the tablenum details
+                    var tableObj = tnc.getTableDetails(txtTableId.Text);
+                    lblTitle.Text = "Table Number: " + txtTableId.Text;
+                    imgQrCode.ImageUrl = "./" + tableObj.image;
+                    lblUniqueCode.Text = "Unique Code: <br/><b>" + tableObj.unique_code + "</b>";
+                }
+                else
+                {
+                    lblWrong3.Text = "Some issues with the generation, please try again";
+
+                }
+
             }
             else
             {
                 //Display the existing qr code and unique code
+                lblWrong3.Text = "";
+                var tableObj = tnc.getTableDetails(txtTableId.Text);
+                lblTitle.Text = "Table Number: " + txtTableId.Text;
+                imgQrCode.ImageUrl = "./" + tableObj.image;
+                lblUniqueCode.Text = "Unique Code: <br/><b>" + tableObj.unique_code + "</b><br/><br/>Go to http://localhost/Boundary/CustomerLogin.aspx";
             }
+            divInsights.Style.Add("display", "none");
+            divQrCode.Style.Add("display", "block");
+            divUsers.Style.Add("display", "none");
         }
+
     }
 }

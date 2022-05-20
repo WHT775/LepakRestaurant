@@ -11,7 +11,7 @@ namespace LepakRestaurant
 {
 
 
-    public partial class MobileMaster
+    public partial class Site_Mobile
     {
 
         /// <summary>

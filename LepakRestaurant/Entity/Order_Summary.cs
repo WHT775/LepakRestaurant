@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,11 @@ namespace LepakRestaurant.Entity
 
         public string _reason { get; set; }
 
+        public Customer customer { get; set; }
+        public string _customername { get; set; }
+
+        public DateTime _lastvisit { get; set; }
+
         public Order_Summary()
         {
             orders = new Orders();
@@ -32,6 +38,10 @@ namespace LepakRestaurant.Entity
             menu = new Menu();
             order_cancel = new Order_Cancel();
             order_cancel.reason = _reason;
+            customer = new Customer();
+            customer.customer_name = _customername;
+            customer.last_visit = _lastvisit;
+
         }
 
         public List<Order_Summary> GetAllPendingOrders()
@@ -186,33 +196,35 @@ namespace LepakRestaurant.Entity
             }
         }
 
-        public string Retrieve(int orderId, int menuId, int qty)
+        public List<Order_Summary> RetrieveInsights()
         {
+            DataSet ds = new DataSet();
+            List<Order_Summary> objOrder_Summary = new List<Order_Summary>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select c.customer_name, c.last_visit, avg(total_amt) as 'Avg spent', item_name, count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id " +
+                string query = "select top 1 c.customer_name, c.last_visit, avg(total_amt) as 'Avgspent', item_name, count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id " +
                     "join menu as m on os.menu_id = m.menu_id where orders_status = 'Completed' " +
                     "group by c.customer_id,  customer_name, item_name, last_visit";
-                string result = "Success";
-                List<User> objUser = new List<User>();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@OrderId", orderId);
-                    cmd.Parameters.AddWithValue("@menuId", menuId);
-                    cmd.Parameters.AddWithValue("@qty", qty);
-                    conn.Open();
-                    try
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        cmd.ExecuteNonQuery();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                Order_Summary tempObj = new Order_Summary();
+                                tempObj.customer.customer_name = dr["customer_name"].ToString();
+                                tempObj.customer.last_visit = Convert.ToDateTime(dr["last_visit"].ToString());
+                                tempObj.menu.item_name = dr["item_name"].ToString();
+                                tempObj.orders.total_amt = Convert.ToDouble(dr["Avgspent"].ToString());
+                                objOrder_Summary.Add(tempObj);
+                            }
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        result = e.Message;
-                    }
-
-                    return result;
                 }
             }
+            return objOrder_Summary;
         }
     }
 }
