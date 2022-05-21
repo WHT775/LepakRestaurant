@@ -83,12 +83,13 @@
             <div id="divInsights" runat="server" class="tabcontent">
                 <div style="text-align: center">
                     <h1>
-                        <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label></h1>
+                        <asp:Label runat="server" Text="Overall Customer Data" Width="100%" ></asp:Label></h1>
                     <div>
-                        Custom Data:
-                        <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged">
+                        <h3 style="display:contents"><asp:Label runat="server" Text="Customer Data: "></asp:Label></h3>
+                        <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="Average Spending" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Most Menu Preferred"></asp:ListItem>
+                            <asp:ListItem Text="Cancelled Order"></asp:ListItem>
                         </asp:DropDownList>
                         <br />
                         <br />
@@ -134,8 +135,8 @@
                 <table>
                     <tr>
                         <td>
-                            <h1>
-                                <asp:Label runat="server" Text="Table Number:"></asp:Label></h1>
+                            <h3>
+                                <asp:Label runat="server" Text="Table Number:"></asp:Label></h3>
                         </td>
                         <td>
                             <asp:TextBox runat="server" ID="txtTableId" TextMode="Number"></asp:TextBox>

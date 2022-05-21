@@ -49,6 +49,7 @@ namespace LepakRestaurant.Controller
         public DataTable RetrieveInsights(int ddlIndex)
         {
             Order_Summary sum = new Order_Summary();
+            Order_Cancel can = new Order_Cancel();
             DataTable dtTemp = new DataTable();
             switch (ddlIndex)
             {
@@ -67,13 +68,21 @@ namespace LepakRestaurant.Controller
                     break;
                 case 1:
                     List<Order_Summary> listOSMenu = sum.RetrieveInsightsMostMenuOrdered();
-                    dtTemp.Columns.Add("Customer Name", typeof(string));
-                    dtTemp.Columns.Add("Last Visit", typeof(string));
-                    dtTemp.Columns.Add("Most Preferred Menu", typeof(string));
-                    dtTemp.Columns.Add("Average Spent", typeof(string));
+                    dtTemp.Columns.Add("", typeof(string));
+                    dtTemp.Columns.Add("Menu Name", typeof(string));
+                    dtTemp.Columns.Add("Total Ordered", typeof(string));
                     foreach (var obj in listOSMenu)
                     {
-                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, "$" + Math.Round(obj.orders.total_amt, 2).ToString("#.00"));
+                        dtTemp.Rows.Add(obj.orders.orders_id, obj.menu.item_name, obj.orders.total_amt);
+                    }
+                    break;
+                case 2:
+                    List<Order_Cancel> listOSCancelOrder = can.RetrieveInsightsCancelOrder();
+                    dtTemp.Columns.Add("", typeof(string));
+                    dtTemp.Columns.Add("Reasoning", typeof(string));
+                    foreach (var obj in listOSCancelOrder)
+                    {
+                        dtTemp.Rows.Add(obj.fk_order_cancel_id, obj.reason);
                     }
                     break;
                 default:
