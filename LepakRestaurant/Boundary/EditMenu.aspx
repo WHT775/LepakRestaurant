@@ -39,12 +39,12 @@
         <tr>
             <td>Category:</td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlCategory" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList></td>
+                <asp:DropDownList CssClass="ddl" runat="server" ID="ddlCategory" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList></td>
         </tr>
         <tr>
             <td>Status:</td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlStatus" DataTextField="status_name" DataValueField="status_id"></asp:DropDownList></td>
+                <asp:DropDownList CssClass="ddl" runat="server" ID="ddlStatus" DataTextField="status_name" DataValueField="status_id"></asp:DropDownList></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -53,10 +53,10 @@
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Cancel"/>
+                <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Cancel" CssClass="fullbtn"/>
             </td>
             <td>
-                <asp:Button runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Update"/>
+                <asp:Button runat="server" ID="btnSubmit" OnClick="btnSubmit_Click" Text="Update" CssClass="fullbtn"/>
             </td>
         </tr>
     </table>

@@ -90,6 +90,9 @@ namespace LepakRestaurant.Boundary
 
         protected void ddlInsights_SelectedIndexChanged(object sender, EventArgs e)
         {
+            divInsights.Style.Add("display", "block");
+            divQrCode.Style.Add("display", "none");
+            divUsers.Style.Add("display", "none");
             gvStatistics.DataSource = osc.RetrieveInsights(ddlInsights.SelectedIndex);
             gvStatistics.DataBind();
         }
@@ -141,7 +144,7 @@ namespace LepakRestaurant.Boundary
                     QRCodeEncoder encoder = new QRCodeEncoder();
                     encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
                     encoder.QRCodeScale = 10;
-                    Bitmap img = encoder.Encode("http://localhost:44331/Boundary/CustomerLogin/?tableid=" + txtTableId.Text);
+                    Bitmap img = encoder.Encode("http://localhost:44331/Boundary/CustomerLogin.aspx?tableid=" + txtTableId.Text);
                     string savePath = Server.MapPath("images/tableid" + txtTableId.Text + ".jpeg");
                     img.Save(savePath, ImageFormat.Jpeg);
                     string url = "images/tableid" + txtTableId.Text + ".jpeg";

@@ -14,20 +14,24 @@ namespace LepakRestaurant.Boundary
         CustomerController cc = new CustomerController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            custDiv.Visible = false;
-            errorDiv.Visible = false;
-            errorMsg.ForeColor = System.Drawing.Color.Red;
-            HttpContext.Current.Session.Clear();
-            if (!string.IsNullOrEmpty(Request.QueryString["tableid"]))
+            if (!IsPostBack)
             {
-                codeTxt.Text = cc.getTableCode(Convert.ToInt32(Request.QueryString["tableid"].ToString()));
-                codeTxt.Enabled = false;
+                custDiv.Visible = false;
+                errorDiv.Visible = false;
+                errorMsg.ForeColor = System.Drawing.Color.Red;
+                HttpContext.Current.Session.Clear();
+                if (!string.IsNullOrEmpty(Request.QueryString["tableid"]))
+                {
+                    codeTxt.Text = cc.getTableCode(Convert.ToInt32(Request.QueryString["tableid"].ToString()));
+                    codeTxt.Enabled = false;
+                }
             }
+
         }
 
         protected void btnCode_Click(object sender, EventArgs e)
         {
-            if (phoneTxt.Text != "" || codeTxt.Text != "")
+            if (phoneTxt.Text != "" && codeTxt.Text != "")
             {
                 int table_num = cc.getTableNum(codeTxt.Text);
                 if (table_num == 0)
@@ -49,13 +53,15 @@ namespace LepakRestaurant.Boundary
                     {
                         custDiv.Visible = true;
                         btnCode.Visible = false;
+                        codeTxt.Enabled = false;
+                        phoneTxt.Enabled = false;
                     }
                 }
             }
             else
             {
                 errorDiv.Visible = true;
-                errorMsg.Text = "Please enter your phone number or unique code";
+                errorMsg.Text = "Please enter your phone number and unique code";
             }
         }
 
@@ -65,8 +71,6 @@ namespace LepakRestaurant.Boundary
             {
                 cc.createCustomer(nameTxt.Text, phoneTxt.Text);
                 HttpContext.Current.Session["custId"] = cc.getCustId();
-				//MessageBox.Show("Customer registered successfully!", "Registered!");
-                //Response.Redirect("CustomerMenu.aspx");
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append("<script type = 'text/javascript'>");
                 sb.Append("window.onload=function(){");
@@ -78,6 +82,7 @@ namespace LepakRestaurant.Boundary
             }
             else
             {
+                errorDiv.Visible = true;
                 errorMsg.Text = "Please enter your name";
             }
         }

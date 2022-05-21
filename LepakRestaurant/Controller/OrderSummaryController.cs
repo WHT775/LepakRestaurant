@@ -68,7 +68,7 @@ namespace LepakRestaurant.Controller
                     break;
                 case 1:
                     List<Order_Summary> listOSMenu = sum.RetrieveInsightsMostMenuOrdered();
-                    dtTemp.Columns.Add("", typeof(string));
+                    dtTemp.Columns.Add(" ", typeof(string));
                     dtTemp.Columns.Add("Menu Name", typeof(string));
                     dtTemp.Columns.Add("Total Ordered", typeof(string));
                     foreach (var obj in listOSMenu)
@@ -78,7 +78,7 @@ namespace LepakRestaurant.Controller
                     break;
                 case 2:
                     List<Order_Cancel> listOSCancelOrder = can.RetrieveInsightsCancelOrder();
-                    dtTemp.Columns.Add("", typeof(string));
+                    dtTemp.Columns.Add(" ", typeof(string));
                     dtTemp.Columns.Add("Reasoning", typeof(string));
                     foreach (var obj in listOSCancelOrder)
                     {

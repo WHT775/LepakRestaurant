@@ -4,15 +4,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <h2>Welcome to Lepak Restaurant</h2>
       <div id="mainDiv" runat="server">
+          <asp:Label runat="server" Text="Unique Code"></asp:Label>
           <asp:TextBox ID="codeTxt" placeholder="Enter unique code here" runat="server"></asp:TextBox>
+          <asp:Label runat="server" Text="Phone Number"></asp:Label>
           <asp:TextBox ID="phoneTxt" placeholder="Enter phone number here" runat ="server"></asp:TextBox>
-          <asp:Button id="btnCode" Text="Enter" runat="server" OnClick="btnCode_Click" />
+          <asp:Button id="btnCode" Text="Enter" runat="server" OnClick="btnCode_Click" CssClass="fullbtn" />
       </div>
       <div id="custDiv" runat="server">
-          <asp:Label ID="nameLbl" Text="Enter your name" runat="server"></asp:Label>
+          <asp:Label ID="nameLbl" Text="Name" runat="server"></asp:Label>
           <asp:TextBox ID ="nameTxt" placeholder="Enter your name here" runat="server"></asp:TextBox>
-          <asp:Button ID="btnAdd" Text="Submit" runat="server" OnClick="btnAdd_Click" />
+          <asp:Button ID="btnAdd" Text="Submit" runat="server" OnClick="btnAdd_Click" CssClass="fullbtn" />
       </div>
     <div id="errorDiv" runat="server">
         <asp:Label ID="errorMsg" runat="server"></asp:Label>

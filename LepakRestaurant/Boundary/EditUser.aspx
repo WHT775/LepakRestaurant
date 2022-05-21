@@ -1,15 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditUser.aspx.cs" Inherits="LepakRestaurant.Boundary.EditUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<style>
-    table.edit{
+    <style>
+        table.edit {
             margin-left: 825px;
             font-family: Arial, Helvetica, sans-serif;
-        }   
-</style>
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table class="edit">
+        <tr>
+            <td colspan="2">
+                <h1>Update User</h1>
+            </td>
+        </tr>
         <tr>
             <td>
                 <asp:Label runat="server" Text="Login ID:"></asp:Label>
@@ -31,21 +36,22 @@
                 <asp:Label runat="server" Text="Role:"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlRole" DataTextField="role_name" DataValueField="roles_id"></asp:DropDownList>
+                <asp:DropDownList CssClass="ddl" runat="server" ID="ddlRole" DataTextField="role_name" DataValueField="roles_id"></asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>
                 <asp:Label runat="server" Text="Disabled:"></asp:Label></td>
             <td>
-                <asp:DropDownList runat="server" ID="ddlDisabled">
+                <asp:DropDownList CssClass="ddl" runat="server" ID="ddlDisabled">
                     <asp:ListItem Text="False" Value="False"></asp:ListItem>
                     <asp:ListItem Text="True" Value="True"></asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td><asp:Label runat="server" ID="lblWrong" ForeColor="Red" Visible="false"></asp:Label></td>
+            <td>
+                <asp:Label runat="server" ID="lblWrong" ForeColor="Red" Visible="false"></asp:Label></td>
         </tr>
         <tr>
             <td>

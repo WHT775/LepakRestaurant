@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         /*body {font-family: Arial;}*/
-        div{
+        div {
             font-family: Arial, Helvetica, sans-serif;
         }
         /* Style the tab */
@@ -25,8 +25,8 @@
                 padding: 14px 16px;
                 transition: 0.3s;
                 font-size: 17px;
-                height:auto;
-                color:black;
+                height: auto;
+                color: black;
             }
 
                 /* Change background color of buttons on hover */
@@ -68,12 +68,12 @@
                             <h2>
                                 <asp:Label runat="server" ID="lblCategories"></asp:Label></h2>
                         </div>
-                        <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
-                            <ItemTemplate>
-                                <asp:Button ID="selectedCategory" Width="100%" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
-                            </ItemTemplate>
-                            <FooterTemplate></FooterTemplate>
-                        </asp:Repeater>
+                            <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
+                                <ItemTemplate>
+                                    <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
+                                </ItemTemplate>
+                                <FooterTemplate></FooterTemplate>
+                            </asp:Repeater>
                         <br />
                         <asp:Repeater ID="rptMenu" runat="server" EnableViewState="true" OnItemDataBound="rptMenu_ItemDataBound" OnItemCommand="rptMenu_ItemCommand">
                             <ItemTemplate>
@@ -103,7 +103,7 @@
                 <div style="overflow-x: auto; text-align: center; width: 100%">
                     <div style="width: 80%; margin: 0 auto;">
 
-                        <asp:GridView runat="server" ID="gvCoupon" AutoGenerateColumns="false" OnRowCommand="gvCoupon_RowCommand" OnRowDeleting="gvCoupon_RowDeleting" OnRowDataBound="gvCoupon_RowDataBound" HorizontalAlign="Center">
+                        <asp:GridView runat="server" CssClass="tablestyle" ID="gvCoupon" AutoGenerateColumns="false" OnRowCommand="gvCoupon_RowCommand" OnRowDeleting="gvCoupon_RowDeleting" OnRowDataBound="gvCoupon_RowDataBound" HorizontalAlign="Center">
                             <Columns>
                                 <asp:BoundField HeaderText="Coupon Code" DataField="coupon_code" />
                                 <asp:BoundField HeaderText="Amount" DataField="discount_amt" />

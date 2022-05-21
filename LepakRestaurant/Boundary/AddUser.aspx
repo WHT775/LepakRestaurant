@@ -10,6 +10,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <table class="add">
             <tr>
+                <td colspan="2">
+                    <h1>Add User</h1>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <asp:Label runat="server" Text="Login ID:"></asp:Label>
                 </td>
@@ -30,13 +35,13 @@
                     <asp:Label runat="server" Text="Role:"></asp:Label>
                 </td>
                 <td>
-                    <asp:DropDownList runat="server" ID="ddlRole" DataTextField="role_name" DataValueField="roles_id"></asp:DropDownList>
+                    <asp:DropDownList CssClass="ddl" runat="server" ID="ddlRole" DataTextField="role_name" DataValueField="roles_id"></asp:DropDownList>
                 </td>
             </tr>
             <tr>
                 <td><asp:Label runat="server" Text="Disabled:"></asp:Label></td>
                 <td>
-                    <asp:DropDownList runat="server" ID="ddlDisabled">
+                    <asp:DropDownList CssClass="ddl" runat="server" ID="ddlDisabled">
                     <asp:ListItem Text="False" Value="False"></asp:ListItem>
                     <asp:ListItem Text="True" Value="True"></asp:ListItem>
                     </asp:DropDownList>

@@ -1,15 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditCoupon.aspx.cs" Inherits="LepakRestaurant.Boundary.EditCoupon" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<style>
-    table{
+    <style>
+        table {
             margin-left: 825px;
             font-family: Arial, Helvetica, sans-serif;
-        }    
-</style>
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table>
+        <tr>
+            <td colspan="2">
+                <h1>Update Coupon</h1>
+            </td>
+        </tr>
         <tr>
             <td>
                 <asp:Label runat="server" Text="Code:"></asp:Label></td>

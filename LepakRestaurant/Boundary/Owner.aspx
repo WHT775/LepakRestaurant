@@ -23,54 +23,12 @@
             margin: 0 auto;
         }
 
-        .grid {
+/*        .grid {
             left: -110px;
             top: 115px;
-        }
+        }*/
         /*body {font-family: Arial;}*/
-        div {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            /*width:100%;*/
-            text-align: center;
-            width: 100vw;
-        }
 
-            /* Style the buttons inside the tab */
-            .tab input[type="submit"] {
-                background-color: inherit;
-                border: none;
-                outline: none;
-                cursor: pointer;
-                padding: 14px 16px;
-                transition: 0.3s;
-                font-size: 17px;
-                height: auto;
-                color: black;
-            }
-
-                /* Change background color of buttons on hover */
-                .tab input[type="submit"]:hover {
-                    background-color: #ddd;
-                }
-
-                /* Create an active/current tablink class */
-                .tab input[type="submit"].active {
-                    background-color: #ccc;
-                }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
-        }
     </style>
     <asp:ScriptManager runat="server" ID="scriptManager1"></asp:ScriptManager>
     <asp:UpdatePanel runat="server" ID="upOwner" UpdateMode="Conditional">
@@ -83,19 +41,21 @@
             <div id="divInsights" runat="server" class="tabcontent">
                 <div style="text-align: center">
                     <h1>
-                        <asp:Label runat="server" Text="Overall Customer Data" Width="100%" ></asp:Label></h1>
-                    <div>
-                        <h3 style="display:contents"><asp:Label runat="server" Text="Customer Data: "></asp:Label></h3>
-                        <asp:DropDownList runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged" AutoPostBack="true">
+                        <asp:Label runat="server" Text="Overall Customer Data" Width="100%"></asp:Label></h1>
+                    <div style="display: inline-flex;">
+                        <h3 style="display: contents">
+                            <asp:Label runat="server" Text="Customer Data: "></asp:Label></h3>
+                        <asp:DropDownList CssClass="ddl" runat="server" ID="ddlInsights" OnSelectedIndexChanged="ddlInsights_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Text="Average Spending" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Most Menu Preferred"></asp:ListItem>
                             <asp:ListItem Text="Cancelled Order"></asp:ListItem>
                         </asp:DropDownList>
-                        <br />
-                        <br />
-                        <asp:GridView runat="server" ID="gvStatistics">
-                        </asp:GridView>
                     </div>
+                    <br />
+                    <br />
+                    <asp:GridView runat="server" ID="gvStatistics" CssClass="tablestyle">
+                    </asp:GridView>
+
                 </div>
             </div>
             <div id="divUsers" runat="server" class="tabcontent">
@@ -108,7 +68,7 @@
                 </div>
                 <br />
                 <div style="text-align: center; width: 100%;">
-                    <asp:GridView runat="server" ID="gvUsers" AutoGenerateColumns="false" OnRowCommand="gvUsers_RowCommand" OnRowDeleting="gvUsers_RowDeleting" OnRowDataBound="gvUsers_RowDataBound">
+                    <asp:GridView CssClass="tablestyle" runat="server" ID="gvUsers" AutoGenerateColumns="false" OnRowCommand="gvUsers_RowCommand" OnRowDeleting="gvUsers_RowDeleting" OnRowDataBound="gvUsers_RowDataBound">
                         <Columns>
                             <asp:BoundField HeaderText="Username" DataField="user_id" />
                             <asp:BoundField HeaderText="Role" DataField="Roles.role_name" />
