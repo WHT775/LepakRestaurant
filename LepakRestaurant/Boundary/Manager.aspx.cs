@@ -29,16 +29,19 @@ namespace LepakRestaurant.Boundary
                 {
                     divMenu.Style.Add("display", "block");
                     divCoupon.Style.Add("display", "none");
+                    divCategory.Style.Add("display", "none");
                 }
                 else if(Request.QueryString["q"] == "c")
                 {
                     divMenu.Style.Add("display", "none");
                     divCoupon.Style.Add("display", "block");
+                    divCategory.Style.Add("display", "none");
                 }
                 else
                 {
                     divMenu.Style.Add("display", "block");
                     divCoupon.Style.Add("display", "none");
+                    divCategory.Style.Add("display", "none");
                 }
 
             }
@@ -138,10 +141,12 @@ namespace LepakRestaurant.Boundary
 
         protected void btnMenuTab_Click(object sender, EventArgs e)
         {
-            divMenu.Style.Add("display","block");
+            divMenu.Style.Add("display", "block");
             divCoupon.Style.Add("display", "none");
-            btnMenuTab.CssClass += " active";
-            btnCouponTab.CssClass = "tablinks";
+            divCategory.Style.Add("display", "none");
+            btnCouponTab.CssClass += "tablinks";
+            btnMenuTab.CssClass = " active";
+            btnCategoryTab.CssClass += "tablinks";
             //btnMenuTab.Attributes.Add("class","active");
             //btnCouponTab.Attributes.Remove("active");
             upManager.Update();
@@ -151,11 +156,24 @@ namespace LepakRestaurant.Boundary
         {
             divMenu.Style.Add("display", "none");
             divCoupon.Style.Add("display", "block");
+            divCategory.Style.Add("display", "none");
             btnCouponTab.CssClass += " active";
             btnMenuTab.CssClass = "tablinks";
+            btnCategoryTab.CssClass += "tablinks";
             upManager.Update();
             //btnCouponTab.Attributes.Add("class", "active");
             //btnMenuTab.Attributes.Remove("active");
+        }
+
+        protected void btnCategoryTab_Click(object sender, EventArgs e)
+        {
+            divMenu.Style.Add("display", "none");
+            divCoupon.Style.Add("display", "none");
+            divCategory.Style.Add("display", "block");
+            btnCouponTab.CssClass += "tablinks";
+            btnMenuTab.CssClass = "tablinks";
+            btnCategoryTab.CssClass += " active";
+            upManager.Update();
         }
     }
 }

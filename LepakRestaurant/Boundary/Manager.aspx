@@ -56,6 +56,7 @@
             <div class="tab">
                 <asp:Button runat="server" CssClass="tablinks" Text="Menu  " ID="btnMenuTab" OnClick="btnMenuTab_Click" />
                 <asp:Button runat="server" CssClass="tablinks" Text="Coupon" ID="btnCouponTab" OnClick="btnCouponTab_Click" />
+                <asp:Button runat="server" CssClass="tablinks" Text="Coupon" ID="btnCategoryTab" OnClick="btnCategoryTab_Click" />
             </div>
             <div id="divMenu" runat="server" class="tabcontent">
                 <div style="width: 100%; text-align: center;">
@@ -68,12 +69,12 @@
                             <h2>
                                 <asp:Label runat="server" ID="lblCategories"></asp:Label></h2>
                         </div>
-                            <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
-                                <ItemTemplate>
-                                    <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
-                                </ItemTemplate>
-                                <FooterTemplate></FooterTemplate>
-                            </asp:Repeater>
+                        <asp:Repeater ID="rptItemCategory" runat="server" OnItemCommand="rptItemCategory_ItemCommand">
+                            <ItemTemplate>
+                                <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME")%>' CommandName='<%#Eval("CATEGORY_NAME")%>' CommandArgument='<%#Eval("category_id")%>' />
+                            </ItemTemplate>
+                            <FooterTemplate></FooterTemplate>
+                        </asp:Repeater>
                         <br />
                         <asp:Repeater ID="rptMenu" runat="server" EnableViewState="true" OnItemDataBound="rptMenu_ItemDataBound" OnItemCommand="rptMenu_ItemCommand">
                             <ItemTemplate>
@@ -120,6 +121,17 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
+                    </div>
+                </div>
+            </div>
+            <div id="divCategory" runat="server" class="tabcontent">
+                <div style="width: 100%; text-align: center;">
+                    <asp:Button runat="server" ID="btnCategory" Text="Add Category" />
+                </div>
+                <br />
+                <div style="overflow-x: auto; text-align: center; width: 100%">
+                    <div style="width: 80%; margin: 0 auto;">
+
                     </div>
                 </div>
             </div>

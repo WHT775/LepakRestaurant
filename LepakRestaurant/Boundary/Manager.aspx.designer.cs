@@ -51,6 +51,15 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.WebControls.Button btnCouponTab;
 
         /// <summary>
+        /// btnCategoryTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCategoryTab;
+
+        /// <summary>
         /// divMenu control.
         /// </summary>
         /// <remarks>
@@ -121,5 +130,23 @@ namespace LepakRestaurant.Boundary
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvCoupon;
+
+        /// <summary>
+        /// divCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCategory;
+
+        /// <summary>
+        /// btnCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCategory;
     }
 }

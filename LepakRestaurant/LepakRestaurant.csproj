@@ -117,10 +117,12 @@
     <Content Include="App_Data\LepakRestaurantDB_log.ldf">
       <DependentUpon>LepakRestaurantDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Boundary\AddCategory.aspx" />
     <Content Include="Boundary\AddCoupon.aspx" />
     <Content Include="Boundary\AddMenu.aspx" />
     <Content Include="Boundary\AddUser.aspx" />
     <Content Include="Boundary\css\Master.css" />
+    <Content Include="Boundary\EditCategory.aspx" />
     <Content Include="Boundary\GenerateQR.aspx" />
     <Content Include="Boundary\PaymentPage.aspx" />
     <Content Include="Boundary\CustomerLogin.aspx" />
@@ -198,6 +200,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Boundary\AddCategory.aspx.cs">
+      <DependentUpon>AddCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\AddCategory.aspx.designer.cs">
+      <DependentUpon>AddCategory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Boundary\AddCoupon.aspx.cs">
       <DependentUpon>AddCoupon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -218,6 +227,13 @@
     </Compile>
     <Compile Include="Boundary\AddUser.aspx.designer.cs">
       <DependentUpon>AddUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Boundary\EditCategory.aspx.cs">
+      <DependentUpon>EditCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Boundary\EditCategory.aspx.designer.cs">
+      <DependentUpon>EditCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Boundary\GenerateQR.aspx.cs">
       <DependentUpon>GenerateQR.aspx</DependentUpon>
