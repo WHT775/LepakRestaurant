@@ -22,6 +22,8 @@ namespace LepakRestaurant.Boundary
                 rptMenu.DataBind();
                 gvCoupon.DataSource = cc.RetrieveAllCoupon();
                 gvCoupon.DataBind();
+                gvCategory.DataSource = mc.getListOfCategory();
+                gvCategory.DataBind();
                 rptItemCategory.DataSource = cmc.getListOfCategoryWithAll();
                 rptItemCategory.DataBind();
                 lblCategories.Text = "All Menu";
@@ -30,18 +32,36 @@ namespace LepakRestaurant.Boundary
                     divMenu.Style.Add("display", "block");
                     divCoupon.Style.Add("display", "none");
                     divCategory.Style.Add("display", "none");
+                    btnCouponTab.CssClass += "tablinks";
+                    btnMenuTab.CssClass = " active";
+                    btnCategoryTab.CssClass += "tablinks";
                 }
                 else if(Request.QueryString["q"] == "c")
                 {
                     divMenu.Style.Add("display", "none");
                     divCoupon.Style.Add("display", "block");
                     divCategory.Style.Add("display", "none");
+                    btnCouponTab.CssClass += " active";
+                    btnMenuTab.CssClass = "tablinks";
+                    btnCategoryTab.CssClass += "tablinks";
+                }
+                else if(Request.QueryString["q"] == "cc")
+                {
+                    divMenu.Style.Add("display", "none");
+                    divCoupon.Style.Add("display", "none");
+                    divCategory.Style.Add("display", "block");
+                    btnCouponTab.CssClass += "tablinks";
+                    btnMenuTab.CssClass = "tablinks";
+                    btnCategoryTab.CssClass += " active";
                 }
                 else
                 {
                     divMenu.Style.Add("display", "block");
                     divCoupon.Style.Add("display", "none");
                     divCategory.Style.Add("display", "none");
+                    btnCouponTab.CssClass += "tablinks";
+                    btnMenuTab.CssClass = " active";
+                    btnCategoryTab.CssClass += "tablinks";
                 }
 
             }
@@ -114,7 +134,42 @@ namespace LepakRestaurant.Boundary
             }
         }
 
+        protected void gvCategory_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Edit")
+            {
+                HttpContext.Current.Session["editcategoryid"] = Convert.ToInt32(e.CommandArgument.ToString());
+                Response.Redirect("EditCategory.aspx");
+            }
+            else if (e.CommandName == "Delete")
+            {
+                if (!mc.RetrieveAllMenuByCategoryId(Convert.ToInt32(e.CommandArgument.ToString())).Any())
+                {
+                    string msg = mc.DeleteCategory(Convert.ToInt32(e.CommandArgument.ToString()));
+                    if (msg == "Category deleted successfully")
+                    {
+                        gvCategory.DataSource = mc.getListOfCategory();
+                        gvCategory.DataBind();
+                    }
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
+                    upManager.Update();
+                }
+                else
+                {
+                    string msg = "Cannot delete category as there are existing items using it!";
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert1", "alert('" + msg + "');", true);
+                    upManager.Update();
+                }
+            }
+        }
+
         protected void gvCoupon_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            //divCoupon.Style.Add("display", "block");
+            //divMenu.Style.Add("display", "none");
+        }
+
+        protected void gvCategory_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             //divCoupon.Style.Add("display", "block");
             //divMenu.Style.Add("display", "none");
@@ -128,6 +183,18 @@ namespace LepakRestaurant.Boundary
                 {
                     Button btn = row.FindControl("btnDelete") as Button;
                     btn.OnClientClick = "return confirm('Are you sure you want to delete this coupon?');";
+                }
+            }
+        }
+
+        protected void gvCategory_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            foreach (GridViewRow row in gvCategory.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    Button btn = row.FindControl("btnDelete") as Button;
+                    btn.OnClientClick = "return confirm('Are you sure you want to delete this category?');";
                 }
             }
         }
@@ -174,6 +241,11 @@ namespace LepakRestaurant.Boundary
             btnMenuTab.CssClass = "tablinks";
             btnCategoryTab.CssClass += " active";
             upManager.Update();
+        }
+
+        protected void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddCategory.aspx");
         }
     }
 }

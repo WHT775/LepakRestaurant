@@ -56,7 +56,7 @@
             <div class="tab">
                 <asp:Button runat="server" CssClass="tablinks" Text="Menu  " ID="btnMenuTab" OnClick="btnMenuTab_Click" />
                 <asp:Button runat="server" CssClass="tablinks" Text="Coupon" ID="btnCouponTab" OnClick="btnCouponTab_Click" />
-                <asp:Button runat="server" CssClass="tablinks" Text="Coupon" ID="btnCategoryTab" OnClick="btnCategoryTab_Click" />
+                <asp:Button runat="server" CssClass="tablinks" Text="Item Category" ID="btnCategoryTab" OnClick="btnCategoryTab_Click" />
             </div>
             <div id="divMenu" runat="server" class="tabcontent">
                 <div style="width: 100%; text-align: center;">
@@ -126,12 +126,27 @@
             </div>
             <div id="divCategory" runat="server" class="tabcontent">
                 <div style="width: 100%; text-align: center;">
-                    <asp:Button runat="server" ID="btnCategory" Text="Add Category" />
+                    <asp:Button runat="server" ID="btnAddCategory" Text="Add Category" onClick="btnAddCategory_Click"/>
                 </div>
                 <br />
                 <div style="overflow-x: auto; text-align: center; width: 100%">
                     <div style="width: 80%; margin: 0 auto;">
-
+                        <asp:GridView runat="server" CssClass="tablestyle" ID="gvCategory" AutoGenerateColumns="false" OnRowCommand="gvCategory_RowCommand" OnRowDeleting="gvCategory_RowDeleting" OnRowDataBound="gvCategory_RowDataBound" HorizontalAlign="Center">
+                            <Columns>
+                                <asp:BoundField HeaderText="Category ID" DataField="category_id" />
+                                <asp:BoundField HeaderText="Category Name" DataField="Category_name" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button runat="server" CommandName="Edit" CommandArgument='<%#Eval("category_id") %>' Text="Edit" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button runat="server" ID="btnDelete" CommandName="Delete" CommandArgument='<%#Eval("category_id") %>' Text="Delete" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

@@ -69,6 +69,12 @@ namespace LepakRestaurant.Controller
             return cat.RetrieveCategories();
         }
 
+        public string retrieveCategoryById(int categoryId)
+        {
+            Category cat = new Category() { category_id = categoryId };
+            return cat.RetrieveCategoryById();
+        }
+
         public List<MenuStatus> getListOfMenuStatus()
         {
             MenuStatus cat = new MenuStatus();
@@ -133,6 +139,37 @@ namespace LepakRestaurant.Controller
                 return me.RetrieveAllMenu();
             else
                 return me.RetrieveAllMenuByCategoryId();
+        }
+
+        public string DeleteCategory(int categoryid)
+        {
+            Category cat = new Category() { category_id = categoryid };
+            return cat.DeleteCategory();
+
+        }
+
+        public string UpdateCategory(int categoryid, string categoryName)
+        {
+            if (categoryName == "") return "Please fill up the form";
+            Category cat = new Category() { category_id = categoryid, category_name = categoryName};
+            return cat.UpdateCategory();
+
+        }
+
+        public string CreateCategory(string categoryName)
+        {
+            if (categoryName == "") return "Please fill up the form";
+            Category cat = new Category() { category_name = categoryName };
+            if (cat.CheckIfCategoryExist()) return "Category exist";
+            bool result = cat.InsertCategory();
+            if (!result)
+            {
+                return "Error creating coupon";
+            }
+            else
+            {
+                return "Successfully created category";
+            }
         }
     }
 }
