@@ -90,6 +90,10 @@ namespace LepakRestaurant.Boundary
             var btn = (Button)sender;
             var item = (RepeaterItem)btn.NamingContainer;
             var tb = (TextBox)item.FindControl("itemQty");
+            if(tb.Text == "")
+            {
+                return;
+            }
             var itemId = (Label)item.FindControl("itemID");
             var labelName = (Label)item.FindControl("itemName");
             var labelPrice = (Label)item.FindControl("itemPrice");

@@ -214,8 +214,6 @@ namespace LepakRestaurant.Boundary
             btnCouponTab.CssClass += "tablinks";
             btnMenuTab.CssClass = " active";
             btnCategoryTab.CssClass += "tablinks";
-            //btnMenuTab.Attributes.Add("class","active");
-            //btnCouponTab.Attributes.Remove("active");
             upManager.Update();
         }
 
