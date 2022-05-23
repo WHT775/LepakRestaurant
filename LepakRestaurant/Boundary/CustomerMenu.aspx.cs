@@ -27,6 +27,7 @@ namespace LepakRestaurant.Boundary
                 BindCategoryData();
                 BindItemData("");
                 updateTempCart();
+                lblTableNum.Text = "Table: "+HttpContext.Current.Session["tableNum"].ToString();
             }
         }
 
@@ -70,16 +71,20 @@ namespace LepakRestaurant.Boundary
                 int counter = 1;
                 foreach (KeyValuePair<int, int> entry in tempCart)
                 {
-                    Label cartId = new Label();
-                    Label cartName = new Label();
-                    Label cartQty = new Label();
-
-                    cartId.Text = "Item " + counter + ": Menu ID: " + entry.Key.ToString() + " ";
-                    cartName.Text = "Item Name: " + nameDict[entry.Key].ToString() + " ";
-                    cartQty.Text = "Quantity: " + entry.Value.ToString() + "<br />";
-                    cartDiv.Controls.Add(cartId);
-                    cartDiv.Controls.Add(cartName);
-                    cartDiv.Controls.Add(cartQty);
+                    Table table = new Table();
+                    
+                    //Label cartId = new Label();
+                    //Label cartName = new Label();
+                    //Label cartQty = new Label();
+                    Label menuItem = new Label();
+                    menuItem.Text = nameDict[entry.Key].ToString() + " x" + entry.Value.ToString() + "<br/>";
+                    //cartId.Text = "Item " + counter + ": Menu ID: " + entry.Key.ToString() + " ";
+                    //cartName.Text = "Item Name: " + nameDict[entry.Key].ToString() + " ";
+                    //cartQty.Text = "Quantity: " + entry.Value.ToString() + "<br />";
+                    //cartDiv.Controls.Add(cartId);
+                    //cartDiv.Controls.Add(cartName);
+                    //cartDiv.Controls.Add(cartQty);
+                    cartDiv.Controls.Add(menuItem);
                     counter++;
                 }
             }

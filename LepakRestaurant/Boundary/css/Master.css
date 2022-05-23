@@ -204,3 +204,7 @@ div {
     overflow-y:auto;
     height:100vh;
 }
+.tblNum{
+    position:absolute;
+    right:20px;
+}

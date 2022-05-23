@@ -140,16 +140,26 @@
 
             <a runat="server" id="my_popup" class="popup"></a>
             <div runat="server" id="popup" class="popup">
-                <h3>Shopping Cart</h3>
-                <div id="cartDiv" runat="server">
+                <div style="display: inline-flex;">
+                    <h3><span style="left: 20px;position:absolute;">Shopping Cart</span></h3>
+                    <h3>
+                        <asp:Label runat="server" ID="lblTableNum" CssClass="tblNum"></asp:Label></h3>
                 </div>
-                <asp:Button ID="Button1" runat="server" Text="Close" OnClientClick="closeShoppingCart();return false;" />
-                <asp:Button ID="cfmOrder" runat="server" Text="Confirm Order" OnClick="cfmOrder_Click" />
-
+                <br />
+                <br />
+                <div style="position: absolute; left: 20px;">
+                    <div id="cartDiv" runat="server">
+                    </div>
+                    <br />
+                    <br />
+                    <asp:Button ID="Button1" runat="server" Text="Close" OnClientClick="closeShoppingCart();return false;" />
+                    <asp:Button ID="cfmOrder" runat="server" Text="Confirm Order" OnClick="cfmOrder_Click" />
+                </div>
                 <a class="close x">
                     <asp:LinkButton runat="server" CssClass="close x" OnClientClick="closeShoppingCart();return false;">x</asp:LinkButton></a>
                 <a class="close word">
                     <asp:LinkButton runat="server" CssClass="close word" OnClientClick="closeShoppingCart();return false;">Close</asp:LinkButton></a>
+
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
