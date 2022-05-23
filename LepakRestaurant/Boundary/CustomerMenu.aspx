@@ -104,10 +104,11 @@
                                             <%--<br />--%>
                                             <asp:Label ID="itemPrice" runat="server" Text='<%# "Price: $" + Eval("ITEM_PRICE") %>'></asp:Label>
                                             <br />
-                                            <asp:TextBox ID="itemQty" runat="server" TextMode="Number" placeholder="Enter quantity here" AutoCompleteType="Disabled"></asp:TextBox>
+                                            <asp:Label runat="server" ID="lblQty" Text="0"></asp:Label>
+                                            <!--<asp:TextBox ID="itemQty" runat="server" TextMode="Number" placeholder="Enter quantity here" AutoCompleteType="Disabled"></asp:TextBox>-->
                                             <br />
-                                            <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
-                                            <asp:Button ID="btnRemove" runat="server" Text="Remove" OnClick="btnRemove_Click" />
+                                            <asp:Button ID="btnAdd" runat="server" Text="+" OnClick="btnAdd_Click" />
+                                            <asp:Button ID="btnRemove" runat="server" Text="-" OnClick="btnRemove_Click" />
                                             <br />
                                         </div>
                                     </ItemTemplate>

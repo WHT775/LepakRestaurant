@@ -94,7 +94,7 @@ namespace LepakRestaurant.Boundary
         {
             var btn = (Button)sender;
             var item = (RepeaterItem)btn.NamingContainer;
-            var tb = (TextBox)item.FindControl("itemQty");
+            var tb = (Label)item.FindControl("lblQty");
             if(tb.Text == "")
             {
                 return;
@@ -104,11 +104,12 @@ namespace LepakRestaurant.Boundary
             var labelPrice = (Label)item.FindControl("itemPrice");
             string itemName = labelName.Text.ToString();
             int menuId = Convert.ToInt32(itemId.Text.ToString());
-            int qty = Convert.ToInt32(tb.Text.ToString());
+            int qty = Convert.ToInt32(tb.Text.ToString()) + 1;
+            tb.Text = qty.ToString();
             double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0,8));
             total_amt += qty * price;
             if (tempCart.ContainsKey(menuId))
-                tempCart[menuId] += qty;
+                tempCart[menuId] = qty;
             else
                 tempCart.Add(menuId, qty);
 
@@ -133,19 +134,45 @@ namespace LepakRestaurant.Boundary
         {
             var btn = (Button)sender;
             var item = (RepeaterItem)btn.NamingContainer;
-            var tb = (TextBox)item.FindControl("itemQty");
+            var tb = (Label)item.FindControl("lblQty");
             var itemId = (Label)item.FindControl("itemID");
             var labelPrice = (Label)item.FindControl("itemPrice");
             int menuId = Convert.ToInt32(itemId.Text.ToString());
-            int qty = Convert.ToInt32(tb.Text.ToString());
+            int qty = Convert.ToInt32(tb.Text.ToString()) - 1;
+            if (qty < 0)
+                qty = 0;
+            tb.Text = qty.ToString();
             double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 8));
             total_amt -= qty * price;
-            if (tempCart.ContainsKey(menuId))
-                tempCart[menuId] -= qty;
-                if(tempCart[menuId] <= 0)
+            if (qty == 0)
+            {
+                if (tempCart.ContainsKey(menuId))
                     tempCart.Remove(menuId);
+                //tempCart[menuId] = qty;
+                    //if (tempCart[menuId] <= 0)
+                        
+            }
+            
 
             updateTempCart();
+        }
+
+        protected void btnAddQty_Click(object sender, EventArgs e)
+        {
+            //var btn = (Button)sender;
+            //var item = (RepeaterItem)btn.NamingContainer;
+            //var tb = (Label)item.FindControl("lblQty");
+            //int qty = Convert.ToInt32(tb.Text.ToString()) + 1;
+            //tb.Text = qty.ToString();
+        }
+
+        protected void btnMinusQty_Click(object sender, EventArgs e)
+        {
+            //var btn = (Button)sender;
+            //var item = (RepeaterItem)btn.NamingContainer;
+            //var tb = (Label)item.FindControl("lblQty");
+            //int qty = Convert.ToInt32(tb.Text.ToString()) - 1;
+            //tb.Text = qty.ToString();
         }
     }
 }
