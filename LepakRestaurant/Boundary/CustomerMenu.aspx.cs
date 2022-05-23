@@ -107,7 +107,7 @@ namespace LepakRestaurant.Boundary
             int qty = Convert.ToInt32(tb.Text.ToString()) + 1;
             tb.Text = qty.ToString();
             double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0,8));
-            total_amt += qty * price;
+            total_amt += price;
             if (tempCart.ContainsKey(menuId))
                 tempCart[menuId] = qty;
             else
@@ -138,12 +138,16 @@ namespace LepakRestaurant.Boundary
             var itemId = (Label)item.FindControl("itemID");
             var labelPrice = (Label)item.FindControl("itemPrice");
             int menuId = Convert.ToInt32(itemId.Text.ToString());
-            int qty = Convert.ToInt32(tb.Text.ToString()) - 1;
+            int qty = Convert.ToInt32(tb.Text.ToString());
+            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 8));
+            if (qty>0)
+                total_amt -= price;
+            qty = qty - 1;
             if (qty < 0)
                 qty = 0;
             tb.Text = qty.ToString();
-            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 8));
-            total_amt -= qty * price;
+            
+            
             if (qty == 0)
             {
                 if (tempCart.ContainsKey(menuId))
