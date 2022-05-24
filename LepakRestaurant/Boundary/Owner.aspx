@@ -22,6 +22,9 @@
         table {
             margin: 0 auto;
         }
+        input[type=submit]{
+            margin-bottom:0px !important;
+        }
 
 /*        .grid {
             left: -110px;

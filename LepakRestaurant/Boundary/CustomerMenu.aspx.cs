@@ -106,7 +106,7 @@ namespace LepakRestaurant.Boundary
             int menuId = Convert.ToInt32(itemId.Text.ToString());
             int qty = Convert.ToInt32(tb.Text.ToString()) + 1;
             tb.Text = qty.ToString();
-            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0,8));
+            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0,1));
             total_amt += price;
             if (tempCart.ContainsKey(menuId))
                 tempCart[menuId] = qty;
@@ -116,6 +116,10 @@ namespace LepakRestaurant.Boundary
             if(!nameDict.ContainsKey(menuId))
                 nameDict.Add(menuId, itemName);
             updateTempCart();
+            upMenu.Update();
+            //btn.Focus();
+            //ScriptManager scriptMan = ScriptManager.GetCurrent(this);
+            //scriptMan.RegisterAsyncPostBackControl(btn);
         }
 
         protected void cfmOrder_Click(object sender, EventArgs e)
@@ -139,7 +143,7 @@ namespace LepakRestaurant.Boundary
             var labelPrice = (Label)item.FindControl("itemPrice");
             int menuId = Convert.ToInt32(itemId.Text.ToString());
             int qty = Convert.ToInt32(tb.Text.ToString());
-            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 8));
+            double price = Convert.ToDouble(labelPrice.Text.ToString().Remove(0, 1));
             if (qty>0)
                 total_amt -= price;
             qty = qty - 1;
@@ -159,6 +163,9 @@ namespace LepakRestaurant.Boundary
             
 
             updateTempCart();
+            upMenu.Update();
+            //ScriptManager scriptMan = ScriptManager.GetCurrent(this);
+            //scriptMan.RegisterAsyncPostBackControl(btn);
         }
 
         protected void btnAddQty_Click(object sender, EventArgs e)
@@ -177,6 +184,12 @@ namespace LepakRestaurant.Boundary
             //var tb = (Label)item.FindControl("lblQty");
             //int qty = Convert.ToInt32(tb.Text.ToString()) - 1;
             //tb.Text = qty.ToString();
+        }
+
+        protected void rptItem_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            var lnkBtnIndvidual = (Button)e.Item.FindControl("btnAdd");
+            scriptManager1.RegisterAsyncPostBackControl(lnkBtnIndvidual);
         }
     }
 }

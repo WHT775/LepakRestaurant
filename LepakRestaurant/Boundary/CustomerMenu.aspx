@@ -1,7 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MobileMaster.Master" AutoEventWireup="true" CodeBehind="CustomerMenu.aspx.cs" Inherits="LepakRestaurant.Boundary.CustomerMenu" %>
+﻿<%@ Page ClientIDMode="AutoID" Title="" Language="C#" MasterPageFile="~/Boundary/MobileMaster.Master" AutoEventWireup="true" CodeBehind="CustomerMenu.aspx.cs" Inherits="LepakRestaurant.Boundary.CustomerMenu" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
+        html
+        {
+            position: fixed;  height: 100%;
+        }
         a.popup:target {
             display: block;
         }
@@ -17,7 +21,7 @@
             left: 0;
             z-index: 3;
             width: 100%;
-            height: 100%;
+            height: 80%;
             background: rgba(0, 0, 0, 0.8);
             cursor: default;
         }
@@ -72,52 +76,83 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager runat="server" ID="scriptManager"></asp:ScriptManager>
+    <asp:ScriptManager runat="server" ID="scriptManager1"></asp:ScriptManager>
 
     <asp:UpdatePanel runat="server" ID="upMenu" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="menuDiv" runat="server">
                 <div class="fullwidthcenter">
-                    <asp:Image ID="ibtnHome" runat="server" Width="260px" ImageUrl="~/CSS/logo.jpg" />
+                    <asp:Image ID="ibtnHome" runat="server" Width="260px" ImageUrl="./images/logo.jpg" />
                     <h3 style="margin: 0px 0px 28px 0px;">Dining at your convenience</h3>
                 </div>
-                <asp:Table runat="server" CssClass="fullwidthcenter">
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:Repeater ID="rptItemCategory" runat="server">
-                                <HeaderTemplate></HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME") %>' OnClick="selectedCategory_Click" />
-                                </ItemTemplate>
-                                <FooterTemplate></FooterTemplate>
-                            </asp:Repeater>
-                            <br />
-                            <div style="overflow-x: auto; text-align: center;">
-                                <asp:Repeater ID="rptItem" runat="server">
-                                    <HeaderTemplate></HeaderTemplate>
-                                    <ItemTemplate>
-                                        <div style="display: inline-grid; text-align: center;">
-                                            <asp:Label ID="itemID" runat="server" Text='<%#Eval("MENU_ID") %>' Visible="false"></asp:Label>
-                                            <asp:Image ID="itemImg" runat="server" ImageUrl='<%# "images\\" + Eval("ITEM_IMG") %>' Height="125px" Width="100%" AlternateText='<%#Eval("ITEM_NAME") %>' />
-                                            <br />
-                                            <asp:Label ID="itemName" runat="server" Text='<%#Eval("ITEM_NAME") %>'></asp:Label>
-                                            <%--<br />--%>
-                                            <asp:Label ID="itemPrice" runat="server" Text='<%# "Price: $" + Eval("ITEM_PRICE") %>'></asp:Label>
-                                            <br />
-                                            <asp:Label runat="server" ID="lblQty" Text="0"></asp:Label>
-                                            <!--<asp:TextBox ID="itemQty" runat="server" TextMode="Number" placeholder="Enter quantity here" AutoCompleteType="Disabled"></asp:TextBox>-->
-                                            <br />
-                                            <asp:Button ID="btnAdd" runat="server" Text="+" OnClick="btnAdd_Click" />
-                                            <asp:Button ID="btnRemove" runat="server" Text="-" OnClick="btnRemove_Click" />
-                                            <br />
-                                        </div>
-                                    </ItemTemplate>
-                                    <FooterTemplate></FooterTemplate>
-                                </asp:Repeater>
+                <%--<asp:Table runat="server" CssClass="fullwidthcenter">--%>
+                <div class="fullwidthcenter">
+                    <%--                    <asp:TableRow>
+                        <asp:TableCell>--%>
+                    <asp:Repeater ID="rptItemCategory" runat="server">
+                        <HeaderTemplate></HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:Button ID="selectedCategory" runat="server" Text='<%#Eval("CATEGORY_NAME") %>' OnClick="selectedCategory_Click" />
+                        </ItemTemplate>
+                        <FooterTemplate></FooterTemplate>
+                    </asp:Repeater>
+                </div>
+                <br />
+                <a runat="server" id="my_popup" class="popup"></a>
+                <div runat="server" id="popup" class="popup">
+                    <div style="display: inline-flex;">
+                        <h3><span style="left: 20px; position: absolute;">Shopping Cart</span></h3>
+                        <h3>
+                            <asp:Label runat="server" ID="lblTableNum" CssClass="tblNum"></asp:Label></h3>
+                    </div>
+                    <br />
+                    <br />
+                    <div style="position: absolute; left: 20px;">
+                        <div id="cartDiv" runat="server">
+                        </div>
+                        <br />
+                        <br />
+                        <asp:Button ID="Button1" runat="server" Text="Close" OnClientClick="closeShoppingCart();return false;" />
+                        <asp:Button ID="cfmOrder" runat="server" Text="Confirm Order" OnClick="cfmOrder_Click" />
+                    </div>
+                    <a class="close x">
+                        <asp:LinkButton runat="server" CssClass="close x" OnClientClick="closeShoppingCart();return false;">x</asp:LinkButton></a>
+                    <a class="close word">
+                        <asp:LinkButton runat="server" CssClass="close word" OnClientClick="closeShoppingCart();return false;">Close</asp:LinkButton></a>
+
+                </div>
+                <div style="overflow-x: auto; text-align: center; grid-template-columns: 1fr 1fr; grid-gap: 10px; display: inline-grid;">
+                    <asp:Repeater ID="rptItem" runat="server" OnItemDataBound="rptItem_ItemDataBound">
+                        <ItemTemplate>
+                            <%--<div style="display: inline-grid; text-align: center;">--%>
+                            <div>
+                                <asp:Label ID="itemID" runat="server" Text='<%#Eval("MENU_ID") %>' Visible="false"></asp:Label>
+                                <asp:Image ID="itemImg" runat="server" ImageUrl='<%# "images\\" + Eval("ITEM_IMG") %>' Height="125px" Width="100%" />
+                                <br />
+                                <asp:Label ID="itemName" runat="server" Text='<%#Eval("ITEM_NAME") %>'></asp:Label>
+                                <br />
+                                <asp:Label ID="itemPrice" runat="server" Text='<%#"$" + Eval("ITEM_PRICE") %>'></asp:Label>
+                                <br />
+                                <%--<asp:Label runat="server" ID="lblQty" Text="0" CssClass="lblText"></asp:Label>--%>
+                                <%--<div>--%>
+                                <br />
+                                <asp:Button ID="btnRemove" runat="server" Text="-" OnClick="btnRemove_Click" CssClass="addminusbtn" />
+                                <asp:Label runat="server" ID="lblQty" Text="0" CssClass="lblText"></asp:Label>
+                                <%--<asp:TextBox ID="itemQty" runat="server" TextMode="Number" Text="0" ReadOnly="true" AutoCompleteType="Disabled" CssClass="lblText"></asp:TextBox>--%>
+                                <asp:Button ID="btnAdd" runat="server" Text="+" OnClick="btnAdd_Click" CssClass="addminusbtn"/>
+
+                                <%--</div>--%>
+                                <%--<td><asp:TextBox ID="itemQty" runat="server" TextMode="Number" Text="0" ReadOnly="true" AutoCompleteType="Disabled" CssClass="lblText"></asp:TextBox></td>--%>
+                                <br />
                             </div>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <%--            <asp:TableRow>
+                            <%--<br />--%>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+
+                <%--                        </asp:TableCell>
+                    </asp:TableRow>--%>
+                <%--            <asp:TableRow>
                 <asp:TableCell>
                     <br />
                     <div id="cartDiv" runat="server">
@@ -127,7 +162,7 @@
                     <br />
                 </asp:TableCell>
             </asp:TableRow>--%>
-                </asp:Table>
+                <%--</asp:Table>--%>
 
 
                 <div style="height: 40px;">
@@ -139,29 +174,10 @@
             </div>
 
 
-            <a runat="server" id="my_popup" class="popup"></a>
-            <div runat="server" id="popup" class="popup">
-                <div style="display: inline-flex;">
-                    <h3><span style="left: 20px;position:absolute;">Shopping Cart</span></h3>
-                    <h3>
-                        <asp:Label runat="server" ID="lblTableNum" CssClass="tblNum"></asp:Label></h3>
-                </div>
-                <br />
-                <br />
-                <div style="position: absolute; left: 20px;">
-                    <div id="cartDiv" runat="server">
-                    </div>
-                    <br />
-                    <br />
-                    <asp:Button ID="Button1" runat="server" Text="Close" OnClientClick="closeShoppingCart();return false;" />
-                    <asp:Button ID="cfmOrder" runat="server" Text="Confirm Order" OnClick="cfmOrder_Click" />
-                </div>
-                <a class="close x">
-                    <asp:LinkButton runat="server" CssClass="close x" OnClientClick="closeShoppingCart();return false;">x</asp:LinkButton></a>
-                <a class="close word">
-                    <asp:LinkButton runat="server" CssClass="close word" OnClientClick="closeShoppingCart();return false;">Close</asp:LinkButton></a>
 
-            </div>
         </ContentTemplate>
+        <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="rptItem" />
+            </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

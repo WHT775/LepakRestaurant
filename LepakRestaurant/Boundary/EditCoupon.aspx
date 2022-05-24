@@ -1,12 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MasterPage.Master" AutoEventWireup="true" CodeBehind="EditCoupon.aspx.cs" Inherits="LepakRestaurant.Boundary.EditCoupon" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        table {
-            margin-left: 825px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table>
@@ -39,9 +33,9 @@
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click" /></td>
+                <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click" CssClass="fullbtn" /></td>
             <td>
-                <asp:Button runat="server" ID="btnUpdate" Text="Update" OnClick="btnUpdate_Click" /></td>
+                <asp:Button runat="server" ID="btnUpdate" Text="Update" OnClick="btnUpdate_Click" CssClass="fullbtn" /></td>
         </tr>
     </table>
 </asp:Content>

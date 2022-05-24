@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
         <div class="fullandcenter">
-            <asp:Image ID="ibtnHome" runat="server" Width="260px" ImageUrl="~/CSS/logo.jpg" />
+            <asp:Image ID="ibtnHome" runat="server" Width="260px" ImageUrl="./images/logo.jpg" />
         </div>
             <div id="mainDiv" runat="server">
                 <asp:Label runat="server" Text="Unique Code"></asp:Label>

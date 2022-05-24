@@ -8,36 +8,72 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="css/Master.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<style>
-    body{
-        margin: 0;
-        /*display: inline-block;*/
-        font-family: Arial, Helvetica, sans-serif;
-    }
-/*    #ibtnHome{
-        margin-left: 845px;
-        width: 800px;
-            }*/
-/*    ul{
-        position: absolute;
-        top: 5px;
-        right: 200px;
-      }*/
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            /*display: inline-block;*/
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-</style>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-top:40px;
+            margin-right:20px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+        .btn-group-lg > .btn, .btn-lg {
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.3333333;
+            border-radius: 6px;
+        }
+
+        .glyphicon {
+            position: relative;
+            top: 1px;
+            display: inline-block;
+            font-family: 'Glyphicons Halflings';
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-                <asp:ImageButton ID="ibtnHome" runat="server" Width="260px" Height="110px" ImageUrl="~/CSS/logo.jpg"/>
-            <%--<li><asp:HyperLink ID="hlHome" class="active" runat="server">Home</asp:HyperLink></li>--%>
-        <ul class="topnav">
-            <li class="right">
-                <asp:LinkButton ID="lbLoginSignUp" runat="server" >Login/Sign Up</asp:LinkButton></li>
-            <%--<li class="right"><asp:HyperLink ID="hlCart" runat="server">Cart</asp:HyperLink></li>--%>
-            <li class="right">
-                <asp:LinkButton ID="lblLogOut" runat="server" OnClick="lblLogOut_Click">Logout</asp:LinkButton></li>
-        </ul>
+        <asp:ImageButton ID="ibtnHome" runat="server" Width="260px" Height="110px" ImageUrl="./images/logo.jpg" />
+        <div style="float: right;">
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-log-out"></span>Log out
+            </button>
+        </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
