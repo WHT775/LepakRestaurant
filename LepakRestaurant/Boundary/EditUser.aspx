@@ -49,10 +49,10 @@
         </tr>
         <tr>
             <td>
-                <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Back" />
+                <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="Back"  CssClass="fullbtn"/>
             </td>
             <td>
-                <asp:Button runat="server" ID="btnUpdate" OnClick="btnUpdate_Click" Text="Update" />
+                <asp:Button runat="server" ID="btnUpdate" OnClick="btnUpdate_Click" Text="Update"  CssClass="fullbtn"/>
             </td>
         </tr>
     </table>

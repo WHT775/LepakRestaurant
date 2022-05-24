@@ -21,7 +21,7 @@
             left: 0;
             z-index: 3;
             width: 100%;
-            height: 80%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.8);
             cursor: default;
         }
@@ -30,7 +30,7 @@
             display: none;
             background: white;
             width: 80%;
-            height: 100%;
+            height: 80%;
             position: fixed;
             top: 0;
             left: 10%;
