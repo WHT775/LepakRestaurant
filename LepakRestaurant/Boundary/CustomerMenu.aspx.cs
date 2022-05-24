@@ -24,6 +24,7 @@ namespace LepakRestaurant.Boundary
                 table_num = (int)HttpContext.Current.Session["tableNum"];
                 tempCart.Clear();
                 nameDict.Clear();
+                total_amt = 0;
                 BindCategoryData();
                 BindItemData("");
                 updateTempCart();
