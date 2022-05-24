@@ -96,6 +96,15 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.WebControls.TextBox cardName;
 
         /// <summary>
+        /// lblCardError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCardError;
+
+        /// <summary>
         /// couponTxt control.
         /// </summary>
         /// <remarks>
@@ -166,5 +175,14 @@ namespace LepakRestaurant.Boundary
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label successText;
+
+        /// <summary>
+        /// btnCont control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCont;
     }
 }

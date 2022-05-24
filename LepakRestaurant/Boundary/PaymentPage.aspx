@@ -16,11 +16,11 @@
             <asp:ListItem>Visa</asp:ListItem>
             <asp:ListItem>Debit</asp:ListItem>
         </asp:RadioButtonList>
-        <asp:TextBox ID="cardNum" runat="server" placeholder="Card Number"></asp:TextBox>
-        <asp:TextBox ID="cardExpiry" runat="server" placeholder="Card Expiry"></asp:TextBox>
-        <asp:TextBox ID="CVV" runat="server" placeholder="CVV"></asp:TextBox>
+        <asp:TextBox ID="cardNum" runat="server" placeholder="Card Number" MaxLength="16"></asp:TextBox>
+        <asp:TextBox ID="cardExpiry" runat="server" placeholder="Card Expiry" TextMode="Date"></asp:TextBox>
+        <asp:TextBox ID="CVV" runat="server" placeholder="CVV" MaxLength="3"></asp:TextBox>
         <asp:TextBox ID="cardName" runat="server" placeholder="Card holder name"></asp:TextBox>
-
+        <asp:Label ID="lblCardError" runat="server"></asp:Label>
         <br />
         <br />
         <asp:Label runat="server" Text="Coupon code:"></asp:Label>
@@ -33,7 +33,11 @@
         <asp:Label ID="lblGst" runat="server"></asp:Label>
         <asp:Button ID ="btnPayment" runat="server" Text="Complete Payment" OnClick="btnPayment_Click"/>
     </div>
-    <div id="paySuccess" runat="server">
+    <div class="fullandcenter" style="display:block !important" id="paySuccess" runat="server">
+        <br />
         <asp:Label ID="successText" runat="server" Text="Payment Successful."></asp:Label>
+        <br />
+        <br />
+        <asp:Button ID="btnCont" runat="server" Text="Continue" OnClick="btnCont_Click"/>
     </div>
 </asp:Content>
