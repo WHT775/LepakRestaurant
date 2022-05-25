@@ -169,6 +169,12 @@ namespace LepakRestaurant.Boundary
                     lblCardError.ForeColor = System.Drawing.Color.Red;
                     lblCardError.Visible = true;
                 }
+                else if(cardNum.Text.ToString().Length != 16)
+                {
+                    lblCardError.Text = "Please fill up card number!";
+                    lblCardError.ForeColor = System.Drawing.Color.Red;
+                    lblCardError.Visible = true;
+                }
                 else
                 {
                     string message = cmc.insertOrder(final, table_num);
