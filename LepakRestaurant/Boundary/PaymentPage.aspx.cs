@@ -151,22 +151,43 @@ namespace LepakRestaurant.Boundary
             }
             else
             {
-                string message = cmc.insertOrder(final, table_num);
-                if (message == "Success")
+                string selectedCardType = cardType.SelectedValue.ToString();
+                int firstNum = 0;
+                switch (selectedCardType)
                 {
-                    int orderId = cmc.getLatestOrderId();
-                    if (orderId != 0)
+                    case "Visa":
+                        firstNum = 4;
+                        break;
+                    case "Master Card":
+                        firstNum = 3;
+                        break;
+                }
+                int txtFirstNum = Convert.ToInt32(cardNum.Text.Substring(0, 1));
+                if(firstNum != txtFirstNum)
+                {
+                    lblCardError.Text = "Please enter correct card number!";
+                    lblCardError.ForeColor = System.Drawing.Color.Red;
+                    lblCardError.Visible = true;
+                }
+                else
+                {
+                    string message = cmc.insertOrder(final, table_num);
+                    if (message == "Success")
                     {
-                        foreach (KeyValuePair<int, int> entry in tempCart)
+                        int orderId = cmc.getLatestOrderId();
+                        if (orderId != 0)
                         {
-                            osc.InsertOrderSummary(orderId, entry.Key, entry.Value);
-                        }
+                            foreach (KeyValuePair<int, int> entry in tempCart)
+                            {
+                                osc.InsertOrderSummary(orderId, entry.Key, entry.Value);
+                            }
 
-                        string m1 = pc.insertPayment(orderId, custId, cardType.SelectedItem.Text);
-                        if (m1 == "Success")
-                        {
-                            paySuccess.Visible = true;
-                            mainPay.Visible = false;
+                            string m1 = pc.insertPayment(orderId, custId, cardType.SelectedItem.Text);
+                            if (m1 == "Success")
+                            {
+                                paySuccess.Visible = true;
+                                mainPay.Visible = false;
+                            }
                         }
                     }
                 }

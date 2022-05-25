@@ -14,7 +14,7 @@
         <br />
         <asp:RadioButtonList ID="cardType" runat="server" RepeatDirection="Horizontal">
             <asp:ListItem>Visa</asp:ListItem>
-            <asp:ListItem>Debit</asp:ListItem>
+            <asp:ListItem>Master Card</asp:ListItem>
         </asp:RadioButtonList>
         <asp:TextBox ID="cardNum" runat="server" placeholder="Card Number" MaxLength="16"></asp:TextBox>
         <asp:TextBox ID="cardExpiry" runat="server" placeholder="Card Expiry" TextMode="Date"></asp:TextBox>
