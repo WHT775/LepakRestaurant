@@ -44,7 +44,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td colspan="2">
-                    <asp:Button ID="btnLogin" runat="server" Text="Login" Style="width: 50%" OnClick="btnLogin_Click" />
+                    <asp:Button ID="btnLogin" runat="server" Text="Login" Style="width: 50%" OnClick="btnLogin_Click" Width="100%"/>
                 </td>
             </tr>
         </table>

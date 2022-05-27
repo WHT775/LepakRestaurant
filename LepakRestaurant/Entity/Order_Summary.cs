@@ -202,11 +202,10 @@ namespace LepakRestaurant.Entity
             List<Order_Summary> objOrder_Summary = new List<Order_Summary>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select top 1 c.customer_name, c.last_visit, avg(total_amt) as 'Avgspent', item_name, count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id " +
-                    "join menu as m on os.menu_id = m.menu_id where orders_status = 'Completed' " +
-                    "group by c.customer_id,  customer_name, item_name, last_visit";
+                string query = "select c.customer_name, c.last_visit, avg(total_amt) as 'Avgspent', count(os.menu_id ) as Frequency from [customer] as c join orders as o on c.customer_id = o.customer_id  join order_summary as os on o.orders_id = os.orders_id where orders_status = 'Completed' group by c.customer_id,  customer_name, last_visit";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    int index = 0;
                     conn.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -215,9 +214,10 @@ namespace LepakRestaurant.Entity
                             while (dr.Read())
                             {
                                 Order_Summary tempObj = new Order_Summary();
+                                tempObj.orders.orders_id = ++index;
                                 tempObj.customer.customer_name = dr["customer_name"].ToString();
                                 tempObj.customer.last_visit = Convert.ToDateTime(dr["last_visit"].ToString());
-                                tempObj.menu.item_name = dr["item_name"].ToString();
+                                //tempObj.menu.item_name = dr["item_name"].ToString();
                                 tempObj.orders.total_amt = Convert.ToDouble(dr["Avgspent"].ToString());
                                 objOrder_Summary.Add(tempObj);
                             }
@@ -233,9 +233,10 @@ namespace LepakRestaurant.Entity
             List<Order_Summary> objOrder_Summary = new List<Order_Summary>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "select ROW_NUMBER() OVER(ORDER BY item_name ASC) AS RowNum, item_name, count(item_name) as 'total' from orders o inner join order_summary os on o.orders_id = os.orders_id inner join menu m on m.menu_id = os.menu_id where o.orders_status = 'Completed' group by m.item_name";
+                string query = "select item_name, count(item_name) as 'total' from orders o inner join order_summary os on o.orders_id = os.orders_id inner join menu m on m.menu_id = os.menu_id where o.orders_status = 'Completed' group by m.item_name order by total desc";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    int index = 0;
                     conn.Open();
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -244,7 +245,7 @@ namespace LepakRestaurant.Entity
                             while (dr.Read())
                             {
                                 Order_Summary tempObj = new Order_Summary();
-                                tempObj.orders.orders_id = Convert.ToInt32(dr["RowNum"].ToString());
+                                tempObj.orders.orders_id = ++index;
                                 tempObj.menu.item_name = dr["item_name"].ToString();
                                 tempObj.orders.total_amt = Convert.ToDouble(dr["total"].ToString());
                                 objOrder_Summary.Add(tempObj);

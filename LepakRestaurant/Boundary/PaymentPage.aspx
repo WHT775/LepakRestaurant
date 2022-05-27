@@ -1,15 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Boundary/MobileMaster.Master" AutoEventWireup="true" CodeBehind="PaymentPage.aspx.cs" Inherits="LepakRestaurant.Boundary.PaymentPage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div id="mainPay" runat="server">
-        <asp:Label ID="lblTableNum" runat="server"></asp:Label>
-        <div id="itemDiv" runat="server">
-
+        <div style="display: inline-flex;">
+            <h3><span style="left: 20px; position: absolute;">Payment</span></h3>
+            <h3>
+                <asp:Label ID="lblTableNum" runat="server" CssClass="tblNum"></asp:Label></h3>
         </div>
-        <asp:Label ID="lblSubtotal" runat="server"></asp:Label>
+        <br />
+        <br />
+        <div id="itemDiv" runat="server">
+        </div>
+        
         <br />
         <br />
         <asp:RadioButtonList ID="cardType" runat="server" RepeatDirection="Horizontal">
@@ -25,19 +31,22 @@
         <br />
         <asp:Label runat="server" Text="Coupon code:"></asp:Label>
         <asp:TextBox ID="couponTxt" runat="server" placeholder="Enter coupon code"></asp:TextBox>
-        <asp:Button ID="checkCoupon" runat="server" Text="Check coupon" OnClick="checkCoupon_Click" UseSubmitBehavior="false"/>
+        <asp:Button ID="checkCoupon" runat="server" Text="Check coupon" OnClick="checkCoupon_Click" UseSubmitBehavior="false" />
         <asp:Label ID="lblDiscountTxt" runat="server"></asp:Label>
         <br />
         <br />
-        <asp:Label ID="lblFinalTotal" runat="server"></asp:Label>
+        <asp:Label ID="lblSubtotal" runat="server"></asp:Label>
         <asp:Label ID="lblGst" runat="server"></asp:Label>
-        <asp:Button ID ="btnPayment" runat="server" Text="Complete Payment" OnClick="btnPayment_Click"/>
+        <br />
+        <asp:Label ID="lblFinalTotal" runat="server"></asp:Label>
+        <br />
+        <asp:Button ID="btnPayment" runat="server" Text="Complete Payment" OnClick="btnPayment_Click" />
     </div>
-    <div class="fullandcenter" style="display:block !important" id="paySuccess" runat="server">
+    <div class="fullandcenter" style="display: block !important" id="paySuccess" runat="server">
         <br />
         <asp:Label ID="successText" runat="server" Text="Payment Successful."></asp:Label>
         <br />
         <br />
-        <asp:Button ID="btnCont" runat="server" Text="Continue" OnClick="btnCont_Click"/>
+        <asp:Button ID="btnCont" runat="server" Text="Continue" OnClick="btnCont_Click" />
     </div>
 </asp:Content>

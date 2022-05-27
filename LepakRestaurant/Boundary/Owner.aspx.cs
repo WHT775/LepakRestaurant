@@ -144,7 +144,7 @@ namespace LepakRestaurant.Boundary
                     QRCodeEncoder encoder = new QRCodeEncoder();
                     encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
                     encoder.QRCodeScale = 10;
-                    Bitmap img = encoder.Encode("http://localhost:44331/Boundary/CustomerLogin.aspx?tableid=" + txtTableId.Text);
+                    Bitmap img = encoder.Encode("http://lepakrestaurant.somee.com/boundary/CustomerLogin.aspx?tableid=" + txtTableId.Text);
                     string savePath = Server.MapPath("images/tableid" + txtTableId.Text + ".jpeg");
                     img.Save(savePath, ImageFormat.Jpeg);
                     string url = "images/tableid" + txtTableId.Text + ".jpeg";
@@ -169,7 +169,7 @@ namespace LepakRestaurant.Boundary
                     var tableObj = tnc.getTableDetails(txtTableId.Text);
                     lblTitle.Text = "Table Number: " + txtTableId.Text;
                     imgQrCode.ImageUrl = "./" + tableObj.image;
-                    lblUniqueCode.Text = "Unique Code: <br/><b>" + tableObj.unique_code + "</b><br/><br/>Go to http://localhost/Boundary/CustomerLogin.aspx";
+                    lblUniqueCode.Text = "Unique Code: <br/><b>" + tableObj.unique_code + "</b><br/><br/>Go to http://lepakrestaurant.somee.com/boundary/CustomerLogin.aspx";
                 }
             }
             divInsights.Style.Add("display", "none");

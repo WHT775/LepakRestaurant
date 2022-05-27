@@ -56,13 +56,14 @@ namespace LepakRestaurant.Controller
                 case 0:
                     //Customer name, last visit, food preference, avg spent
                     List<Order_Summary> listOS = sum.RetrieveInsights();
+                    dtTemp.Columns.Add(" ", typeof(int));
                     dtTemp.Columns.Add("Customer Name", typeof(string));
                     dtTemp.Columns.Add("Last Visit", typeof(string));
-                    dtTemp.Columns.Add("Most Preferred Menu", typeof(string));
+                    //dtTemp.Columns.Add("Most Preferred Menu", typeof(string));
                     dtTemp.Columns.Add("Average Spent", typeof(string));
                     foreach (var obj in listOS)
                     {
-                        dtTemp.Rows.Add(obj.customer.customer_name, obj.customer.last_visit, obj.menu.item_name, "$"+ Math.Round(obj.orders.total_amt, 2).ToString("#.00"));
+                        dtTemp.Rows.Add(obj.orders.orders_id, obj.customer.customer_name, obj.customer.last_visit, "$"+ Math.Round(obj.orders.total_amt, 2).ToString("#.00"));
                     }
                     //dtSet = sum.RetrieveInsights();
                     break;

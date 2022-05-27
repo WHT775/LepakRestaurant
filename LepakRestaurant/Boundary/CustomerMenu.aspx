@@ -108,7 +108,7 @@
                     <br />
                     <br />
                     <div style="position: absolute; left: 20px;">
-                        <div id="cartDiv" runat="server">
+                        <div id="cartDiv" runat="server" style="text-align:left;">
                         </div>
                         <br />
                         <br />

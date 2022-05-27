@@ -42,15 +42,6 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl itemDiv;
 
         /// <summary>
-        /// lblSubtotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSubtotal;
-
-        /// <summary>
         /// cardType control.
         /// </summary>
         /// <remarks>
@@ -132,13 +123,13 @@ namespace LepakRestaurant.Boundary
         protected global::System.Web.UI.WebControls.Label lblDiscountTxt;
 
         /// <summary>
-        /// lblFinalTotal control.
+        /// lblSubtotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFinalTotal;
+        protected global::System.Web.UI.WebControls.Label lblSubtotal;
 
         /// <summary>
         /// lblGst control.
@@ -148,6 +139,15 @@ namespace LepakRestaurant.Boundary
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblGst;
+
+        /// <summary>
+        /// lblFinalTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFinalTotal;
 
         /// <summary>
         /// btnPayment control.

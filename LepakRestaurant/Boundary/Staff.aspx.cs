@@ -58,8 +58,8 @@ namespace LepakRestaurant.Boundary
                     msg += " " + e.CommandArgument.ToString();
                 }
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('" + msg + "');", true);
+                bindPendingOrders();
             }
-            bindPendingOrders();
             upStaff.Update();
         }
         public void bindPendingOrders()
